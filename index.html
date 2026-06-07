@@ -1,24 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Opportunity Finder</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #004466;
-            color: Blue;
-            padding: 3em 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-        }
-        header p
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LaunchPad – Find Your Next Opportunity</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a0f2c;
+      --blue:   #1a56ff;
+      --sky:    #60a5fa;
+      --mint:   #34d399;
+      --yellow: #fbbf24;
+      --pink:   #f472b6;
+      --white:  #f8faff;
+      --card-bg:#111735;
+      --text:   #cbd5e1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,15,44,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--mint); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: .45rem 1.1rem;
+      border-radius: 8px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: #3b6fff !important; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 6rem 5% 4rem;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,86,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(52,211,153,0.12);
+      color: var(--mint);
+      border: 1px solid rgba(52,211,153,0.3);
+      border-radius: 999px;
+      padding: .35rem 1rem;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      max-width: 780px;
+      margin: 0 auto 1.2rem;
+      animation: fadeUp .7s ease .1s both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--blue), var(--mint));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text);
+      font-size: 1.1rem;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeUp .7s ease .2s both;
+    }
+
+    /* ── SEARCH BAR ── */
+    .search-wrap {
+      display: flex;
+      max-width: 620px;
+      margin: 0 auto 1.2rem;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      overflow: hidden;
+      animation: fadeUp .7s ease .3s both;
+      transition: border-color .2s;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(26,86,255,0.15);
+    }
+    .search-wrap input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      padding: 1rem 1.2rem;
+    }
+    .search-wrap input::placeholder { color: rgba(255,255,255,0.3); }
+    .search-wrap button {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 0 1.6rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      transition: background .2s;
+    }
+    .search-wrap button:hover { background: #3b6fff; }
+
+    /* ── FILTER PILLS ── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+      animation: fadeUp .7s ease .4s both;
+    }
+    .pill {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      border-radius: 999px;
+      padding: .4rem 1rem;
+      font-size: .85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+      user-select: none;
+    }
+    .pill:hover, .pill.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 2.5rem 5%;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin: 0 5%;
+      animation: fadeUp .7s ease .5s both;
+    }
+    .stat { text-align: center; }
+    .stat strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .stat span { font-size: .85rem; color: var(--text); }
+
+    /* ── SECTION TITLE ── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3rem 5% 1.5rem;
+    }
+    .section-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .section-header a {
+      color: var(--sky);
+      font-size: .9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .section-header a:hover { color: var(--white); }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+      padding: 0 5% 3rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 1.4rem;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .card.internship::before  { background: var(--blue); }
+    .card.summer::before      { background: var(--mint); }
+    .card.research::before    { background: var(--yellow); }
+    .card.volunteer::before   { background: var(--pink); }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.15);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .card-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .card.internship .card-icon  { background: rgba(26,86,255,0.15); }
+    .card.summer .card-icon      { background: rgba(52,211,153,0.15); }
+    .card.research .card-icon    { background: rgba(251,191,36,0.15); }
+    .card.volunteer .card-icon   { background: rgba(244,114,182,0.15); }
+
+    .card-tag {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .25rem .7rem;
+      border-radius: 999px;
+    }
+    .internship .card-tag  { background: rgba(26,86,255,0.18); color: var(--sky); }
+    .summer .card-tag      { background: rgba(52,211,153,0.18); color: var(--mint); }
+    .research .card-tag    { background: rgba(251,191,36,0.18); color: var(--yellow); }
+    .volunteer .card-tag   { background: rgba(244,114,182,0.18); color: var(--pink); }
+
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .4rem;
+      line-height: 1.3;
+    }
+    .card .org {
+      font-size: .85rem;
+      color: var(--text);
+      margin-bottom: .8rem;
+    }
+    .card p {
+      font-size: .88rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .card-meta {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      font-size: .78rem;
+      color: rgba(203,213,225,0.7);
+    }
+    .card-meta span::before {
+      margin-right: .3rem;
+    }
+    .card-footer {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .deadline {
+      font-size: .78rem;
+      color: var(--text);
+    }
+    .deadline strong { color: var(--yellow); }
+    .btn-apply {
+      background: rgba(26,86,255,0.2);
+      color: var(--sky);
+      border: 1px solid rgba(26,86,255,0.4);
+      border-radius: 8px;
+      padding: .4rem .9rem;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-apply:hover {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* ── CATEGORIES ── */
+    .categories {
+      padding: 0 5% 4rem;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .cat-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 1.4rem;
+      cursor: pointer;
+      transition: all .2s;
+      text-align: center;
+    }
+    .cat-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+    }
+    .cat-card .cat-emoji { font-size: 2rem; margin-bottom: .6rem; display: block; }
+    .cat-card h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .3rem;
+    }
+    .cat-card span { font-size: .8rem; color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem 5%;
+      text-align: center;
+      color: var(--text);
+      font-size: .85rem;
+    }
+    footer a { color: var(--sky); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .stats { gap: 1.5rem; flex-wrap: wrap; }
+      .section-header { flex-direction: column; gap: .5rem; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">Launch<span>Pad</span></a>
+  <ul>
+    <li><a href="#">Internships</a></li>
+    <li><a href="#">Summer Programs</a></li>
+    <li><a href="#">Research</a></li>
+    <li><a href="#">Volunteer</a></li>
+    <li><a href="#" class="nav-cta">Submit a Program</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🚀 For High School Students</div>
+  <h1>Find Your <em>Perfect Opportunity</em> This Summer</h1>
+  <p>Discover internships, summer programs, and research opportunities hand-picked for high school students across every field.</p>
+
+  <div class="search-wrap">
+    <input type="text" placeholder="Search programs, fields, or schools…" />
+    <button>Search</button>
+  </div>
+
+  <div class="filters">
+    <div class="pill active">All</div>
+    <div class="pill">Internships</div>
+    <div class="pill">Summer Programs</div>
+    <div class="pill">Research</div>
+    <div class="pill">Volunteer</div>
+    <div class="pill">Paid</div>
+    <div class="pill">Free / Scholarship</div>
+    <div class="pill">Online</div>
+    <div class="pill">In-Person</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><strong>500+</strong><span>Programs Listed</span></div>
+  <div class="stat"><strong>50+</strong><span>Fields & Industries</span></div>
+  <div class="stat"><strong>Free</strong><span>Always Free to Use</span></div>
+</div>
+
+<!-- FEATURED OPPORTUNITIES -->
+<div class="section-header">
+  <h2>Featured Opportunities</h2>
+  <a href="#">View all →</a>
+</div>
+
+<div class="cards-grid">
+
+  <!-- Card 1 -->
+  <div class="card internship">
+    <div class="card-top">
+      <div class="card-icon">💼</div>
+      <span class="card-tag">Internship</span>
+    </div>
+    <h3>Google STEP Internship</h3>
+    <div class="org">Google · Mountain View, CA (Remote Option)</div>
+    <p>A 12-week software engineering internship for first and second-year college students, open to HS seniors. Gain real-world coding experience.</p>
+    <div class="card-meta">
+      <span>📅 Summer 2025</span>
+      <span>💰 Paid</span>
+      <span>💻 Tech</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Jan 15</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card summer">
+    <div class="card-top">
+      <div class="card-icon">🌞</div>
+      <span class="card-tag">Summer Program</span>
+    </div>
+    <h3>MIT Research Science Institute</h3>
+    <div class="org">MIT · Cambridge, MA</div>
+    <p>One of the most prestigious free STEM programs in the country. Spend 6 weeks doing real scientific research alongside MIT professors.</p>
+    <div class="card-meta">
+      <span>📅 Jun – Jul</span>
+      <span>🎓 Free / Scholarship</span>
+      <span>🔬 STEM</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Dec 15</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card research">
+    <div class="card-top">
+      <div class="card-icon">🔬</div>
+      <span class="card-tag">Research</span>
+    </div>
+    <h3>NIH High School Summer Internship</h3>
+    <div class="org">National Institutes of Health · Bethesda, MD</div>
+    <p>Work side-by-side with NIH researchers on real biomedical projects. One of the top research opportunities available to high schoolers.</p>
+    <div class="card-meta">
+      <span>📅 Summer 2025</span>
+      <span>💰 Paid ($8/hr)</span>
+      <span>🧬 Biomedical</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Feb 1</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Card 4 -->
+  <div class="card volunteer">
+    <div class="card-top">
+      <div class="card-icon">🤝</div>
+      <span class="card-tag">Volunteer</span>
+    </div>
+    <h3>AmeriCorps Youth Programs</h3>
+    <div class="org">AmeriCorps · Nationwide</div>
+    <p>Make a difference in your community through service projects focused on education, environment, and public health. Open to students 16+.</p>
+    <div class="card-meta">
+      <span>📅 Year-Round</span>
+      <span>🆓 Free</span>
+      <span>🌍 Community</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Rolling</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Card 5 -->
+  <div class="card summer">
+    <div class="card-top">
+      <div class="card-icon">🎨</div>
+      <span class="card-tag">Summer Program</span>
+    </div>
+    <h3>Parsons Pre-College Academy</h3>
+    <div class="org">The New School · New York, NY</div>
+    <p>Explore art, design, and creative technology at one of the world's top design schools. Perfect for students passionate about visual arts.</p>
+    <div class="card-meta">
+      <span>📅 Jul – Aug</span>
+      <span>💸 Financial Aid</span>
+      <span>🎨 Arts & Design</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Mar 30</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Card 6 -->
+  <div class="card internship">
+    <div class="card-top">
+      <div class="card-icon">📊</div>
+      <span class="card-tag">Internship</span>
+    </div>
+    <h3>Goldman Sachs Summer Analyst</h3>
+    <div class="org">Goldman Sachs · New York, NY</div>
+    <p>An exclusive 8-week introduction to finance and investment banking for high-achieving students interested in business and economics.</p>
+    <div class="card-meta">
+      <span>📅 Summer 2025</span>
+      <span>💰 Paid</span>
+      <span>📈 Finance</span>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>Oct 1</strong></div>
+      <a class="btn-apply" href="#">Learn More</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- CATEGORIES -->
+<div class="section-header">
+  <h2>Browse by Category</h2>
+  <a href="#">See all categories →</a>
+</div>
+<div class="categories">
+  <div class="cat-grid">
+    <div class="cat-card"><span class="cat-emoji">💻</span><h4>Technology</h4><span>120+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">🔬</span><h4>Science & Research</h4><span>95+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">💊</span><h4>Medicine & Health</h4><span>80+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">🎨</span><h4>Arts & Design</h4><span>60+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">📊</span><h4>Business & Finance</h4><span>75+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">⚖️</span><h4>Law & Government</h4><span>45+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">🌍</span><h4>Environment</h4><span>50+ programs</span></div>
+    <div class="cat-card"><span class="cat-emoji">🤝</span><h4>Community Service</h4><span>90+ programs</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 LaunchPad · Built to help students find their future · <a href="#">Contact</a> · <a href="#">Submit a Program</a></p>
+</footer>
+
+<!-- FILTER INTERACTION SCRIPT -->
+<script>
+  document.querySelectorAll('.pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
