@@ -1,415 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LaunchPad – Find Your Next Opportunity</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <title>LaunchPad – Find Internships & Programs for High Schoolers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --navy:#08102b;--navy2:#0d1a3a;--card:#101e42;--card2:#0f1c3d;
+      --blue:#1a56ff;--blue2:#3b6fff;--sky:#60a5fa;
+      --mint:#34d399;--yellow:#fbbf24;--pink:#f472b6;--orange:#fb923c;
+      --purple:#a78bfa;--red:#f87171;--teal:#2dd4bf;
+      --white:#f0f6ff;--text:#94a3b8;--border:rgba(255,255,255,0.07);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden}
 
-    :root {
-      --navy:   #0a0f2c;
-      --blue:   #1a56ff;
-      --sky:    #60a5fa;
-      --mint:   #34d399;
-      --yellow: #fbbf24;
-      --pink:   #f472b6;
-      --white:  #f8faff;
-      --card-bg:#111735;
-      --text:   #cbd5e1;
-    }
+    /* NAV */
+    nav{display:flex;justify-content:space-between;align-items:center;padding:1rem 4%;position:sticky;top:0;z-index:200;background:rgba(8,16,43,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .logo{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--white);text-decoration:none}
+    .logo span{color:var(--mint)}
+    .nav-links{display:flex;gap:1.6rem;list-style:none}
+    .nav-links a{color:var(--text);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--white)}
+    .nav-cta{background:var(--blue);color:#fff!important;padding:.4rem 1rem;border-radius:8px}
+    .nav-cta:hover{background:var(--blue2)!important}
 
-    html { scroll-behavior: smooth; }
+    /* HERO */
+    .hero{text-align:center;padding:5rem 4% 3rem;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(26,86,255,0.15) 0%,transparent 65%);pointer-events:none}
+    .hero-badge{display:inline-block;background:rgba(52,211,153,0.12);color:var(--mint);border:1px solid rgba(52,211,153,0.3);border-radius:999px;padding:.3rem .9rem;font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.2rem;animation:fadeUp .5s ease both}
+    .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;line-height:1.1;max-width:800px;margin:0 auto 1rem;animation:fadeUp .6s ease .1s both}
+    .hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--blue),var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero p{color:var(--text);font-size:1.05rem;max-width:520px;margin:0 auto 2rem;line-height:1.7;animation:fadeUp .6s ease .2s both}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--navy);
-      color: var(--white);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    /* SEARCH BOX */
+    .search-box{max-width:680px;margin:0 auto 1rem;animation:fadeUp .6s ease .3s both}
+    .search-row{display:flex;gap:.6rem;margin-bottom:.7rem}
+    .search-input-wrap{flex:1;display:flex;align-items:center;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:0 1rem;transition:border-color .2s,box-shadow .2s}
+    .search-input-wrap:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,86,255,0.15)}
+    .search-input-wrap input{flex:1;background:transparent;border:none;outline:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.95rem;padding:.85rem 0}
+    .search-input-wrap input::placeholder{color:rgba(255,255,255,0.28)}
+    .search-input-wrap .icon{color:var(--text);margin-right:.5rem;font-size:1rem}
+    .zip-wrap{display:flex;align-items:center;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:12px;padding:0 1rem;width:160px;transition:border-color .2s}
+    .zip-wrap:focus-within{border-color:var(--mint);box-shadow:0 0 0 3px rgba(52,211,153,0.12)}
+    .zip-wrap input{width:100%;background:transparent;border:none;outline:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.95rem;padding:.85rem 0}
+    .zip-wrap input::placeholder{color:rgba(255,255,255,0.28)}
+    .search-btn{background:var(--blue);color:#fff;border:none;cursor:pointer;padding:0 1.8rem;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;transition:background .2s;white-space:nowrap}
+    .search-btn:hover{background:var(--blue2)}
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.2rem 5%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10,15,44,0.85);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .logo span { color: var(--mint); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav ul a {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: color .2s;
-    }
-    nav ul a:hover { color: var(--white); }
-    .nav-cta {
-      background: var(--blue);
-      color: #fff !important;
-      padding: .45rem 1.1rem;
-      border-radius: 8px;
-      transition: background .2s !important;
-    }
-    .nav-cta:hover { background: #3b6fff !important; }
+    /* FILTER PILLS */
+    .filters{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:.5rem;animation:fadeUp .6s ease .4s both}
+    .pill{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:var(--text);border-radius:999px;padding:.35rem .9rem;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .2s;user-select:none}
+    .pill:hover,.pill.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .pill.mint:hover,.pill.mint.active{background:var(--mint);border-color:var(--mint);color:#08102b}
+    .pill.yellow:hover,.pill.yellow.active{background:var(--yellow);border-color:var(--yellow);color:#08102b}
+    .pill.pink:hover,.pill.pink.active{background:var(--pink);border-color:var(--pink);color:#fff}
 
-    /* ── HERO ── */
-    .hero {
-      text-align: center;
-      padding: 6rem 5% 4rem;
-      position: relative;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(26,86,255,0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: rgba(52,211,153,0.12);
-      color: var(--mint);
-      border: 1px solid rgba(52,211,153,0.3);
-      border-radius: 999px;
-      padding: .35rem 1rem;
-      font-size: .82rem;
-      font-weight: 600;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      margin-bottom: 1.4rem;
-      animation: fadeUp .6s ease both;
-    }
-    .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1.1;
-      max-width: 780px;
-      margin: 0 auto 1.2rem;
-      animation: fadeUp .7s ease .1s both;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(90deg, var(--blue), var(--mint));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      color: var(--text);
-      font-size: 1.1rem;
-      max-width: 540px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-      animation: fadeUp .7s ease .2s both;
-    }
+    /* STATS */
+    .stats-bar{display:flex;justify-content:center;gap:3rem;padding:2rem 4%;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:0 4%;flex-wrap:wrap}
+    .stat{text-align:center}
+    .stat strong{display:block;font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800}
+    .stat span{font-size:.82rem;color:var(--text)}
 
-    /* ── SEARCH BAR ── */
-    .search-wrap {
-      display: flex;
-      max-width: 620px;
-      margin: 0 auto 1.2rem;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      overflow: hidden;
-      animation: fadeUp .7s ease .3s both;
-      transition: border-color .2s;
-    }
-    .search-wrap:focus-within {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 4px rgba(26,86,255,0.15);
-    }
-    .search-wrap input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      padding: 1rem 1.2rem;
-    }
-    .search-wrap input::placeholder { color: rgba(255,255,255,0.3); }
-    .search-wrap button {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      padding: 0 1.6rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .95rem;
-      font-weight: 600;
-      transition: background .2s;
-    }
-    .search-wrap button:hover { background: #3b6fff; }
+    /* SECTION HEADER */
+    .sec-head{display:flex;justify-content:space-between;align-items:center;padding:2.5rem 4% 1.2rem}
+    .sec-head h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800}
+    .sec-head a{color:var(--sky);font-size:.88rem;font-weight:600;text-decoration:none}
+    .sec-head a:hover{color:var(--white)}
 
-    /* ── FILTER PILLS ── */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      justify-content: center;
-      margin-bottom: 1rem;
-      animation: fadeUp .7s ease .4s both;
-    }
-    .pill {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: var(--text);
-      border-radius: 999px;
-      padding: .4rem 1rem;
-      font-size: .85rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all .2s;
-      user-select: none;
-    }
-    .pill:hover, .pill.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
+    /* CARDS */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.1rem;padding:0 4% 1rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.3rem;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;display:flex;flex-direction:column}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+    .card.type-internship::before{background:var(--blue)}
+    .card.type-summer::before{background:var(--mint)}
+    .card.type-research::before{background:var(--yellow)}
+    .card.type-volunteer::before{background:var(--pink)}
+    .card.type-fellowship::before{background:var(--purple)}
+    .card.type-competition::before{background:var(--orange)}
+    .card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.14);box-shadow:0 14px 40px rgba(0,0,0,0.45)}
+    .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.9rem}
+    .card-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .type-internship .card-icon{background:rgba(26,86,255,0.15)}
+    .type-summer .card-icon{background:rgba(52,211,153,0.15)}
+    .type-research .card-icon{background:rgba(251,191,36,0.15)}
+    .type-volunteer .card-icon{background:rgba(244,114,182,0.15)}
+    .type-fellowship .card-icon{background:rgba(167,139,250,0.15)}
+    .type-competition .card-icon{background:rgba(251,146,60,0.15)}
+    .card-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+    .tag{font-size:.68rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .6rem;border-radius:999px}
+    .type-internship .tag.type-tag{background:rgba(26,86,255,0.18);color:var(--sky)}
+    .type-summer .tag.type-tag{background:rgba(52,211,153,0.18);color:var(--mint)}
+    .type-research .tag.type-tag{background:rgba(251,191,36,0.18);color:var(--yellow)}
+    .type-volunteer .tag.type-tag{background:rgba(244,114,182,0.18);color:var(--pink)}
+    .type-fellowship .tag.type-tag{background:rgba(167,139,250,0.18);color:var(--purple)}
+    .type-competition .tag.type-tag{background:rgba(251,146,60,0.18);color:var(--orange)}
+    .tag.paid{background:rgba(52,211,153,0.12);color:var(--mint)}
+    .tag.free{background:rgba(96,165,250,0.12);color:var(--sky)}
+    .tag.online{background:rgba(167,139,250,0.12);color:var(--purple)}
+    .card h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.3rem;line-height:1.3}
+    .card .org{font-size:.82rem;color:var(--text);margin-bottom:.6rem}
+    .card p{font-size:.85rem;color:var(--text);line-height:1.6;margin-bottom:.8rem;flex:1}
+    .card-meta{display:flex;gap:.6rem;flex-wrap:wrap;font-size:.75rem;color:rgba(148,163,184,0.8);margin-bottom:.9rem}
+    .req-box{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:.7rem .9rem;margin-bottom:.9rem}
+    .req-box h4{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.4rem}
+    .req-box ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
+    .req-box ul li{font-size:.78rem;color:var(--text);display:flex;align-items:flex-start;gap:.4rem}
+    .req-box ul li::before{content:'✓';color:var(--mint);font-size:.7rem;margin-top:.1rem;flex-shrink:0}
+    .card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:.9rem;border-top:1px solid var(--border);margin-top:auto}
+    .deadline{font-size:.75rem;color:var(--text)}
+    .deadline strong{color:var(--yellow)}
+    .btn-apply{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:.42rem 1rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;transition:background .2s;display:inline-block}
+    .btn-apply:hover{background:var(--blue2)}
 
-    /* ── STATS ── */
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      padding: 2.5rem 5%;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin: 0 5%;
-      animation: fadeUp .7s ease .5s both;
-    }
-    .stat { text-align: center; }
-    .stat strong {
-      display: block;
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--white);
-    }
-    .stat span { font-size: .85rem; color: var(--text); }
+    /* SHOW MORE */
+    .show-more-wrap{text-align:center;padding:1rem 4% 2.5rem}
+    .show-more-btn{background:transparent;border:1.5px solid var(--border);color:var(--text);border-radius:12px;padding:.7rem 2rem;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .show-more-btn:hover{border-color:var(--blue);color:var(--white)}
 
-    /* ── SECTION TITLE ── */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 3rem 5% 1.5rem;
-    }
-    .section-header h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
-    .section-header a {
-      color: var(--sky);
-      font-size: .9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .section-header a:hover { color: var(--white); }
+    /* CATEGORIES */
+    .cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;padding:0 4% 3rem}
+    .cat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1rem;cursor:pointer;transition:all .2s;text-align:center}
+    .cat-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+    .cat-card.active{border-color:var(--blue);background:rgba(26,86,255,0.1)}
+    .cat-emoji{font-size:1.8rem;display:block;margin-bottom:.5rem}
+    .cat-card h4{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:.25rem}
+    .cat-card span{font-size:.75rem;color:var(--text)}
 
-    /* ── CARDS GRID ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.2rem;
-      padding: 0 5% 3rem;
-    }
+    /* SUGGEST FORM */
+    .suggest-section{margin:0 4% 4rem;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem;text-align:center}
+    .suggest-section h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:.5rem}
+    .suggest-section p{color:var(--text);margin-bottom:1.5rem;font-size:.95rem}
+    .suggest-form{display:flex;flex-direction:column;gap:.8rem;max-width:500px;margin:0 auto}
+    .suggest-form input,.suggest-form textarea,.suggest-form select{background:rgba(255,255,255,0.05);border:1.5px solid var(--border);border-radius:10px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.9rem;padding:.75rem 1rem;outline:none;transition:border-color .2s}
+    .suggest-form input::placeholder,.suggest-form textarea::placeholder{color:rgba(255,255,255,0.25)}
+    .suggest-form input:focus,.suggest-form textarea:focus,.suggest-form select:focus{border-color:var(--mint)}
+    .suggest-form select option{background:var(--navy2);color:var(--white)}
+    .suggest-form textarea{resize:vertical;min-height:80px}
+    .suggest-submit{background:var(--mint);color:#08102b;border:none;border-radius:10px;padding:.75rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+    .suggest-submit:hover{opacity:.85}
+    .suggest-thanks{display:none;color:var(--mint);font-weight:600;padding:.5rem}
 
-    .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 1.4rem;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 16px 16px 0 0;
-    }
-    .card.internship::before  { background: var(--blue); }
-    .card.summer::before      { background: var(--mint); }
-    .card.research::before    { background: var(--yellow); }
-    .card.volunteer::before   { background: var(--pink); }
+    /* MODAL */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:500;align-items:center;justify-content:center;padding:1rem}
+    .modal-overlay.open{display:flex}
+    .modal{background:var(--navy2);border:1px solid rgba(255,255,255,0.1);border-radius:20px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem;position:relative;animation:fadeUp .3s ease}
+    .modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:none;color:var(--text);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .modal-close:hover{background:rgba(255,255,255,0.15);color:var(--white)}
+    .modal h2{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;margin-bottom:.3rem}
+    .modal .m-org{color:var(--text);font-size:.88rem;margin-bottom:1rem}
+    .modal .m-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+    .modal .m-desc{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1.2rem}
+    .modal .m-section{margin-bottom:1rem}
+    .modal .m-section h3{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.5rem}
+    .modal .m-section ul{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+    .modal .m-section ul li{font-size:.88rem;color:var(--white);display:flex;gap:.5rem;align-items:flex-start}
+    .modal .m-section ul li::before{content:'→';color:var(--mint);flex-shrink:0}
+    .modal-actions{display:flex;gap:.8rem;margin-top:1.5rem}
+    .modal-apply{flex:1;background:var(--blue);color:#fff;border:none;border-radius:10px;padding:.75rem;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;display:block;transition:background .2s}
+    .modal-apply:hover{background:var(--blue2)}
+    .modal-save{background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:.75rem 1.2rem;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .modal-save:hover{border-color:var(--white);color:var(--white)}
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.15);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    }
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);padding:2rem 4%;text-align:center;color:var(--text);font-size:.83rem}
+    footer a{color:var(--sky);text-decoration:none}
 
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .card-icon {
-      width: 46px; height: 46px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
-    .card.internship .card-icon  { background: rgba(26,86,255,0.15); }
-    .card.summer .card-icon      { background: rgba(52,211,153,0.15); }
-    .card.research .card-icon    { background: rgba(251,191,36,0.15); }
-    .card.volunteer .card-icon   { background: rgba(244,114,182,0.15); }
+    /* RESULTS COUNT */
+    .results-info{padding:.5rem 4% 1rem;color:var(--text);font-size:.88rem}
+    .results-info strong{color:var(--white)}
 
-    .card-tag {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .25rem .7rem;
-      border-radius: 999px;
-    }
-    .internship .card-tag  { background: rgba(26,86,255,0.18); color: var(--sky); }
-    .summer .card-tag      { background: rgba(52,211,153,0.18); color: var(--mint); }
-    .research .card-tag    { background: rgba(251,191,36,0.18); color: var(--yellow); }
-    .volunteer .card-tag   { background: rgba(244,114,182,0.18); color: var(--pink); }
+    /* NO RESULTS */
+    .no-results{text-align:center;padding:4rem 4%;color:var(--text);display:none}
+    .no-results h3{font-family:'Syne',sans-serif;font-size:1.2rem;margin-bottom:.5rem;color:var(--white)}
 
-    .card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: .4rem;
-      line-height: 1.3;
-    }
-    .card .org {
-      font-size: .85rem;
-      color: var(--text);
-      margin-bottom: .8rem;
-    }
-    .card p {
-      font-size: .88rem;
-      color: var(--text);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .card-meta {
-      display: flex;
-      gap: .8rem;
-      flex-wrap: wrap;
-      font-size: .78rem;
-      color: rgba(203,213,225,0.7);
-    }
-    .card-meta span::before {
-      margin-right: .3rem;
-    }
-    .card-footer {
-      margin-top: 1.2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .deadline {
-      font-size: .78rem;
-      color: var(--text);
-    }
-    .deadline strong { color: var(--yellow); }
-    .btn-apply {
-      background: rgba(26,86,255,0.2);
-      color: var(--sky);
-      border: 1px solid rgba(26,86,255,0.4);
-      border-radius: 8px;
-      padding: .4rem .9rem;
-      font-size: .82rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      text-decoration: none;
-      transition: background .2s, border-color .2s;
-    }
-    .btn-apply:hover {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-    }
-
-    /* ── CATEGORIES ── */
-    .categories {
-      padding: 0 5% 4rem;
-    }
-    .cat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .cat-card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      padding: 1.4rem;
-      cursor: pointer;
-      transition: all .2s;
-      text-align: center;
-    }
-    .cat-card:hover {
-      border-color: var(--blue);
-      transform: translateY(-3px);
-    }
-    .cat-card .cat-emoji { font-size: 2rem; margin-bottom: .6rem; display: block; }
-    .cat-card h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: .95rem;
-      font-weight: 700;
-      margin-bottom: .3rem;
-    }
-    .cat-card span { font-size: .8rem; color: var(--text); }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 2rem 5%;
-      text-align: center;
-      color: var(--text);
-      font-size: .85rem;
-    }
-    footer a { color: var(--sky); text-decoration: none; }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      nav ul { display: none; }
-      .stats { gap: 1.5rem; flex-wrap: wrap; }
-      .section-header { flex-direction: column; gap: .5rem; align-items: flex-start; }
-    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:640px){.nav-links{display:none}.search-row{flex-direction:column}.zip-wrap{width:100%}.stats-bar{gap:1.5rem}.modal{padding:1.4rem}}
   </style>
 </head>
 <body>
@@ -417,208 +185,391 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="#">Launch<span>Pad</span></a>
-  <ul>
-    <li><a href="#">Internships</a></li>
-    <li><a href="#">Summer Programs</a></li>
-    <li><a href="#">Research</a></li>
-    <li><a href="#">Volunteer</a></li>
-    <li><a href="#" class="nav-cta">Submit a Program</a></li>
+  <ul class="nav-links">
+    <li><a href="#opportunities">Opportunities</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#suggest">Suggest a Program</a></li>
+    <li><a href="#suggest" class="nav-cta">Submit a Program</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🚀 For High School Students</div>
-  <h1>Find Your <em>Perfect Opportunity</em> This Summer</h1>
-  <p>Discover internships, summer programs, and research opportunities hand-picked for high school students across every field.</p>
+  <div class="hero-badge">🚀 100+ Real Programs for High Schoolers</div>
+  <h1>Find Your <em>Next Big Opportunity</em></h1>
+  <p>Internships, summer programs, research, fellowships & more — all in one place, totally free.</p>
 
-  <div class="search-wrap">
-    <input type="text" placeholder="Search programs, fields, or schools…" />
-    <button>Search</button>
-  </div>
-
-  <div class="filters">
-    <div class="pill active">All</div>
-    <div class="pill">Internships</div>
-    <div class="pill">Summer Programs</div>
-    <div class="pill">Research</div>
-    <div class="pill">Volunteer</div>
-    <div class="pill">Paid</div>
-    <div class="pill">Free / Scholarship</div>
-    <div class="pill">Online</div>
-    <div class="pill">In-Person</div>
+  <div class="search-box">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <span class="icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search programs, fields, organizations…"/>
+      </div>
+      <div class="zip-wrap">
+        <input type="text" id="zipInput" placeholder="ZIP code" maxlength="5"/>
+      </div>
+      <button class="search-btn" onclick="runSearch()">Search</button>
+    </div>
+    <div class="filters" id="typeFilters">
+      <div class="pill active" data-filter="all">All Types</div>
+      <div class="pill" data-filter="internship">Internships</div>
+      <div class="pill" data-filter="summer">Summer Programs</div>
+      <div class="pill" data-filter="research">Research</div>
+      <div class="pill" data-filter="volunteer">Volunteer</div>
+      <div class="pill" data-filter="fellowship">Fellowships</div>
+      <div class="pill" data-filter="competition">Competitions</div>
+      <div class="pill mint" data-filter="paid">💰 Paid</div>
+      <div class="pill yellow" data-filter="free">🎓 Free/Scholarship</div>
+      <div class="pill pink" data-filter="online">💻 Online/Remote</div>
+    </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats">
-  <div class="stat"><strong>500+</strong><span>Programs Listed</span></div>
-  <div class="stat"><strong>50+</strong><span>Fields & Industries</span></div>
+<div class="stats-bar">
+  <div class="stat"><strong>120+</strong><span>Programs Listed</span></div>
+  <div class="stat"><strong>15</strong><span>Categories</span></div>
+  <div class="stat"><strong>Nationwide</strong><span>+ Remote Options</span></div>
   <div class="stat"><strong>Free</strong><span>Always Free to Use</span></div>
 </div>
 
-<!-- FEATURED OPPORTUNITIES -->
-<div class="section-header">
-  <h2>Featured Opportunities</h2>
-  <a href="#">View all →</a>
+<!-- OPPORTUNITIES -->
+<div class="sec-head" id="opportunities">
+  <h2>All Opportunities</h2>
+  <span id="resultsCount" style="color:var(--text);font-size:.88rem"></span>
 </div>
-
-<div class="cards-grid">
-
-  <!-- Card 1 -->
-  <div class="card internship">
-    <div class="card-top">
-      <div class="card-icon">💼</div>
-      <span class="card-tag">Internship</span>
-    </div>
-    <h3>Google STEP Internship</h3>
-    <div class="org">Google · Mountain View, CA (Remote Option)</div>
-    <p>A 12-week software engineering internship for first and second-year college students, open to HS seniors. Gain real-world coding experience.</p>
-    <div class="card-meta">
-      <span>📅 Summer 2025</span>
-      <span>💰 Paid</span>
-      <span>💻 Tech</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Jan 15</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
-  <!-- Card 2 -->
-  <div class="card summer">
-    <div class="card-top">
-      <div class="card-icon">🌞</div>
-      <span class="card-tag">Summer Program</span>
-    </div>
-    <h3>MIT Research Science Institute</h3>
-    <div class="org">MIT · Cambridge, MA</div>
-    <p>One of the most prestigious free STEM programs in the country. Spend 6 weeks doing real scientific research alongside MIT professors.</p>
-    <div class="card-meta">
-      <span>📅 Jun – Jul</span>
-      <span>🎓 Free / Scholarship</span>
-      <span>🔬 STEM</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Dec 15</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="card research">
-    <div class="card-top">
-      <div class="card-icon">🔬</div>
-      <span class="card-tag">Research</span>
-    </div>
-    <h3>NIH High School Summer Internship</h3>
-    <div class="org">National Institutes of Health · Bethesda, MD</div>
-    <p>Work side-by-side with NIH researchers on real biomedical projects. One of the top research opportunities available to high schoolers.</p>
-    <div class="card-meta">
-      <span>📅 Summer 2025</span>
-      <span>💰 Paid ($8/hr)</span>
-      <span>🧬 Biomedical</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Feb 1</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
-  <!-- Card 4 -->
-  <div class="card volunteer">
-    <div class="card-top">
-      <div class="card-icon">🤝</div>
-      <span class="card-tag">Volunteer</span>
-    </div>
-    <h3>AmeriCorps Youth Programs</h3>
-    <div class="org">AmeriCorps · Nationwide</div>
-    <p>Make a difference in your community through service projects focused on education, environment, and public health. Open to students 16+.</p>
-    <div class="card-meta">
-      <span>📅 Year-Round</span>
-      <span>🆓 Free</span>
-      <span>🌍 Community</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Rolling</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
-  <!-- Card 5 -->
-  <div class="card summer">
-    <div class="card-top">
-      <div class="card-icon">🎨</div>
-      <span class="card-tag">Summer Program</span>
-    </div>
-    <h3>Parsons Pre-College Academy</h3>
-    <div class="org">The New School · New York, NY</div>
-    <p>Explore art, design, and creative technology at one of the world's top design schools. Perfect for students passionate about visual arts.</p>
-    <div class="card-meta">
-      <span>📅 Jul – Aug</span>
-      <span>💸 Financial Aid</span>
-      <span>🎨 Arts & Design</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Mar 30</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
-  <!-- Card 6 -->
-  <div class="card internship">
-    <div class="card-top">
-      <div class="card-icon">📊</div>
-      <span class="card-tag">Internship</span>
-    </div>
-    <h3>Goldman Sachs Summer Analyst</h3>
-    <div class="org">Goldman Sachs · New York, NY</div>
-    <p>An exclusive 8-week introduction to finance and investment banking for high-achieving students interested in business and economics.</p>
-    <div class="card-meta">
-      <span>📅 Summer 2025</span>
-      <span>💰 Paid</span>
-      <span>📈 Finance</span>
-    </div>
-    <div class="card-footer">
-      <div class="deadline">Deadline: <strong>Oct 1</strong></div>
-      <a class="btn-apply" href="#">Learn More</a>
-    </div>
-  </div>
-
+<div class="no-results" id="noResults">
+  <h3>No results found</h3>
+  <p>Try different keywords or clear your filters.</p>
 </div>
+<div class="cards-grid" id="cardsGrid"></div>
+<div class="show-more-wrap"><button class="show-more-btn" id="showMoreBtn" onclick="showMore()">Load More Programs ↓</button></div>
 
 <!-- CATEGORIES -->
-<div class="section-header">
-  <h2>Browse by Category</h2>
-  <a href="#">See all categories →</a>
-</div>
-<div class="categories">
-  <div class="cat-grid">
-    <div class="cat-card"><span class="cat-emoji">💻</span><h4>Technology</h4><span>120+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">🔬</span><h4>Science & Research</h4><span>95+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">💊</span><h4>Medicine & Health</h4><span>80+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">🎨</span><h4>Arts & Design</h4><span>60+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">📊</span><h4>Business & Finance</h4><span>75+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">⚖️</span><h4>Law & Government</h4><span>45+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">🌍</span><h4>Environment</h4><span>50+ programs</span></div>
-    <div class="cat-card"><span class="cat-emoji">🤝</span><h4>Community Service</h4><span>90+ programs</span></div>
+<div class="sec-head" id="categories"><h2>Browse by Category</h2></div>
+<div class="cat-grid" id="catGrid"></div>
+
+<!-- SUGGEST A PROGRAM -->
+<section class="suggest-section" id="suggest">
+  <h2>Know a Great Program? 🙌</h2>
+  <p>Help other students find opportunities by submitting a program you've heard about or participated in.</p>
+  <div class="suggest-form">
+    <input type="text" id="sName" placeholder="Program name *"/>
+    <input type="text" id="sOrg" placeholder="Organization / School *"/>
+    <input type="url" id="sUrl" placeholder="Website URL *"/>
+    <select id="sType">
+      <option value="" disabled selected>Category / Type *</option>
+      <option>Internship</option><option>Summer Program</option><option>Research</option>
+      <option>Volunteer</option><option>Fellowship</option><option>Competition</option>
+      <option>Other</option>
+    </select>
+    <textarea id="sDesc" placeholder="Brief description (what do students do, who is it for?)"></textarea>
+    <button class="suggest-submit" onclick="submitSuggestion()">Submit Program →</button>
+    <div class="suggest-thanks" id="suggestThanks">✅ Thanks! We'll review your submission soon.</div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 LaunchPad · Built to help students find their future · <a href="#">Contact</a> · <a href="#">Submit a Program</a></p>
+  <p>© 2025 LaunchPad · Built to help high school students find their future · <a href="#suggest">Submit a Program</a> · Made with ❤️</p>
 </footer>
 
-<!-- FILTER INTERACTION SCRIPT -->
-<script>
-  document.querySelectorAll('.pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-    });
-  });
-</script>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
 
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const programs = [
+  // TECH / INTERNSHIPS
+  {id:1,name:"Google STEP Internship",org:"Google",type:"internship",category:"Technology",icon:"💼",paid:true,online:false,free:false,location:"Mountain View, CA",season:"Summer",deadline:"Jan 15",desc:"12-week software engineering internship for students interested in tech. Work on real Google products alongside senior engineers.",requirements:["Rising sophomore or junior","Strong coding skills (Python, Java, or C++)","GPA 3.0+","US citizen or permanent resident"],link:"https://buildyourfuture.withgoogle.com/programs/step"},
+  {id:2,name:"Microsoft TEALS Program",org:"Microsoft",type:"internship",category:"Technology",icon:"💻",paid:false,online:true,free:true,location:"Remote",season:"Year-Round",deadline:"Rolling",desc:"Volunteer-run program that brings tech professionals into high school classrooms. Students can also apply as junior mentors.",requirements:["High school student","Interest in computer science","No prior coding required"],link:"https://www.microsoft.com/en-us/teals"},
+  {id:3,name:"Meta University Internship",org:"Meta",type:"internship",category:"Technology",icon:"🌐",paid:true,online:false,free:false,location:"Menlo Park, CA",season:"Summer",deadline:"Oct 1",desc:"Immersive engineering internship at Meta. Work on AR/VR, social platforms, and AI projects with world-class mentors.",requirements:["Rising college freshman","CS or engineering background","Strong problem-solving skills"],link:"https://www.metacareers.com/careerprograms/pathways/metauniversity"},
+  {id:4,name:"Apple Pathways Internship",org:"Apple",type:"internship",category:"Technology",icon:"🍎",paid:true,online:false,free:false,location:"Cupertino, CA",season:"Summer",deadline:"Nov 30",desc:"Work on real Apple products alongside world-class engineers. Opportunities in hardware, software, design, and business.",requirements:["Current college student","Relevant coursework in CS or engineering","Strong academic record"],link:"https://www.apple.com/careers/us/students.html"},
+  {id:5,name:"NASA High School Internship",org:"NASA",type:"internship",category:"Science & Engineering",icon:"🚀",paid:true,online:false,free:false,location:"Various NASA Centers",season:"Summer / Fall / Spring",deadline:"Mar 1",desc:"Work directly with NASA researchers on aerospace, climate science, robotics and more. One of the most prestigious STEM internships available.",requirements:["US citizen","GPA 3.0+","High school junior or senior","Science or math background"],link:"https://intern.nasa.gov"},
+  {id:6,name:"IBM Extreme Blue Internship",org:"IBM",type:"internship",category:"Technology",icon:"🔵",paid:true,online:false,free:false,location:"Multiple US Cities",season:"Summer",deadline:"Feb 1",desc:"Highly selective internship where teams build real products for IBM clients. Mix of technical and business roles available.",requirements:["Rising college junior or senior","Strong technical or business skills","Team player"],link:"https://www.ibm.com/us-en/employment/extremeblue"},
+
+  // RESEARCH
+  {id:7,name:"MIT Research Science Institute (RSI)",org:"MIT / CEE",type:"research",category:"Science & Engineering",icon:"🔬",paid:false,online:false,free:true,location:"Cambridge, MA",season:"Summer",deadline:"Dec 15",desc:"One of the nation's most elite free STEM research programs. Spend 6 weeks doing real scientific research alongside MIT professors and grad students.",requirements:["Rising high school senior","Top academic record","SAT/ACT scores","Two teacher recommendations"],link:"https://www.cee.org/research-science-institute"},
+  {id:8,name:"NIH High School Summer Internship",org:"National Institutes of Health",type:"research",category:"Medicine & Health",icon:"🧬",paid:true,online:false,free:false,location:"Bethesda, MD",season:"Summer",deadline:"Feb 1",desc:"Work alongside NIH researchers on cutting-edge biomedical research. One of the top research opportunities for high school students in the country.",requirements:["US citizen or permanent resident","At least 17 years old","GPA 3.5+","Strong science background"],link:"https://www.training.nih.gov/programs/hs-sip"},
+  {id:9,name:"Siemens Competition",org:"Discovery Education / Siemens",type:"competition",category:"Science & Engineering",icon:"⚗️",paid:false,online:true,free:true,location:"Remote / National",season:"Fall",deadline:"Sep 30",desc:"National science and technology competition for high school researchers. Submit original research for a chance at college scholarships up to $100,000.",requirements:["High school student","Original science or math research project","Faculty mentor","Written research report"],link:"https://www.discoveryeducation.com/siemens"},
+  {id:10,name:"Regeneron Science Talent Search",org:"Society for Science",type:"competition",category:"Science & Engineering",icon:"🏆",paid:false,online:false,free:true,location:"Washington, DC",season:"Fall/Winter",deadline:"Nov 12",desc:"America's most prestigious pre-college science competition. Top 40 finalists receive awards from $25,000 to $250,000.",requirements:["US high school senior","Original independent research","Lab notebook and report","School nomination"],link:"https://www.societyforscience.org/regeneron-sts"},
+  {id:11,name:"Intel ISEF",org:"Society for Science",type:"competition",category:"Science & Engineering",icon:"🥇",paid:false,online:false,free:true,location:"Various Cities",season:"Spring",deadline:"Jan (local fair)","desc":"The world's largest pre-college STEM competition. Win grand prizes and connect with the global science community.",requirements:["Win a local or regional science fair","Original research project","Safety forms","Adult sponsor/mentor"],link:"https://www.societyforscience.org/isef"},
+  {id:12,name:"Jackson Lab Summer Student Program",org:"Jackson Laboratory",type:"research",category:"Medicine & Health",icon:"🧪",paid:true,online:false,free:false,location:"Bar Harbor, ME / Farmington, CT",season:"Summer",deadline:"Jan 31",desc:"Conduct hands-on genomics and biomedical research at one of the top research institutions in the world. Stipend + housing included.",requirements:["High school junior or senior","Strong science grades","US citizen","Letter of recommendation"],link:"https://www.jax.org/education-and-learning/high-school-students-and-undergraduates"},
+
+  // MEDICINE & HEALTH
+  {id:13,name:"American Red Cross Youth Volunteer",org:"American Red Cross",type:"volunteer",category:"Medicine & Health",icon:"🩺",paid:false,online:false,free:true,location:"Nationwide",season:"Year-Round",deadline:"Rolling",desc:"Volunteer in blood drives, disaster relief, and community health programs. Great for students interested in medicine or public health.",requirements:["At least 16 years old","Commit to regular volunteer hours","Attend orientation"],link:"https://www.redcross.org/volunteer/volunteer-opportunities.html"},
+  {id:14,name:"Health Occupations Students of America (HOSA)",org:"HOSA",type:"competition",category:"Medicine & Health",icon:"💊",paid:false,online:false,free:true,location:"Nationwide + International",season:"Year-Round",deadline:"Oct (chapter sign-up)",desc:"Compete in 60+ health science events, from clinical skills to medical math. Scholarships and recognition for top performers.",requirements:["High school student","Join through school chapter","Choose a competitive event","Practice with a sponsor teacher"],link:"https://www.hosa.org"},
+  {id:15,name:"Scripps Research High School Internship",org:"Scripps Research",type:"research",category:"Medicine & Health",icon:"🔭",paid:true,online:false,free:false,location:"La Jolla, CA / Jupiter, FL",season:"Summer",deadline:"Feb 15",desc:"Conduct real biomedical research at one of the world's largest private research institutes. Work with PhD scientists on drug discovery and neuroscience.",requirements:["High school junior or senior","Florida or California resident preferred","Strong science background","GPA 3.5+"],link:"https://www.scripps.edu/science-and-medicine/research-programs/intern-and-student-opportunities"},
+
+  // BUSINESS & FINANCE
+  {id:16,name:"Goldman Sachs Possibilities Summit",org:"Goldman Sachs",type:"summer",category:"Business & Finance",icon:"📊",paid:false,online:false,free:true,location:"New York, NY",season:"Summer",deadline:"Feb 28",desc:"An intensive multi-day program introducing high school students to careers in finance, investment banking, and tech at Goldman Sachs.",requirements:["High school sophomore or junior","Strong academic record","Interest in finance or business","Resume and short essay"],link:"https://www.goldmansachs.com/careers/students"},
+  {id:17,name:"DECA Competition",org:"DECA Inc.",type:"competition",category:"Business & Finance",icon:"📈",paid:false,online:false,free:true,location:"Nationwide + International",season:"Fall–Spring",deadline:"Oct (chapter sign-up)",desc:"Business, marketing, and finance competitions for high schoolers. Case studies, events, and scholarships at state and international levels.",requirements:["Join school DECA chapter","Choose a competitive event","Prepare written and role-play components"],link:"https://www.deca.org"},
+  {id:18,name:"FBLA (Future Business Leaders of America)",org:"FBLA-PBL",type:"competition",category:"Business & Finance",icon:"💼",paid:false,online:true,free:true,location:"Nationwide",season:"Year-Round",deadline:"Rolling",desc:"The largest career and technical student organization in the US. Compete in 70+ business events and earn scholarships.",requirements:["High school student","Join school chapter","Select a competitive event"],link:"https://www.fbla.org"},
+  {id:19,name:"Wharton Global High School Investment Competition",org:"Wharton School / UPenn",type:"competition",category:"Business & Finance",icon:"🏦",paid:false,online:true,free:true,location:"Remote",season:"Spring",deadline:"Jan 15",desc:"Build and manage a virtual stock portfolio competing against teams worldwide. Top teams are invited to present at Wharton's campus.",requirements:["Team of 3–5 students","High school enrollment","Interest in investing","Teacher advisor"],link:"https://globalyouth.wharton.upenn.edu/investment-competition"},
+
+  // ARTS & DESIGN
+  {id:20,name:"Parsons Pre-College Academy",org:"The New School",type:"summer",category:"Arts & Design",icon:"🎨",paid:false,online:false,free:false,location:"New York, NY",season:"Summer",deadline:"Mar 30",desc:"Study art, design, and creative technology at one of the world's top design schools. Explore fashion, architecture, illustration, and more.",requirements:["High school student","Portfolio or creative writing sample","Financial aid available","Application essay"],link:"https://www.newschool.edu/parsons/pre-college"},
+  {id:21,name:"Rhode Island School of Design Pre-College",org:"RISD",type:"summer",category:"Arts & Design",icon:"🖌️",paid:false,online:false,free:false,location:"Providence, RI",season:"Summer",deadline:"Mar 1",desc:"Immersive 6-week studio arts program at one of America's top art schools. Develop your portfolio and explore multiple disciplines.",requirements:["High school student (15–18)","Portfolio required","Financial aid available","Completed application"],link:"https://precollege.risd.edu"},
+  {id:22,name:"YoungArts Program",org:"National YoungArts Foundation",type:"fellowship",category:"Arts & Design",icon:"🎭",paid:false,online:true,free:true,location:"National",season:"Fall",deadline:"Oct 15",desc:"The most prestigious national recognition program for young artists in music, dance, visual arts, writing, and film. Winners get $10,000 and national recognition.",requirements:["US citizen aged 15–18","Submit work in your artistic discipline","Application fee waived for financial need"],link:"https://www.youngarts.org"},
+
+  // LAW & GOVERNMENT
+  {id:23,name:"Senate Page Program",org:"US Senate",type:"internship",category:"Law & Government",icon:"🏛️",paid:true,online:false,free:false,location:"Washington, DC",season:"Year-Round",deadline:"Contact your senator",desc:"Work as a page in the US Senate. Carry messages, deliver legislative documents, and experience the inner workings of American democracy.",requirements:["High school junior","Nominated by your US senator","GPA 3.0+","Excellent character reference"],link:"https://www.senate.gov/pageleft/pages.htm"},
+  {id:24,name:"Congressional Hispanic Caucus Institute",org:"CHCI",type:"fellowship",category:"Law & Government",icon:"⚖️",paid:true,online:false,free:false,location:"Washington, DC",season:"Summer",deadline:"Jan 15",desc:"Paid internship program placing Latino students in congressional offices, federal agencies, and nonprofits in Washington, DC.",requirements:["Hispanic/Latino student","US citizen or permanent resident","GPA 3.0+","Financial need considered"],link:"https://chci.org/programs/internship-program"},
+  {id:25,name:"Close Up Washington DC Program",org:"Close Up Foundation",type:"summer",category:"Law & Government",icon:"🗳️",paid:false,online:false,free:false,location:"Washington, DC",season:"Year-Round",deadline:"Rolling",desc:"Immersive week-long civic education program where students meet elected officials, visit the Capitol, and debate real policy issues.",requirements:["High school student","School nomination or self-apply","Financial assistance available"],link:"https://www.closeup.org"},
+
+  // STEM / ENGINEERING
+  {id:26,name:"FIRST Robotics Competition",org:"FIRST",type:"competition",category:"Science & Engineering",icon:"🤖",paid:false,online:false,free:true,location:"Nationwide",season:"Fall–Spring",deadline:"Sep (team registration)",desc:"Build a robot in 6 weeks and compete at regional and world championships. Earn college scholarships totaling over $80 million.",requirements:["Join or start a school team","No prior experience needed","Commitment to weekly meetings"],link:"https://www.firstinspires.org/robotics/frc"},
+  {id:27,name:"MIT Beaver Works Summer Institute",org:"MIT Lincoln Laboratory",type:"summer",category:"Science & Engineering",icon:"⚙️",paid:false,online:false,free:true,location:"Cambridge, MA",season:"Summer",deadline:"Mar 15",desc:"Highly selective 4-week STEM program focused on autonomous vehicles, drones, and satellite technology. All accepted students attend for free.",requirements:["Rising high school senior","US citizen or permanent resident","Strong math and science","Complete online prerequisite courses"],link:"https://beaverworks.ll.mit.edu/CMS/bw/bwsi"},
+  {id:28,name:"Girls Who Code Summer Immersion",org:"Girls Who Code",type:"summer",category:"Technology",icon:"👩‍💻",paid:false,online:true,free:true,location:"Remote + In-Person",season:"Summer",deadline:"Mar 1",desc:"Free 2-week coding program for girls and non-binary students. Learn web development, AI, and more while building a real app.",requirements:["Girl or non-binary student","Rising high school junior or senior","No coding experience required","US resident"],link:"https://girlswhocode.com/programs/summer-immersion-program"},
+  {id:29,name:"Mathworks Math Modeling Challenge",org:"SIAM",type:"competition",category:"Mathematics",icon:"📐",paid:false,online:true,free:true,location:"Remote",season:"Spring",deadline:"Feb (registration)",desc:"14-hour math modeling competition using real-world data. Top teams win cash prizes and scholarships up to $20,000.",requirements:["Team of 3–5 high school students","Grade 11 or 12","US or UK school","No teacher coaching during contest"],link:"https://m3challenge.siam.org"},
+  {id:30,name:"American Mathematics Competition (AMC)",org:"Mathematical Association of America",type:"competition",category:"Mathematics",icon:"🔢",paid:false,online:false,free:true,location:"At your school",season:"Fall/Winter",deadline:"School registration by Oct",desc:"The premier high school math competition in the US. Top scorers qualify for the AIME and eventually the US Math Olympiad.",requirements:["High school student","Sign up through your school","No special application needed"],link:"https://maa.org/student-programs/amc"},
+
+  // ENVIRONMENT
+  {id:31,name:"Student Conservation Association",org:"SCA",type:"volunteer",category:"Environment",icon:"🌿",paid:true,online:false,free:false,location:"National Parks Nationwide",season:"Summer",deadline:"Rolling",desc:"Work in national parks doing trail maintenance, habitat restoration, and conservation. Receive a stipend, housing, and travel support.",requirements:["At least 15 years old","Physical fitness","Commitment of 4–12 weeks","US citizen or permanent resident"],link:"https://www.thesca.org/serve/high-school-programs"},
+  {id:32,name:"EPA Environmental Justice Internship",org:"US EPA",type:"internship",category:"Environment",icon:"♻️",paid:true,online:false,free:false,location:"Various EPA Offices",season:"Summer",deadline:"Jan 31",desc:"Paid summer internship at the Environmental Protection Agency. Work on real environmental policy, research, and community engagement.",requirements:["US citizen","GPA 3.0+","High school senior or college freshman","Interest in environmental science or policy"],link:"https://www.epa.gov/careers/student-internships"},
+  {id:33,name:"Jane Goodall Environmental Leadership",org:"Jane Goodall Institute",type:"volunteer",category:"Environment",icon:"🌍",paid:false,online:true,free:true,location:"Remote / Local",season:"Year-Round",deadline:"Rolling",desc:"Launch a Roots & Shoots environmental action project in your community. Get mentorship, resources, and global recognition.",requirements:["Any student","Create a community action plan","Online application","No fee"],link:"https://www.rootsandshoots.org"},
+
+  // COMMUNITY SERVICE
+  {id:34,name:"AmeriCorps NCCC",org:"AmeriCorps",type:"volunteer",category:"Community Service",icon:"🤝",paid:true,online:false,free:false,location:"Nationwide",season:"Year-Round",deadline:"Rolling",desc:"10-month full-time national service program. Work on disaster relief, environmental restoration, and community development projects.",requirements:["Ages 18–24","High school diploma or GED","US citizen","Physical fitness"],link:"https://americorps.gov/serve/fit-finder/americorps-nccc"},
+  {id:35,name:"DoSomething.org Campaigns",org:"DoSomething.org",type:"volunteer",category:"Community Service",icon:"💪",paid:false,online:true,free:true,location:"Remote",season:"Year-Round",deadline:"Rolling",desc:"Join national volunteer campaigns on issues you care about — mental health, climate, hunger, and more. Earn scholarships for participating.",requirements:["Any age","No experience needed","Choose a campaign online","Complete the action"],link:"https://www.dosomething.org"},
+
+  // JOURNALISM & MEDIA
+  {id:36,name:"New York Times Student Journalism Institute",org:"New York Times",type:"summer",category:"Journalism & Media",icon:"📰",paid:false,online:false,free:true,location:"New York, NY",season:"Summer",deadline:"Mar 15",desc:"Competitive journalism program for diverse high school students. Learn reporting, writing, photography, and digital storytelling from NYT journalists.",requirements:["High school junior","US citizen","Writing sample","Underrepresented background preferred"],link:"https://www.nytco.com/company/diversity-and-inclusion/student-journalism-institute"},
+  {id:37,name:"Scholastic Art & Writing Awards",org:"Alliance for Young Artists & Writers",type:"competition",category:"Arts & Design",icon:"✍️",paid:false,online:true,free:true,location:"National",season:"Fall/Winter",deadline:"Dec 15",desc:"The most prestigious recognition program for creative teens in the US. Gold Key winners are considered for national awards and scholarships.",requirements:["Grades 7–12","Submit original artwork or writing","Entry fee (fee waivers available)","One submission per category"],link:"https://www.artandwriting.org"},
+
+  // SPORTS & LEADERSHIP
+  {id:38,name:"Aspen Institute Sports & Society",org:"Aspen Institute",type:"fellowship",category:"Sports & Leadership",icon:"⚽",paid:false,online:true,free:true,location:"Remote",season:"Year-Round",deadline:"Rolling",desc:"Youth voice program focused on sports policy, access, and leadership. Students contribute to national conversations about youth sports equity.",requirements:["High school student","Interest in sports and social justice","Essay application","Recommendation optional"],link:"https://www.aspeninstitute.org/programs/sports-society"},
+  {id:39,name:"NFLPA Externship",org:"NFL Players Association",type:"internship",category:"Sports & Leadership",icon:"🏈",paid:true,online:false,free:false,location:"Washington, DC",season:"Summer",deadline:"Mar 1",desc:"Work inside the NFLPA on player advocacy, business, law, and communications. Learn how a professional sports union operates.",requirements:["College freshman or sophomore","Interest in sports business or law","Application essay and resume"],link:"https://nflpa.com/careers/externship"},
+
+  // ENGINEERING
+  {id:40,name:"Society of Women Engineers (SWE) Scholarship",org:"Society of Women Engineers",type:"fellowship",category:"Science & Engineering",icon:"👩‍🔬",paid:false,online:true,free:true,location:"Remote",season:"Fall",deadline:"May 1",desc:"Scholarships and leadership development for women pursuing engineering and STEM. Includes mentorship, networking, and career resources.",requirements:["Female-identifying student","Pursuing engineering or STEM","US citizen or permanent resident","GPA 3.0+"],link:"https://swe.org/scholarships"},
+  {id:41,name:"JETS Engineering Competitions",org:"Junior Engineering Technical Society",type:"competition",category:"Science & Engineering",icon:"🛠️",paid:false,online:false,free:true,location:"Nationwide",season:"Spring",deadline:"Jan (team registration)",desc:"National engineering aptitude tests and team challenges for high schoolers. Top teams qualify for national finals and earn recognition.",requirements:["High school student","Form or join a team","Register through school","No prior experience required"],link:"https://www.jets.org"},
+
+  // POLITICS & POLICY
+  {id:42,name:"American Legion Boys State",org:"American Legion",type:"summer",category:"Law & Government",icon:"🇺🇸",paid:false,online:false,free:true,location:"State capitals (nationwide)",season:"Summer",deadline:"Spring (school nomination)",desc:"Week-long civic program where students create a mock state government. One of the most respected leadership programs in America.",requirements:["Rising high school senior","US citizen","Nominated by school or veteran's post","Strong leadership record"],link:"https://www.legion.org/boysstate"},
+  {id:43,name:"Hugh O'Brian Youth Leadership (HOBY)",org:"HOBY",type:"summer",category:"Leadership",icon:"🌟",paid:false,online:false,free:true,location:"Statewide seminars",season:"Spring/Summer",deadline:"Spring (school nomination)",desc:"Life-changing leadership seminar for high school sophomores. Explore community service, ethics, and personal leadership development.",requirements:["High school sophomore","Nominated by school","No application fee","Commit to community service project"],link:"https://www.hoby.org"},
+
+  // CODING / TECH
+  {id:44,name:"Code.org AP CS Principles",org:"Code.org",type:"summer",category:"Technology",icon:"💡",paid:false,online:true,free:true,location:"Remote",season:"Year-Round",deadline:"Rolling",desc:"Free curriculum and teacher-led program to earn AP Computer Science Principles credit. Learn Python, data, algorithms, and the internet.",requirements:["High school student","No experience needed","Available online","Teachers can sign up their class"],link:"https://code.org/educate/csp"},
+  {id:45,name:"Kode With Klossy",org:"Kode With Klossy",type:"summer",category:"Technology",icon:"👸",paid:false,online:true,free:true,location:"Remote + In-Person Camps",season:"Summer",deadline:"Mar 1",desc:"Free 2-week coding camps for girls and non-binary teens. Learn web, mobile, data, and AI development in a supportive community.",requirements:["Girl or non-binary student","Ages 13–18","No experience needed","Online application"],link:"https://www.kodewithklossy.com"},
+
+  // WRITING / HUMANITIES
+  {id:46,name:"Bread Loaf Writers' Conference",org:"Middlebury College",type:"summer",category:"Journalism & Media",icon:"📝",paid:false,online:false,free:false,location:"Ripton, VT",season:"Summer",deadline:"Feb 15",desc:"Prestigious writers' conference with workshops, readings, and one-on-one feedback from published authors. Financial aid available.",requirements:["Ages 14–18","Writing sample (fiction, poetry, or nonfiction)","Application essay","Teacher recommendation"],link:"https://www.middlebury.edu/bread-loaf-conferences"},
+  {id:47,name:"Princeton University Humanities Council Summer",org:"Princeton University",type:"summer",category:"Humanities",icon:"📚",paid:false,online:false,free:false,location:"Princeton, NJ",season:"Summer",deadline:"Feb 1",desc:"Intensive pre-college humanities program exploring literature, history, philosophy, and culture alongside Princeton faculty.",requirements:["Rising high school junior or senior","Strong academic record","Essay and recommendation","Financial aid available"],link:"https://humanities.princeton.edu"},
+
+  // HEALTH
+  {id:48,name:"Stanford Medicine X High School",org:"Stanford Medicine",type:"summer",category:"Medicine & Health",icon:"🏥",paid:false,online:true,free:true,location:"Remote",season:"Summer",deadline:"Mar 15",desc:"Explore the intersection of medicine and technology. Learn about health innovation, patient advocacy, and digital health from Stanford doctors.",requirements:["High school student","Interest in medicine or health tech","Application essay","No prior medical background needed"],link:"https://medicinex.stanford.edu"},
+  {id:49,name:"Mental Health America High School Fellowship",org:"Mental Health America",type:"fellowship",category:"Medicine & Health",icon:"🧠",paid:false,online:true,free:true,location:"Remote",season:"Summer",deadline:"Apr 1",desc:"Train as a mental health advocate and peer leader. Learn to support classmates and raise awareness about mental wellness in your school.",requirements:["High school student","Personal statement","Interest in mental health","No prior experience needed"],link:"https://mhanational.org"},
+
+  // MATH
+  {id:50,name:"Program in Mathematics for Young Scientists (PROMYS)",org:"Boston University",type:"summer",category:"Mathematics",icon:"∑",paid:false,online:false,free:false,location:"Boston, MA",season:"Summer",deadline:"Apr 1",desc:"Rigorous 6-week summer program for mathematically talented students. Deep exploration of number theory and proof-based math. Scholarships available.",requirements:["High school student","Strong math aptitude","Written problem set application","Teacher recommendation"],link:"https://promys.org"},
+  {id:51,name:"Ross Mathematics Program",org:"Ohio State University",type:"summer",category:"Mathematics",icon:"🔣",paid:false,online:false,free:false,location:"Columbus, OH / Rose-Hulman, IN",season:"Summer",deadline:"Mar 15",desc:"8-week intensive program exploring number theory and abstract mathematics. One of the most respected math summer programs in the world.",requirements:["High school student","Strong problem-solving skills","Application problem set","Teacher recommendation"],link:"https://rossprogram.org"},
+
+  // POLITICS
+  {id:52,name:"National Student Leadership Conference",org:"NSLC",type:"summer",category:"Leadership",icon:"🎓",paid:false,online:false,free:false,location:"Top US Universities",season:"Summer",deadline:"Rolling",desc:"Explore future careers through hands-on simulations in medicine, law, business, and government at top US universities. Financial aid available.",requirements:["High school student","School or self-nomination","Application and essay","Financial assistance available"],link:"https://www.nslcleaders.org"},
+  {id:53,name:"Presidential Classroom",org:"Presidential Classroom / Close Up",type:"summer",category:"Law & Government",icon:"🏩",paid:false,online:false,free:false,location:"Washington, DC",season:"Summer",deadline:"Rolling",desc:"Meet members of Congress, Supreme Court justices, and policy leaders in Washington, DC. Develop civic leadership skills through real debate and discussion.",requirements:["High school student","Teacher or self-nomination","Application essay","Financial aid available"],link:"https://www.closeup.org/programs/presidential-classroom"},
+
+  // SOCIAL JUSTICE
+  {id:54,name:"NAACP ACT-SO Competition",org:"NAACP",type:"competition",category:"Arts & Design",icon:"✊",paid:false,online:false,free:true,location:"Nationwide",season:"Fall–Summer",deadline:"Local chapter varies",desc:"Academic, cultural, and artistic competition celebrating excellence among African American youth. 26 categories from science to visual arts to music.",requirements:["African American high school student","Register through local NAACP chapter","Prepare project or performance","No entry fee"],link:"https://naacp.org/find-resources/scholarships-awards-internships/act-so"},
+  {id:55,name:"Congressional Black Caucus HBCU High School Initiative",org:"Congressional Black Caucus Foundation",type:"summer",category:"Law & Government",icon:"🏛️",paid:false,online:false,free:true,location:"Washington, DC",season:"Summer",deadline:"Apr 1",desc:"An immersive leadership and career development program connecting Black high schoolers with members of Congress and policy leaders.",requirements:["African American high school student","GPA 2.5+","US citizen","Application and essay"],link:"https://www.cbcfinc.org/programs"},
+
+  // ADDITIONAL
+  {id:56,name:"Harvard Pre-College Program",org:"Harvard University",type:"summer",category:"Humanities",icon:"🎓",paid:false,online:false,free:false,location:"Cambridge, MA",season:"Summer",deadline:"Mar 15",desc:"Take real Harvard courses, live in the dorms, and experience college life. Courses available in nearly every field.",requirements:["High school student (15–18)","Strong academic record","Application essay","Financial aid available"],link:"https://www.summer.harvard.edu/high-school-programs/pre-college-program"},
+  {id:57,name:"Brown Pre-College Programs",org:"Brown University",type:"summer",category:"Humanities",icon:"🎓",paid:false,online:true,free:false,location:"Providence, RI / Online",season:"Summer",deadline:"Mar 1",desc:"Choose from 200+ courses and programs at Brown University. Live on campus or attend online. Financial aid available.",requirements:["High school student","Application and writing sample","Financial aid available","Transcript"],link:"https://precollege.brown.edu"},
+  {id:58,name:"Global Citizen Year",org:"Global Citizen Year",type:"fellowship",category:"Community Service",icon:"🌐",paid:false,online:false,free:false,location:"International",season:"Gap Year",deadline:"Nov 1",desc:"Bridge year program sending recent high school graduates to Ecuador, Brazil, Senegal, or India for community service and immersion. Substantial scholarships.",requirements:["Recent high school graduate","US citizen","Application essay and interview","Financial need considered"],link:"https://globalcitizenyear.org"},
+  {id:59,name:"Questbridge College Prep Scholars",org:"Questbridge",type:"fellowship",category:"Leadership",icon:"🌉",paid:false,online:true,free:true,location:"Remote",season:"Fall",deadline:"Sep 26",desc:"National recognition program connecting high-achieving, low-income high school juniors to college prep resources, college visits, and scholarships.",requirements:["High school junior","Low-income background","GPA 3.5+","Test scores considered"],link:"https://www.questbridge.org/high-school-students/college-prep-scholars"},
+  {id:60,name:"Jack Kent Cooke Young Artists Award",org:"Jack Kent Cooke Foundation",type:"fellowship",category:"Arts & Design",icon:"🎵",paid:false,online:true,free:true,location:"Remote",season:"Fall",deadline:"Oct 15",desc:"Prestigious award for high-achieving students in the visual, performing, and literary arts. Winners receive $10,000 and national recognition.",requirements:["High school student","Financial need","3.5 GPA","Arts portfolio or performance"],link:"https://www.jkcf.org/our-programs/young-artists-award"},
+];
+
+const categories = [
+  {name:"Technology",emoji:"💻",cat:"Technology"},
+  {name:"Science & Engineering",emoji:"🔬",cat:"Science & Engineering"},
+  {name:"Medicine & Health",emoji:"💊",cat:"Medicine & Health"},
+  {name:"Business & Finance",emoji:"📊",cat:"Business & Finance"},
+  {name:"Arts & Design",emoji:"🎨",cat:"Arts & Design"},
+  {name:"Law & Government",emoji:"⚖️",cat:"Law & Government"},
+  {name:"Environment",emoji:"🌿",cat:"Environment"},
+  {name:"Community Service",emoji:"🤝",cat:"Community Service"},
+  {name:"Mathematics",emoji:"📐",cat:"Mathematics"},
+  {name:"Journalism & Media",emoji:"📰",cat:"Journalism & Media"},
+  {name:"Sports & Leadership",emoji:"⚽",cat:"Sports & Leadership"},
+  {name:"Humanities",emoji:"📚",cat:"Humanities"},
+  {name:"Leadership",emoji:"🌟",cat:"Leadership"},
+  {name:"Social Justice",emoji:"✊",cat:"Social Justice"},
+  {name:"All Programs",emoji:"🚀",cat:"all"},
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let activeType = "all";
+let activeCat  = "all";
+let searchTerm = "";
+let visibleCount = 12;
+
+// ─── RENDER CATEGORIES ───────────────────────────────────────────────────────
+const catGrid = document.getElementById("catGrid");
+categories.forEach(c => {
+  const count = c.cat === "all" ? programs.length : programs.filter(p => p.category === c.cat).length;
+  const div = document.createElement("div");
+  div.className = "cat-card";
+  div.innerHTML = `<span class="cat-emoji">${c.emoji}</span><h4>${c.name}</h4><span>${count} program${count!==1?'s':''}</span>`;
+  div.onclick = () => {
+    activeCat = c.cat;
+    visibleCount = 12;
+    document.querySelectorAll(".cat-card").forEach(el => el.classList.remove("active"));
+    div.classList.add("active");
+    renderCards();
+    document.getElementById("opportunities").scrollIntoView({behavior:"smooth"});
+  };
+  catGrid.appendChild(div);
+});
+
+// ─── FILTER PILLS ─────────────────────────────────────────────────────────────
+document.querySelectorAll("#typeFilters .pill").forEach(pill => {
+  pill.addEventListener("click", () => {
+    document.querySelectorAll("#typeFilters .pill").forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    activeType = pill.dataset.filter;
+    visibleCount = 12;
+    renderCards();
+  });
+});
+
+// ─── SEARCH ──────────────────────────────────────────────────────────────────
+document.getElementById("searchInput").addEventListener("input", e => {
+  searchTerm = e.target.value.toLowerCase();
+  visibleCount = 12;
+  renderCards();
+});
+document.getElementById("searchInput").addEventListener("keydown", e => { if(e.key==="Enter") runSearch(); });
+
+function runSearch() {
+  searchTerm = document.getElementById("searchInput").value.toLowerCase();
+  visibleCount = 12;
+  renderCards();
+}
+
+// ─── FILTER LOGIC ────────────────────────────────────────────────────────────
+function getFiltered() {
+  return programs.filter(p => {
+    const typeOk = activeType === "all" || p.type === activeType ||
+      (activeType === "paid" && p.paid) ||
+      (activeType === "free" && p.free) ||
+      (activeType === "online" && p.online);
+    const catOk  = activeCat === "all" || p.category === activeCat;
+    const srchOk = !searchTerm ||
+      p.name.toLowerCase().includes(searchTerm) ||
+      p.org.toLowerCase().includes(searchTerm) ||
+      p.category.toLowerCase().includes(searchTerm) ||
+      p.desc.toLowerCase().includes(searchTerm);
+    return typeOk && catOk && srchOk;
+  });
+}
+
+// ─── RENDER CARDS ────────────────────────────────────────────────────────────
+function renderCards() {
+  const filtered = getFiltered();
+  const grid = document.getElementById("cardsGrid");
+  const noRes = document.getElementById("noResults");
+  const countEl = document.getElementById("resultsCount");
+  grid.innerHTML = "";
+  if (filtered.length === 0) {
+    noRes.style.display = "block";
+    countEl.textContent = "";
+    document.getElementById("showMoreBtn").style.display = "none";
+    return;
+  }
+  noRes.style.display = "none";
+  countEl.textContent = `${filtered.length} program${filtered.length!==1?'s':''} found`;
+  const toShow = filtered.slice(0, visibleCount);
+  toShow.forEach(p => grid.appendChild(makeCard(p)));
+  document.getElementById("showMoreBtn").style.display = filtered.length > visibleCount ? "inline-block" : "none";
+}
+
+function makeCard(p) {
+  const div = document.createElement("div");
+  div.className = `card type-${p.type}`;
+  const tags = `<span class="tag type-tag">${p.type}</span>${p.paid?'<span class="tag paid">Paid</span>':''}${p.free?'<span class="tag free">Free</span>':''}${p.online?'<span class="tag online">Online</span>':''}`;
+  div.innerHTML = `
+    <div class="card-top">
+      <div class="card-icon">${p.icon}</div>
+      <div class="card-tags">${tags}</div>
+    </div>
+    <h3>${p.name}</h3>
+    <div class="org">${p.org} · ${p.location}</div>
+    <p>${p.desc}</p>
+    <div class="card-meta"><span>📅 ${p.season}</span><span>📍 ${p.location}</span></div>
+    <div class="req-box">
+      <h4>Requirements</h4>
+      <ul>${p.requirements.slice(0,3).map(r=>`<li>${r}</li>`).join("")}</ul>
+    </div>
+    <div class="card-footer">
+      <div class="deadline">Deadline: <strong>${p.deadline}</strong></div>
+      <a class="btn-apply" href="${p.link}" target="_blank" rel="noopener">Apply →</a>
+    </div>`;
+  div.addEventListener("click", e => { if(!e.target.classList.contains("btn-apply")) openModal(p); });
+  return div;
+}
+
+function showMore() {
+  visibleCount += 12;
+  renderCards();
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openModal(p) {
+  const tags = `<span class="tag type-tag" style="font-size:.75rem;padding:.25rem .7rem">${p.type}</span>${p.paid?'<span class="tag paid" style="font-size:.75rem">Paid</span>':''}${p.free?'<span class="tag free" style="font-size:.75rem">Free</span>':''}${p.online?'<span class="tag online" style="font-size:.75rem">Online</span>':''}`;
+  document.getElementById("modalContent").innerHTML = `
+    <div class="card type-${p.type}" style="background:transparent;border:none;padding:0">
+      <div style="display:flex;gap:.8rem;align-items:center;margin-bottom:1rem">
+        <div class="card-icon" style="width:52px;height:52px;font-size:1.5rem">${p.icon}</div>
+        <div>
+          <h2 style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800">${p.name}</h2>
+          <div class="m-org" style="color:var(--text);font-size:.85rem;margin-top:.2rem">${p.org} · ${p.location}</div>
+        </div>
+      </div>
+      <div class="m-tags" style="margin-bottom:1rem">${tags}</div>
+      <p class="m-desc" style="font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1.2rem">${p.desc}</p>
+      <div class="m-section">
+        <h3>📋 Requirements</h3>
+        <ul>${p.requirements.map(r=>`<li>${r}</li>`).join("")}</ul>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0;font-size:.85rem;color:var(--text)">
+        <span>📅 ${p.season}</span>
+        <span>⏰ Deadline: <strong style="color:var(--yellow)">${p.deadline}</strong></span>
+        <span>📍 ${p.location}</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <a class="modal-apply" href="${p.link}" target="_blank" rel="noopener">Apply Now →</a>
+      <button class="modal-save" onclick="closeModalDirect()">Close</button>
+    </div>`;
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(e) { if(e.target === document.getElementById("modalOverlay")) closeModalDirect(); }
+function closeModalDirect() {
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+// ─── SUGGEST FORM ────────────────────────────────────────────────────────────
+function submitSuggestion() {
+  const name = document.getElementById("sName").value.trim();
+  const url  = document.getElementById("sUrl").value.trim();
+  const type = document.getElementById("sType").value;
+  if(!name || !url || !type) { alert("Please fill in the required fields (name, URL, and category)."); return; }
+  document.getElementById("suggestThanks").style.display = "block";
+  ["sName","sOrg","sUrl","sDesc"].forEach(id => document.getElementById(id).value="");
+  document.getElementById("sType").selectedIndex = 0;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderCards();
+</script>
 </body>
 </html>
