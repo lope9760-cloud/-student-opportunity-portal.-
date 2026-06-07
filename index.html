@@ -3,1419 +3,1459 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LaunchPad – Find Programs, Internships & Opportunities for High Schoolers</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<title>LaunchPad – Find Internships & Programs for High Schoolers</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0e1a;
-  --surface: #111827;
-  --surface2: #1a2235;
-  --border: #1f2d42;
-  --accent: #00d4ff;
-  --accent2: #7c3aed;
-  --accent3: #f59e0b;
-  --green: #10b981;
-  --red: #ef4444;
-  --text: #e8edf5;
-  --muted: #8896aa;
-  --card-bg: #111827;
+  --navy: #0B1437;
+  --navy-light: #162052;
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
+  --sky: #EFF6FF;
+  --sky2: #DBEAFE;
+  --green: #059669;
+  --green-light: #ECFDF5;
+  --amber: #D97706;
+  --amber-light: #FFFBEB;
+  --purple: #7C3AED;
+  --purple-light: #F5F3FF;
+  --coral: #DC2626;
+  --coral-light: #FEF2F2;
+  --teal: #0D9488;
+  --teal-light: #F0FDFA;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --white: #FFFFFF;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.10);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--gray-50);
+  color: var(--gray-900);
   min-height: 100vh;
-  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* ─── NAV ─── */
+/* NAV */
 nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(10,14,26,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  background: var(--navy);
   padding: 0 2rem;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
 }
 .nav-logo {
   font-family: 'Syne', sans-serif;
-  font-size: 1.4rem; font-weight: 800;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--white);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.nav-links { display: flex; gap: 1.5rem; align-items: center; }
+.nav-logo span { color: #60A5FA; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
 .nav-links a {
-  color: var(--muted); text-decoration: none;
-  font-size: 0.9rem; font-weight: 500;
-  transition: color .2s;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-badge {
-  background: var(--accent); color: #000;
-  font-size: 0.75rem; font-weight: 700;
-  padding: 4px 12px; border-radius: 20px;
+  color: rgba(255,255,255,0.75);
   text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.15s;
 }
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.btn-suggest {
+  background: var(--blue);
+  color: #fff !important;
+  border-radius: 8px;
+  padding: 7px 16px !important;
+  font-size: 0.875rem !important;
+}
+.btn-suggest:hover { background: var(--blue-light) !important; }
 
-/* ─── HERO ─── */
+/* HERO */
 .hero {
-  position: relative;
-  padding: 5rem 2rem 3rem;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1E3A8A 100%);
+  color: white;
+  padding: 5rem 2rem 4rem;
   text-align: center;
+  position: relative;
   overflow: hidden;
 }
 .hero::before {
   content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.12) 0%, transparent 70%),
-              radial-gradient(ellipse 50% 40% at 80% 80%, rgba(124,58,237,0.1) 0%, transparent 60%);
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
+  top: -200px; right: -100px;
   pointer-events: none;
 }
-.hero-tag {
-  display: inline-block;
-  background: rgba(0,212,255,0.1);
-  border: 1px solid rgba(0,212,255,0.3);
-  color: var(--accent);
-  font-size: 0.8rem; font-weight: 600;
-  padding: 5px 14px; border-radius: 20px;
-  margin-bottom: 1.2rem;
-  letter-spacing: .05em; text-transform: uppercase;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59,130,246,0.2);
+  border: 1px solid rgba(96,165,250,0.4);
+  color: #93C5FD;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .hero h1 {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
 }
-.hero h1 em {
-  font-style: normal;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
+.hero h1 em { color: #60A5FA; font-style: normal; }
 .hero p {
-  color: var(--muted); font-size: 1.05rem;
-  max-width: 560px; margin: 0 auto 2.5rem;
-  line-height: 1.7;
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.75);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
 }
 
-/* ─── SEARCH BOX ─── */
+/* SEARCH BOX */
 .search-box {
-  max-width: 720px; margin: 0 auto 1.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1rem 1.2rem;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto;
-  gap: .75rem;
-  align-items: center;
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
+  max-width: 820px;
+  margin: 0 auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+}
+.search-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 .search-input-wrap {
-  display: flex; align-items: center; gap: .5rem;
+  flex: 1;
+  min-width: 200px;
+  position: relative;
 }
-.search-input-wrap svg { color: var(--muted); flex-shrink: 0; }
-.search-input-wrap input {
-  background: none; border: none; outline: none;
-  color: var(--text); font-family: inherit; font-size: 1rem;
+.search-input-wrap svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+  pointer-events: none;
+}
+#main-search {
   width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--gray-900);
+  transition: border-color 0.15s;
+  background: var(--gray-50);
 }
-.search-input-wrap input::placeholder { color: var(--muted); }
-.divider { width: 1px; height: 28px; background: var(--border); }
-.search-btn {
-  background: linear-gradient(135deg, var(--accent), #0099cc);
-  color: #000; border: none; cursor: pointer;
-  font-family: 'Syne', sans-serif;
-  font-size: 0.95rem; font-weight: 700;
-  padding: 10px 24px; border-radius: 10px;
-  transition: opacity .2s, transform .15s;
+#main-search:focus { outline: none; border-color: var(--blue); background: white; }
+.search-row select, .zip-wrap input {
+  padding: 12px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--gray-700);
+  background: var(--gray-50);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.search-row select:focus, .zip-wrap input:focus { outline: none; border-color: var(--blue); background: white; }
+.zip-wrap {
+  display: flex;
+  gap: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid var(--gray-200);
+  background: var(--gray-50);
+  transition: border-color 0.15s;
+}
+.zip-wrap:focus-within { border-color: var(--blue); background: white; }
+.zip-wrap input {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  width: 110px;
+}
+.zip-wrap input:focus { background: transparent; }
+.zip-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 0 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s;
   white-space: nowrap;
 }
-.search-btn:hover { opacity: .9; transform: scale(1.02); }
-
-/* ─── STATS ─── */
-.stats {
-  display: flex; gap: 2rem; justify-content: center;
-  flex-wrap: wrap; margin-bottom: 3rem;
+.zip-btn:hover { background: var(--blue-light); }
+.search-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
 }
-.stat { text-align: center; }
-.stat-num {
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  background: white;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-chip:hover { border-color: var(--blue); color: var(--blue); }
+.filter-chip.active { background: var(--blue); border-color: var(--blue); color: white; }
+.search-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.search-btn:hover { background: var(--blue-light); transform: translateY(-1px); }
+.ai-badge {
+  background: rgba(124,58,237,0.12);
+  color: var(--purple);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+/* STATS STRIP */
+.stats-strip {
+  background: white;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1rem 2rem;
+}
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+.stat-item strong { color: var(--gray-900); font-size: 1.1rem; font-family: 'Syne', sans-serif; }
+.stat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-300); }
+
+/* MAIN LAYOUT */
+.main-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* SIDEBAR */
+.sidebar {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.sidebar-section {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+.sidebar-section:last-child { border-bottom: none; }
+.sidebar-title {
   font-family: 'Syne', sans-serif;
-  font-size: 1.8rem; font-weight: 800;
-  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-400);
+  margin-bottom: 0.75rem;
 }
-.stat-label { font-size: 0.8rem; color: var(--muted); }
-
-/* ─── CATEGORY CHIPS ─── */
-.cats-section { padding: 0 2rem 1.5rem; max-width: 1200px; margin: 0 auto; }
-.cats-title { font-family: 'Syne', sans-serif; font-size: .8rem; font-weight: 700; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .75rem; }
-.cats-row {
-  display: flex; flex-wrap: wrap; gap: .5rem;
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.12s;
+  margin-bottom: 2px;
 }
-.cat-chip {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--muted);
-  padding: 6px 14px; border-radius: 20px;
-  font-size: .85rem; cursor: pointer;
-  transition: all .2s;
-  display: flex; align-items: center; gap: 5px;
+.sidebar-btn:hover { background: var(--gray-50); color: var(--blue); }
+.sidebar-btn.active { background: var(--sky); color: var(--blue); font-weight: 600; }
+.sidebar-btn .cat-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
 }
-.cat-chip:hover, .cat-chip.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #000;
-}
-.cat-chip .chip-icon { font-size: .9rem; }
-
-/* ─── FILTER BAR ─── */
-.filter-bar {
-  max-width: 1200px; margin: 0 auto 1.5rem;
-  padding: 0 2rem;
-  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
-}
-.filter-select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 8px 14px; border-radius: 8px;
-  font-family: inherit; font-size: .85rem;
-  cursor: pointer; outline: none;
-}
-.filter-tag {
-  background: rgba(124,58,237,0.15);
-  border: 1px solid rgba(124,58,237,0.4);
-  color: #a78bfa;
-  padding: 6px 12px; border-radius: 20px;
-  font-size: .8rem; cursor: pointer;
-  transition: all .2s;
-}
-.filter-tag:hover, .filter-tag.active {
-  background: var(--accent2); color: #fff;
-}
-.result-count {
+.sidebar-btn .count {
   margin-left: auto;
-  color: var(--muted); font-size: .85rem;
+  background: var(--gray-100);
+  color: var(--gray-500);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 100px;
+}
+.sidebar-btn.active .count { background: var(--sky2); color: var(--blue); }
+
+.cost-filter label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  padding: 5px 0;
+  cursor: pointer;
+}
+.cost-filter input[type=checkbox] { accent-color: var(--blue); width: 15px; height: 15px; }
+
+.season-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.season-btn {
+  padding: 5px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: white;
+  cursor: pointer;
+  transition: all 0.12s;
+  font-family: 'DM Sans', sans-serif;
+}
+.season-btn:hover, .season-btn.active { background: var(--blue); border-color: var(--blue); color: white; }
+
+.grade-btns { display: flex; gap: 6px; flex-wrap: wrap; }
+.grade-btn {
+  padding: 5px 11px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: white;
+  cursor: pointer;
+  transition: all 0.12s;
+  font-family: 'DM Sans', sans-serif;
+}
+.grade-btn:hover, .grade-btn.active { background: var(--navy); border-color: var(--navy); color: white; }
+
+.clear-filters {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.12s;
+}
+.clear-filters:hover { border-color: var(--coral); color: var(--coral); }
+
+/* AI PANEL */
+.ai-panel {
+  background: linear-gradient(135deg, var(--purple-light), #EDE9FE);
+  border: 1.5px solid #C4B5FD;
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.ai-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.75rem;
+}
+.ai-icon {
+  width: 32px; height: 32px;
+  background: var(--purple);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+}
+.ai-panel h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--purple); }
+.ai-panel p { font-size: 0.82rem; color: #5B21B6; margin-bottom: 10px; }
+.ai-input-row { display: flex; gap: 8px; }
+#ai-search {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid #C4B5FD;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-family: 'DM Sans', sans-serif;
+  background: rgba(255,255,255,0.7);
+  color: var(--gray-900);
+}
+#ai-search:focus { outline: none; border-color: var(--purple); background: white; }
+.ai-go-btn {
+  background: var(--purple);
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.ai-go-btn:hover { background: #6D28D9; }
+.ai-result {
+  margin-top: 10px;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: var(--gray-700);
+  display: none;
+  border: 1px solid #E9D5FF;
+  line-height: 1.6;
+}
+.ai-result.visible { display: block; }
+
+/* RESULTS HEADER */
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.results-count { font-size: 0.95rem; color: var(--gray-600); }
+.results-count strong { color: var(--gray-900); font-family: 'Syne', sans-serif; }
+.sort-row { display: flex; align-items: center; gap: 8px; }
+.sort-row label { font-size: 0.8rem; color: var(--gray-500); }
+.sort-row select {
+  padding: 6px 10px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  background: white;
+  color: var(--gray-700);
+  cursor: pointer;
 }
 
-/* ─── PROGRAM GRID ─── */
-.programs-section {
-  max-width: 1200px; margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
+/* PROGRAM CARDS GRID */
 .programs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
-/* ─── PROGRAM CARD ─── */
 .prog-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.25rem;
-  display: flex; flex-direction: column;
-  gap: .75rem;
-  transition: transform .2s, border-color .2s, box-shadow .2s;
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  overflow: hidden;
+  transition: all 0.18s;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
 }
 .prog-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(0,212,255,0.3);
-  box-shadow: 0 8px 32px rgba(0,212,255,0.08);
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
-.card-top {
-  display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem;
-}
-.card-badges { display: flex; flex-wrap: wrap; gap: .35rem; }
-.badge {
-  font-size: .7rem; font-weight: 600; padding: 3px 9px; border-radius: 6px;
-  text-transform: uppercase; letter-spacing: .04em;
-}
-.badge-type { background: rgba(0,212,255,0.12); color: var(--accent); }
-.badge-paid { background: rgba(16,185,129,0.12); color: var(--green); }
-.badge-free { background: rgba(245,158,11,0.12); color: var(--accent3); }
-.badge-online { background: rgba(124,58,237,0.12); color: #a78bfa; }
-.badge-location { background: rgba(239,68,68,0.12); color: #f87171; }
-.badge-deadline { background: rgba(251,191,36,.12); color: #fbbf24; }
-.badge-hidden { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
 
-.card-bookmark {
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); font-size: 1.1rem;
-  transition: color .2s;
+.prog-card-top {
+  padding: 1rem 1rem 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.prog-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  object-fit: contain;
+  background: white;
   flex-shrink: 0;
-}
-.card-bookmark:hover { color: var(--accent3); }
-
-.card-org {
-  font-size: .78rem; color: var(--muted); font-weight: 500;
-  display: flex; align-items: center; gap: .4rem;
-}
-.org-logo {
-  width: 20px; height: 20px; border-radius: 4px;
-  background: var(--surface2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .7rem;
-}
-
-.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Syne', sans-serif;
-  font-size: 1.05rem; font-weight: 700;
-  line-height: 1.3; color: var(--text);
+  font-weight: 800;
+  font-size: 1rem;
+  overflow: hidden;
+}
+.prog-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
-.card-desc {
-  font-size: .875rem; color: var(--muted);
-  line-height: 1.6; display: -webkit-box;
-  -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+.prog-info { flex: 1; min-width: 0; }
+.prog-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.prog-org {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prog-tags {
+  padding: 0 1rem 0.75rem;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.tag-type { background: var(--sky2); color: #1D4ED8; }
+.tag-field { background: var(--gray-100); color: var(--gray-600); }
+.tag-cost-free { background: var(--green-light); color: var(--green); }
+.tag-cost-paid { background: var(--amber-light); color: var(--amber); }
+.tag-cost-aid { background: var(--purple-light); color: var(--purple); }
+.tag-remote { background: var(--teal-light); color: var(--teal); }
+.tag-deadline { background: #FFF7ED; color: #C2410C; }
+.tag-season { background: #FDF4FF; color: #9333EA; }
+
+.prog-desc {
+  padding: 0 1rem 0.75rem;
+  font-size: 0.82rem;
+  color: var(--gray-500);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.card-meta {
-  display: flex; flex-wrap: wrap; gap: .5rem;
+.prog-card-footer {
+  margin-top: auto;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
-.meta-item {
-  display: flex; align-items: center; gap: .3rem;
-  font-size: .78rem; color: var(--muted);
+.prog-deadline { font-size: 0.78rem; color: var(--gray-400); }
+.prog-deadline span { color: var(--gray-700); font-weight: 600; }
+.prog-apply {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
+  transition: background 0.12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
-.meta-item svg { flex-shrink: 0; }
+.prog-apply:hover { background: var(--blue); }
+.prog-apply svg { width: 12px; height: 12px; }
 
-.card-reqs {
-  background: var(--surface2);
-  border-radius: 8px;
-  padding: .7rem .85rem;
-}
-.reqs-label {
-  font-size: .72rem; font-weight: 700;
-  color: var(--accent); text-transform: uppercase;
-  letter-spacing: .06em; margin-bottom: .4rem;
-}
-.reqs-list {
-  display: flex; flex-wrap: wrap; gap: .3rem;
-}
-.req-tag {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-size: .72rem; padding: 2px 8px; border-radius: 4px;
-}
-
-.card-actions {
-  display: flex; gap: .6rem; margin-top: auto;
-}
-.btn-apply {
-  flex: 1;
-  background: linear-gradient(135deg, var(--accent), #0099cc);
-  color: #000; border: none; cursor: pointer;
-  font-family: 'Syne', sans-serif;
-  font-size: .88rem; font-weight: 700;
-  padding: 9px 16px; border-radius: 8px;
-  text-decoration: none; display: flex;
-  align-items: center; justify-content: center; gap: .4rem;
-  transition: opacity .2s;
-}
-.btn-apply:hover { opacity: .85; }
-.btn-more {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text); cursor: pointer;
-  font-family: inherit; font-size: .85rem;
-  padding: 9px 14px; border-radius: 8px;
-  transition: border-color .2s;
-  text-decoration: none; display: flex; align-items: center;
-}
-.btn-more:hover { border-color: var(--accent); color: var(--accent); }
-
-/* ─── HIDDEN GEMS SECTION ─── */
-.gems-section {
-  max-width: 1200px; margin: 0 auto;
-  padding: 0 2rem 3rem;
-}
-.section-header {
-  display: flex; align-items: center; gap: 1rem;
-  margin-bottom: 1.25rem;
-}
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.4rem; font-weight: 800;
-}
-.section-subtitle { color: var(--muted); font-size: .9rem; }
-.gems-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-.gem-card {
-  background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(0,212,255,0.04));
-  border: 1px solid rgba(16,185,129,0.2);
-  border-radius: 12px;
-  padding: 1.1rem;
-  transition: transform .2s;
-}
-.gem-card:hover { transform: translateY(-2px); }
-.gem-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .5rem; }
-.gem-title { font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 700; }
-.gem-school { font-size: .78rem; color: var(--green); font-weight: 600; }
-.gem-desc { font-size: .82rem; color: var(--muted); margin: .4rem 0 .8rem; line-height: 1.5; }
-.gem-apply {
-  display: inline-flex; align-items: center; gap: .35rem;
-  background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
-  color: var(--green); text-decoration: none;
-  font-size: .8rem; font-weight: 600;
-  padding: 5px 12px; border-radius: 6px;
-  transition: background .2s;
-}
-.gem-apply:hover { background: rgba(16,185,129,0.25); }
-
-/* ─── MODAL ─── */
-.modal-overlay {
-  display: none;
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.7);
-  backdrop-filter: blur(6px);
-  z-index: 200;
-  align-items: center; justify-content: center;
-  padding: 1rem;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  max-width: 600px; width: 100%;
-  max-height: 90vh; overflow-y: auto;
-  padding: 2rem;
-  position: relative;
-}
-.modal-close {
-  position: absolute; top: 1rem; right: 1rem;
-  background: var(--surface2); border: none; cursor: pointer;
-  color: var(--muted); font-size: 1.2rem;
-  width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  transition: color .2s;
-}
-.modal-close:hover { color: var(--text); }
-.modal-org { font-size: .8rem; color: var(--muted); margin-bottom: .3rem; }
-.modal-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: .75rem; }
-.modal-badges { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
-.modal-desc { color: var(--muted); line-height: 1.7; font-size: .93rem; margin-bottom: 1.2rem; }
-.modal-section { margin-bottom: 1.2rem; }
-.modal-section-title { font-family: 'Syne', sans-serif; font-size: .85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
-.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
-.modal-info-item { background: var(--surface2); border-radius: 8px; padding: .6rem .8rem; }
-.modal-info-label { font-size: .72rem; color: var(--muted); margin-bottom: .15rem; }
-.modal-info-val { font-size: .88rem; font-weight: 500; }
-.modal-req-list { list-style: none; display: flex; flex-direction: column; gap: .3rem; }
-.modal-req-list li { font-size: .88rem; color: var(--muted); display: flex; gap: .5rem; }
-.modal-req-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
-.modal-apply {
-  display: flex; align-items: center; justify-content: center; gap: .5rem;
-  width: 100%;
-  background: linear-gradient(135deg, var(--accent), #0099cc);
-  color: #000; border: none; cursor: pointer;
-  font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
-  padding: 13px; border-radius: 10px;
-  text-decoration: none; margin-top: .5rem;
-  transition: opacity .2s;
-}
-.modal-apply:hover { opacity: .85; }
-
-/* ─── NO RESULTS ─── */
-.no-results {
-  text-align: center; padding: 4rem 2rem;
-  color: var(--muted);
-}
-.no-results h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; margin-bottom: .5rem; color: var(--text); }
-
-/* ─── FOOTER ─── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem;
+/* LOAD MORE */
+.load-more-wrap {
   text-align: center;
-  color: var(--muted); font-size: .85rem;
+  padding: 2rem 0 1rem;
 }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 640px) {
-  .search-box {
-    grid-template-columns: 1fr;
-    gap: .5rem;
-  }
-  .divider { display: none; }
-  .programs-grid { grid-template-columns: 1fr; }
-  nav { padding: 0 1rem; }
-  .nav-links { gap: .75rem; }
+.load-more-btn {
+  background: white;
+  border: 2px solid var(--blue);
+  color: var(--blue);
+  padding: 12px 32px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
 }
+.load-more-btn:hover { background: var(--blue); color: white; }
 
-/* Loading shimmer */
-.shimmer {
-  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+/* SUGGEST FORM */
+.suggest-section {
+  background: linear-gradient(135deg, var(--navy) 0%, #1E3A8A 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+.suggest-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+.suggest-section p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+.suggest-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.suggest-form input, .suggest-form select, .suggest-form textarea {
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 8px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
 }
-@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.suggest-form input::placeholder, .suggest-form textarea::placeholder { color: rgba(255,255,255,0.4); }
+.suggest-form input:focus, .suggest-form select:focus, .suggest-form textarea:focus {
+  outline: none; border-color: #60A5FA;
+}
+.suggest-form select { color: rgba(255,255,255,0.7); }
+.suggest-form select option { background: var(--navy); color: white; }
+.suggest-form textarea { grid-column: 1 / -1; resize: vertical; min-height: 80px; }
+.suggest-form .full { grid-column: 1 / -1; }
+.suggest-submit {
+  grid-column: 1 / -1;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s;
+}
+.suggest-submit:hover { background: var(--blue-light); }
+.suggest-thanks { color: #86EFAC; font-weight: 600; display: none; text-align: center; padding: 1rem; }
 
-/* Animate in */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+/* FOOTER */
+footer {
+  background: var(--gray-900);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.8rem;
 }
-.prog-card { animation: fadeUp .4s ease both; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+/* EMPTY STATE */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--gray-400);
+}
+.empty-state h3 { font-size: 1.1rem; color: var(--gray-600); margin-bottom: 0.5rem; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 540px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.2s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.modal-logo {
+  width: 52px; height: 52px;
+  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.modal-logo img { width: 100%; height: 100%; object-fit: contain; }
+.modal-header-info h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; }
+.modal-header-info p { font-size: 0.82rem; color: var(--gray-500); }
+.modal-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-400);
+  font-size: 1.3rem;
+  line-height: 1;
+  padding: 4px;
+}
+.modal-close:hover { color: var(--gray-700); }
+.modal-body {
+  padding: 1.25rem 1.5rem;
+}
+.modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+.modal-desc { font-size: 0.9rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 1.25rem; }
+.modal-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+.modal-detail {
+  background: var(--gray-50);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.modal-detail .label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); margin-bottom: 3px; }
+.modal-detail .value { font-size: 0.875rem; font-weight: 600; color: var(--gray-800); }
+.modal-requirements { margin-bottom: 1.25rem; }
+.modal-requirements h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); margin-bottom: 8px; }
+.modal-requirements ul { list-style: none; }
+.modal-requirements li { font-size: 0.875rem; color: var(--gray-600); padding: 4px 0; display: flex; align-items: flex-start; gap: 8px; }
+.modal-requirements li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.modal-apply {
+  display: block;
+  width: 100%;
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.15s;
+}
+.modal-apply:hover { background: var(--blue-light); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .main-wrap { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .suggest-form { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  nav { padding: 0 1rem; }
+  .nav-links a:not(.btn-suggest) { display: none; }
+  .hero { padding: 3rem 1rem 2.5rem; }
+  .main-wrap { padding: 1rem; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">🚀 LaunchPad</a>
+  <a href="#" class="nav-logo">🚀 Launch<span>Pad</span></a>
   <div class="nav-links">
-    <a href="#programs">Programs</a>
-    <a href="#hidden-gems">Hidden Gems</a>
-    <a href="#programs" class="nav-badge">Browse All</a>
+    <a href="#opportunities">Browse</a>
+    <a href="#ai-section">AI Search</a>
+    <a href="#suggest" class="btn-suggest">+ Submit Program</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-tag">✦ Free for High Schoolers</div>
-  <h1>Find Your <em>Next Big Opportunity</em></h1>
-  <p>Hundreds of real internships, summer programs, research opportunities, fellowships & more — with direct apply links and requirements all in one place.</p>
+  <div class="hero-badge">✦ 500+ Verified Programs</div>
+  <h1>Find Your <em>Next Big</em><br>Opportunity</h1>
+  <p>Internships, research programs, summer institutes, competitions & fellowships — curated for high schoolers. Always free.</p>
 
   <div class="search-box">
-    <div class="search-input-wrap">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" id="searchInput" placeholder="Search programs, subjects, schools..." />
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="main-search" placeholder="Search programs, fields, schools..." autocomplete="off">
+      </div>
+      <select id="filter-type">
+        <option value="">All Types</option>
+        <option value="Internship">Internship</option>
+        <option value="Summer Program">Summer Program</option>
+        <option value="Research">Research Program</option>
+        <option value="Fellowship">Fellowship</option>
+        <option value="Competition">Competition</option>
+        <option value="Bootcamp">Bootcamp</option>
+        <option value="Volunteer">Volunteer</option>
+        <option value="Scholarship">Scholarship</option>
+        <option value="Pre-College">Pre-College</option>
+        <option value="Leadership">Leadership Program</option>
+        <option value="Exchange">Exchange Program</option>
+        <option value="Workshop">Workshop</option>
+      </select>
+      <select id="filter-field">
+        <option value="">Any Field</option>
+        <option value="STEM">STEM</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Medicine">Medicine / Health</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Business">Business</option>
+        <option value="Law">Law / Policy</option>
+        <option value="Arts">Arts & Design</option>
+        <option value="Social Science">Social Science</option>
+        <option value="Environmental">Environmental</option>
+        <option value="Humanities">Humanities</option>
+        <option value="Math">Mathematics</option>
+        <option value="Biology">Biology</option>
+        <option value="Psychology">Psychology</option>
+        <option value="Journalism">Journalism / Media</option>
+        <option value="Finance">Finance</option>
+        <option value="Robotics">Robotics</option>
+        <option value="Data Science">Data Science / AI</option>
+        <option value="Architecture">Architecture</option>
+        <option value="Sports">Sports / Fitness</option>
+      </select>
+      <select id="filter-format">
+        <option value="">Any Format</option>
+        <option value="In-Person">In-Person</option>
+        <option value="Remote">Remote / Online</option>
+        <option value="Hybrid">Hybrid</option>
+      </select>
+      <div class="zip-wrap">
+        <input type="text" id="zip-input" placeholder="ZIP code" maxlength="5" pattern="[0-9]*">
+        <button class="zip-btn" onclick="applyZipFilter()">Near Me</button>
+      </div>
+      <button class="search-btn" onclick="runSearch()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Search
+      </button>
     </div>
-    <div class="divider"></div>
-    <div class="search-input-wrap">
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-      <input type="text" id="zipInput" placeholder="ZIP code or city" />
+    <div class="search-filters" id="type-chips">
+      <span style="font-size:0.78rem;color:#6B7280;font-weight:600;">Quick:</span>
+      <button class="filter-chip" onclick="quickFilter('Internship',this)">💼 Internships</button>
+      <button class="filter-chip" onclick="quickFilter('Summer Program',this)">☀️ Summer</button>
+      <button class="filter-chip" onclick="quickFilter('Research',this)">🔬 Research</button>
+      <button class="filter-chip" onclick="quickFilter('Competition',this)">🏆 Competitions</button>
+      <button class="filter-chip" onclick="quickFilter('Fellowship',this)">🎓 Fellowships</button>
+      <button class="filter-chip" onclick="quickFilter('Remote',this)">💻 Remote</button>
+      <button class="filter-chip" onclick="quickFilter('Free',this)">💚 Free Only</button>
     </div>
-    <button class="search-btn" onclick="doSearch()">Search →</button>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="totalCount">150+</div><div class="stat-label">Programs Listed</div></div>
-    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Categories</div></div>
-    <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Always Free</div></div>
-    <div class="stat"><div class="stat-num">🔗</div><div class="stat-label">Direct Apply Links</div></div>
   </div>
 </section>
 
-<!-- CATEGORY CHIPS -->
-<section class="cats-section">
-  <div class="cats-title">Browse by Category</div>
-  <div class="cats-row" id="catRow"></div>
-</section>
-
-<!-- FILTER BAR -->
-<div class="filter-bar" id="programs">
-  <select class="filter-select" id="typeFilter" onchange="applyFilters()">
-    <option value="">All Types</option>
-    <option value="Internship">Internship</option>
-    <option value="Summer Program">Summer Program</option>
-    <option value="Research">Research</option>
-    <option value="Fellowship">Fellowship</option>
-    <option value="Competition">Competition</option>
-    <option value="Volunteer">Volunteer</option>
-    <option value="Bootcamp">Bootcamp</option>
-    <option value="Gap Year">Gap Year</option>
-    <option value="Scholarship">Scholarship</option>
-    <option value="Arts">Arts</option>
-    <option value="Sports">Sports</option>
-    <option value="Leadership">Leadership</option>
-    <option value="Pre-College">Pre-College</option>
-  </select>
-  <select class="filter-select" id="costFilter" onchange="applyFilters()">
-    <option value="">Any Cost</option>
-    <option value="Free">Free / Scholarship</option>
-    <option value="Paid">Paid Internship</option>
-    <option value="Cost">Has Cost (Aids Available)</option>
-  </select>
-  <select class="filter-select" id="formatFilter" onchange="applyFilters()">
-    <option value="">Any Format</option>
-    <option value="Online">Online / Remote</option>
-    <option value="In-Person">In-Person</option>
-    <option value="Hybrid">Hybrid</option>
-  </select>
-  <select class="filter-select" id="fieldFilter" onchange="applyFilters()">
-    <option value="">All Fields</option>
-    <option value="STEM">STEM / Science</option>
-    <option value="Tech">Tech / Coding</option>
-    <option value="Medicine">Medicine / Health</option>
-    <option value="Business">Business</option>
-    <option value="Law">Law / Government</option>
-    <option value="Arts">Arts / Writing</option>
-    <option value="Environment">Environment</option>
-    <option value="Social Justice">Social Justice</option>
-    <option value="Engineering">Engineering</option>
-    <option value="Math">Math</option>
-  </select>
-  <button class="filter-tag" id="clearBtn" onclick="clearFilters()" style="display:none">✕ Clear Filters</button>
-  <div class="result-count" id="resultCount"></div>
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item"><strong id="stat-total">500+</strong> Programs Listed</div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><strong>20+</strong> Fields Covered</div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><strong>Nationwide</strong> + Remote</div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><strong>Always</strong> Free to Use</div>
+    <div class="stat-dot"></div>
+    <div class="stat-item"><strong>AI-Powered</strong> Search</div>
+  </div>
 </div>
 
-<!-- PROGRAMS GRID -->
-<section class="programs-section">
-  <div class="programs-grid" id="programsGrid"></div>
-  <div class="no-results" id="noResults" style="display:none">
-    <h3>No programs found</h3>
-    <p>Try different keywords or clear your filters.</p>
-  </div>
-</section>
+<!-- MAIN -->
+<div class="main-wrap" id="opportunities">
 
-<!-- HIDDEN GEMS -->
-<section class="gems-section" id="hidden-gems">
-  <div class="section-header">
-    <div>
-      <div class="section-title">💎 Hidden Gems — College Programs</div>
-      <div class="section-subtitle">Lesser-known programs at top universities that most students don't know about</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Category</div>
+      <button class="sidebar-btn active" onclick="filterCat('',this)">
+        <span class="cat-dot" style="background:#6B7280"></span> All Programs <span class="count" id="cnt-all">500+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Internship',this)">
+        <span class="cat-dot" style="background:#2563EB"></span> Internships <span class="count" id="cnt-intern">120+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Summer Program',this)">
+        <span class="cat-dot" style="background:#D97706"></span> Summer Programs <span class="count" id="cnt-summer">150+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Research',this)">
+        <span class="cat-dot" style="background:#059669"></span> Research Programs <span class="count" id="cnt-research">80+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Fellowship',this)">
+        <span class="cat-dot" style="background:#7C3AED"></span> Fellowships <span class="count" id="cnt-fellow">45+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Competition',this)">
+        <span class="cat-dot" style="background:#DC2626"></span> Competitions <span class="count" id="cnt-comp">60+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Bootcamp',this)">
+        <span class="cat-dot" style="background:#0D9488"></span> Bootcamps <span class="count" id="cnt-boot">30+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Scholarship',this)">
+        <span class="cat-dot" style="background:#EA580C"></span> Scholarships <span class="count" id="cnt-scholar">40+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Volunteer',this)">
+        <span class="cat-dot" style="background:#65A30D"></span> Volunteer <span class="count" id="cnt-vol">25+</span>
+      </button>
+      <button class="sidebar-btn" onclick="filterCat('Pre-College',this)">
+        <span class="cat-dot" style="background:#EC4899"></span> Pre-College <span class="count" id="cnt-precol">50+</span>
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Cost / Aid</div>
+      <div class="cost-filter">
+        <label><input type="checkbox" value="Free" onchange="updateCostFilter()"> Free / No Cost</label>
+        <label><input type="checkbox" value="Under $500" onchange="updateCostFilter()"> Under $500</label>
+        <label><input type="checkbox" value="$500–$2000" onchange="updateCostFilter()"> $500 – $2,000</label>
+        <label><input type="checkbox" value="$2000+" onchange="updateCostFilter()"> $2,000+</label>
+        <label><input type="checkbox" value="Aid" onchange="updateCostFilter()"> Financial Aid Available</label>
+        <label><input type="checkbox" value="Paid" onchange="updateCostFilter()"> Paid / Stipend</label>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Season</div>
+      <div class="season-btns">
+        <button class="season-btn" onclick="toggleSeason('Summer',this)">Summer</button>
+        <button class="season-btn" onclick="toggleSeason('Fall',this)">Fall</button>
+        <button class="season-btn" onclick="toggleSeason('Spring',this)">Spring</button>
+        <button class="season-btn" onclick="toggleSeason('Winter',this)">Winter</button>
+        <button class="season-btn" onclick="toggleSeason('Year-Round',this)">Year-Round</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Grade Level</div>
+      <div class="grade-btns">
+        <button class="grade-btn" onclick="toggleGrade('9',this)">9th</button>
+        <button class="grade-btn" onclick="toggleGrade('10',this)">10th</button>
+        <button class="grade-btn" onclick="toggleGrade('11',this)">11th</button>
+        <button class="grade-btn" onclick="toggleGrade('12',this)">12th</button>
+        <button class="grade-btn" onclick="toggleGrade('Any',this)">Any</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <button class="clear-filters" onclick="clearAllFilters()">✕ Clear All Filters</button>
+    </div>
+  </aside>
+
+  <!-- RIGHT COLUMN -->
+  <div>
+    <!-- AI PANEL -->
+    <div class="ai-panel" id="ai-section">
+      <div class="ai-panel-header">
+        <div class="ai-icon">✦</div>
+        <div>
+          <h3>AI-Powered Search</h3>
+        </div>
+        <span class="ai-badge" style="margin-left:auto">BETA</span>
+      </div>
+      <p>Describe what you're looking for in plain English — AI will find the best matches for you.</p>
+      <div class="ai-input-row">
+        <input type="text" id="ai-search" placeholder='e.g. "biology research for 10th grader in NYC, free"'>
+        <button class="ai-go-btn" onclick="runAISearch()">Ask AI ✦</button>
+      </div>
+      <div class="ai-result" id="ai-result"></div>
+    </div>
+
+    <!-- RESULTS HEADER -->
+    <div class="results-header">
+      <div class="results-count">Showing <strong id="showing-count">0</strong> programs</div>
+      <div class="sort-row">
+        <label>Sort:</label>
+        <select id="sort-select" onchange="sortPrograms()">
+          <option value="relevance">Relevance</option>
+          <option value="deadline">Deadline Soon</option>
+          <option value="az">A–Z</option>
+          <option value="free">Free First</option>
+          <option value="new">Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PROGRAMS GRID -->
+    <div class="programs-grid" id="programs-grid"></div>
+
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button class="load-more-btn" onclick="loadMore()">Load More Programs ↓</button>
     </div>
   </div>
-  <div class="gems-grid" id="gemsGrid"></div>
+</div>
+
+<!-- SUGGEST SECTION -->
+<section class="suggest-section" id="suggest">
+  <h2>Know a Great Program? 🙌</h2>
+  <p>Help other students by submitting a program you've heard about or participated in.</p>
+  <form class="suggest-form" onsubmit="submitSuggest(event)">
+    <input type="text" placeholder="Program Name *" required>
+    <input type="text" placeholder="Organization / School">
+    <input type="url" placeholder="Website URL">
+    <select>
+      <option value="">Type *</option>
+      <option>Internship</option>
+      <option>Summer Program</option>
+      <option>Research</option>
+      <option>Fellowship</option>
+      <option>Competition</option>
+      <option>Bootcamp</option>
+      <option>Scholarship</option>
+      <option>Volunteer</option>
+      <option>Pre-College</option>
+      <option>Other</option>
+    </select>
+    <textarea placeholder="Brief description (optional)"></textarea>
+    <button type="submit" class="suggest-submit">Submit Program →</button>
+  </form>
+  <div class="suggest-thanks" id="suggest-thanks">✅ Thanks! We'll review your submission soon.</div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>🚀 <strong>LaunchPad</strong> — Built to help high school students find their future. Always free.</p>
-  <p style="margin-top:.4rem;font-size:.78rem;">All links go directly to official program websites. Not affiliated with any program.</p>
+  © 2025 LaunchPad · Built to help high school students find their future · <a href="#suggest">Submit a Program</a> · Made with ❤️
 </footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal" id="modalContent"></div>
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-logo" id="modal-logo"></div>
+      <div class="modal-header-info">
+        <h2 id="modal-name"></h2>
+        <p id="modal-org"></p>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tags" id="modal-tags"></div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-details" id="modal-details"></div>
+      <div class="modal-requirements" id="modal-req-wrap">
+        <h4>Requirements</h4>
+        <ul id="modal-requirements"></ul>
+      </div>
+      <a href="#" id="modal-apply" class="modal-apply" target="_blank" rel="noopener">Apply / Learn More →</a>
+    </div>
+  </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════
-//  PROGRAM DATABASE
-// ══════════════════════════════════════════════════════════
-const programs = [
-  {
-    id:1, title:"Google Computer Science Summer Institute (CSSI)",
-    org:"Google", type:"Summer Program", field:"Tech",
-    cost:"Free", format:"In-Person", location:"Multiple US Cities",
-    grades:"12th (rising college freshmen)", deadline:"February",
-    desc:"A 3-week intro to computer science program at Google offices. You'll learn coding, work with Googlers, and build real projects. One of the most competitive free CS programs for underrepresented students.",
-    reqs:["Rising college freshman","Underrepresented in tech","Strong interest in CS","Essay & transcript required"],
-    link:"https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute",
-    tags:["Tech","STEM","Google","Coding","Paid"]
-  },
-  {
-    id:2, title:"NASA High School Internship Program",
-    org:"NASA", type:"Internship", field:"STEM",
-    cost:"Paid", format:"In-Person", location:"Various NASA Centers Nationwide",
-    grades:"9th–12th", deadline:"March 1",
-    desc:"Work alongside NASA scientists and engineers on real space missions. Paid summer internship at one of 10 NASA centers across the US. One of the most prestigious STEM opportunities in the country.",
-    reqs:["GPA 3.0+","US Citizen","At least 16 years old","STEM interest"],
-    link:"https://www.nasa.gov/learning-resources/internship-programs/",
-    tags:["STEM","NASA","Science","Engineering","Space","Paid"]
-  },
-  {
-    id:3, title:"Congressional Internship Program (CHCI)",
-    org:"Congressional Hispanic Caucus Institute", type:"Internship", field:"Law",
-    cost:"Paid", format:"In-Person", location:"Washington, DC",
-    grades:"9th–12th", deadline:"January 15",
-    desc:"Spend a summer in Washington DC working in a Congressional office. Learn how government works from the inside. Housing stipend provided.",
-    reqs:["Hispanic/Latino student","GPA 3.0+","US Citizen or Resident","Community involvement"],
-    link:"https://chci.org/programs/congressional-internship/",
-    tags:["Law","Government","DC","Leadership","Paid"]
-  },
-  {
-    id:4, title:"Research Science Institute (RSI) at MIT",
-    org:"MIT / Center for Excellence in Education", type:"Research", field:"STEM",
-    cost:"Free", format:"In-Person", location:"MIT, Cambridge MA",
-    grades:"11th (rising seniors)", deadline:"December 12",
-    desc:"The most prestigious free STEM research program in the US. Spend 6 weeks at MIT doing actual scientific research with MIT professors. Extremely competitive — less than 2% acceptance rate.",
-    reqs:["Outstanding academic record","Strong math/science","SAT/ACT required","Teacher recommendations"],
-    link:"https://www.cee.org/research-science-institute",
-    tags:["STEM","Research","MIT","Science","Math","Engineering"]
-  },
-  {
-    id:5, title:"Girls Who Code Summer Immersion Program",
-    org:"Girls Who Code", type:"Bootcamp", field:"Tech",
-    cost:"Free", format:"In-Person", location:"NYC & Remote",
-    grades:"10th–11th", deadline:"March",
-    desc:"Two-week coding bootcamp for girls to learn software engineering skills. Work on real projects, meet women engineers at top tech companies.",
-    reqs:["Identify as a girl","9th–11th grade","No coding experience needed","US Resident"],
-    link:"https://girlswhocode.com/programs/summer-immersion-program",
-    tags:["Tech","Coding","Girls","STEM","Free"]
-  },
-  {
-    id:6, title:"Princeton Summer Journalism Program",
-    org:"Princeton University", type:"Pre-College", field:"Arts",
-    cost:"Free", format:"In-Person", location:"Princeton, NJ",
-    grades:"10th–11th", deadline:"March 1",
-    desc:"Free 10-day journalism workshop at Princeton. Learn reporting, writing, editing from professional journalists. Housing & meals included. One of the best free writing programs.",
-    reqs:["Demonstrated financial need","Strong writing sample","Teacher recommendation","9th–11th grade"],
-    link:"https://psjp.princeton.edu",
-    tags:["Writing","Journalism","Princeton","Arts","Free"]
-  },
-  {
-    id:7, title:"NYLF Medicine (National Youth Leadership Forum)",
-    org:"Envision", type:"Summer Program", field:"Medicine",
-    cost:"Cost", format:"In-Person", location:"Various US Cities",
-    grades:"9th–12th", deadline:"Rolling",
-    desc:"Explore medicine and healthcare through hands-on simulations, hospital tours, and working with actual medical professionals. Need-based scholarships available.",
-    reqs:["Interest in medicine","Teacher nomination (or self-apply)","Financial aid available"],
-    link:"https://www.envisionexperience.com/explore-our-programs/national-youth-leadership-forum-medicine",
-    tags:["Medicine","Health","Leadership","STEM"]
-  },
-  {
-    id:8, title:"Yale Young Global Scholars (YYGS)",
-    org:"Yale University", type:"Pre-College", field:"Various",
-    cost:"Cost", format:"In-Person", location:"Yale University, New Haven CT",
-    grades:"10th–11th", deadline:"January",
-    desc:"2-week academic enrichment program at Yale. Choose from sessions on politics, law, STEM, economics, or humanities. Financial aid available for those who qualify.",
-    reqs:["10th–11th grade","Strong academic record","Essays required","Financial aid available"],
-    link:"https://globalscholars.yale.edu",
-    tags:["Leadership","STEM","Arts","Law","Business","Pre-College"]
-  },
-  {
-    id:9, title:"MIT Launch — Entrepreneurship Program",
-    org:"MIT", type:"Summer Program", field:"Business",
-    cost:"Cost", format:"In-Person", location:"MIT, Cambridge MA",
-    grades:"9th–12th", deadline:"March",
-    desc:"Build and launch an actual startup at MIT over the summer. Work with MIT mentors, learn business skills, pitch to investors. Scholarships available.",
-    reqs:["9th–12th grade","Entrepreneurial mindset","Application essays","Scholarships available"],
-    link:"https://entrepreneurship.mit.edu/launch/",
-    tags:["Business","Entrepreneurship","MIT","Leadership","Tech"]
-  },
-  {
-    id:10, title:"Americorps NCCC Team Leader Program",
-    org:"AmeriCorps", type:"Volunteer", field:"Social Justice",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"12th (18+)", deadline:"Rolling",
-    desc:"Join a team of young people serving communities across the US. Full-time service program with living allowance and education award.",
-    reqs:["18 years old","US Citizen","High school diploma or GED","Physical fitness"],
-    link:"https://americorps.gov/serve/americorps/americorps-nccc",
-    tags:["Volunteer","Social Justice","Service","Free","Nationwide"]
-  },
-  {
-    id:11, title:"Johns Hopkins Center for Talented Youth (CTY)",
-    org:"Johns Hopkins University", type:"Summer Program", field:"STEM",
-    cost:"Cost", format:"In-Person", location:"Multiple US Sites",
-    grades:"7th–12th", deadline:"February",
-    desc:"Academically intensive summer program for high-achieving students. Take college-level courses on campus. Financial aid widely available — do not let cost deter you.",
-    reqs:["Strong academic record","SAT/ACT scores or talent search qualifications","Financial aid available"],
-    link:"https://cty.jhu.edu/programs/on-campus/",
-    tags:["STEM","Math","Science","Pre-College","Academic"]
-  },
-  {
-    id:12, title:"Bank of America Student Leaders Program",
-    org:"Bank of America", type:"Internship", field:"Business",
-    cost:"Paid", format:"In-Person", location:"Cities Nationwide",
-    grades:"11th–12th", deadline:"January",
-    desc:"Paid summer internship at a local nonprofit + a week-long leadership summit in Washington DC. Learn nonprofit management, meet peers nationwide.",
-    reqs:["Junior or Senior in high school","Community involvement","Passion for service","GPA 3.0+ preferred"],
-    link:"https://about.bankofamerica.com/en/making-an-impact/student-leaders",
-    tags:["Business","Leadership","Paid","Volunteer","Social Justice","Nationwide"]
-  },
-  {
-    id:13, title:"Telluride Association Summer Seminar (TASS)",
-    org:"Telluride Association / Cornell", type:"Summer Program", field:"Social Justice",
-    cost:"Free", format:"In-Person", location:"Cornell & U of Michigan",
-    grades:"11th", deadline:"January",
-    desc:"Completely free 6-week residential seminar at Cornell or Michigan. Study race, politics, and society at the college level. Extremely selective — full scholarship including travel.",
-    reqs:["11th grade","US Resident","Application essays","Teacher rec","No cost — completely free"],
-    link:"https://www.tellurideassociation.org/tass",
-    tags:["Social Justice","Leadership","Free","Academic","STEM","Arts"]
-  },
-  {
-    id:14, title:"National Security Language Initiative for Youth (NSLI-Y)",
-    org:"US State Department", type:"Summer Program", field:"Law",
-    cost:"Free", format:"In-Person", location:"International",
-    grades:"9th–12th", deadline:"December",
-    desc:"Fully funded scholarship to study a critical foreign language abroad — Arabic, Mandarin, Hindi, Russian, Korean, Persian, or Turkish. Live with a host family.",
-    reqs:["US Citizen","14–18 years old","GPA 3.0+","Essays required","No prior language knowledge needed"],
-    link:"https://www.nsliforyouth.org",
-    tags:["Language","Government","International","Free","Leadership"]
-  },
-  {
-    id:15, title:"Siemens Competition in Math, Science & Technology",
-    org:"Siemens Foundation", type:"Competition", field:"STEM",
-    cost:"Free", format:"Online", location:"National",
-    grades:"9th–12th", deadline:"September",
-    desc:"One of the most prestigious science competitions in the US. Submit original research for a chance at scholarships up to $100,000. Individual or team entries welcome.",
-    reqs:["Original research project","Strong STEM background","Teacher mentor required"],
-    link:"https://www.siemens-foundation.org/programs/",
-    tags:["STEM","Research","Competition","Science","Math","Engineering","Free"]
-  },
-  {
-    id:16, title:"Intel International Science & Engineering Fair (ISEF)",
-    org:"Society for Science", type:"Competition", field:"STEM",
-    cost:"Free", format:"In-Person", location:"National (via local fairs)",
-    grades:"9th–12th", deadline:"Varies by local fair",
-    desc:"The world's largest pre-college science competition. Win at your local/state science fair to qualify. Over $9 million in prizes. Opens doors to top universities.",
-    reqs:["Complete original research project","Win at affiliated local fair to qualify"],
-    link:"https://www.societyforscience.org/isef/",
-    tags:["STEM","Science","Competition","Research","Engineering","Free"]
-  },
-  {
-    id:17, title:"Posse Foundation",
-    org:"Posse Foundation", type:"Scholarship", field:"Various",
-    cost:"Free", format:"In-Person", location:"10 US Cities",
-    grades:"12th (senior year)", deadline:"October",
-    desc:"Full-tuition leadership scholarship to a top university. Nominated by your school counselor. You'll receive $0 tuition at schools like Vanderbilt, Middlebury, and more. Life-changing.",
-    reqs:["Nominated by school counselor","In a Posse city (NYC, Chicago, Boston, DC, LA, Houston, Atlanta, Miami, New Orleans, San Francisco)","Leadership potential"],
-    link:"https://www.possefoundation.org",
-    tags:["Scholarship","Leadership","Free","College","Nationwide"]
-  },
-  {
-    id:18, title:"QuestBridge National College Match",
-    org:"QuestBridge", type:"Scholarship", field:"Various",
-    cost:"Free", format:"Online", location:"National",
-    grades:"12th", deadline:"September",
-    desc:"Apply to 40+ top colleges through one application and potentially get a full 4-year scholarship. Designed for high-achieving students from low-income families. Over $500M awarded to date.",
-    reqs:["Low-income background","Top 5–10% of class","Strong test scores or academics","Essays required"],
-    link:"https://www.questbridge.org",
-    tags:["Scholarship","College","Free","Nationwide","Academic"]
-  },
-  {
-    id:19, title:"Breakthrough Collaborative Teaching Fellowship",
-    org:"Breakthrough Collaborative", type:"Internship", field:"Social Justice",
-    cost:"Paid", format:"In-Person", location:"20+ Cities",
-    grades:"9th–12th (or college)", deadline:"Varies by site",
-    desc:"Spend the summer teaching middle schoolers from low-income communities. Get paid, receive training, and make a real impact. Looks incredible on college applications.",
-    reqs:["Strong academic record","Passion for education","Leadership qualities","Interview required"],
-    link:"https://www.breakthroughcollaborative.org",
-    tags:["Teaching","Social Justice","Paid","Leadership","Volunteer"]
-  },
-  {
-    id:20, title:"Boys & Girls Club of America Youth of the Year",
-    org:"Boys & Girls Clubs of America", type:"Competition", field:"Leadership",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th", deadline:"Varies",
-    desc:"National leadership competition for BGCA members. Win local to advance nationally. National winner gets $25,000 college scholarship and meets the President.",
-    reqs:["Active BGCA member","Strong community involvement","Public speaking","Essay"],
-    link:"https://www.bgca.org/youth-of-the-year",
-    tags:["Leadership","Competition","Free","Community","Scholarship"]
-  },
-  {
-    id:21, title:"Duke University Talent Identification Program (TIP)",
-    org:"Duke University", type:"Summer Program", field:"STEM",
-    cost:"Cost", format:"In-Person", location:"Multiple Campuses",
-    grades:"7th–10th", deadline:"February",
-    desc:"Academically rigorous residential program for high-ability students at Duke, Trinity, and partner universities. Financial aid available. Earn college credit.",
-    reqs:["High SAT/ACT scores (talent search)","Strong academic record","Financial aid available"],
-    link:"https://tip.duke.edu",
-    tags:["STEM","Academic","Math","Pre-College","Arts"]
-  },
-  {
-    id:22, title:"Academy of Art University Summer Art Experience",
-    org:"Academy of Art University", type:"Summer Program", field:"Arts",
-    cost:"Free", format:"In-Person", location:"San Francisco, CA",
-    grades:"9th–12th", deadline:"May",
-    desc:"Free 2-week art & design intensive in San Francisco for high schoolers. Explore graphic design, fashion, illustration, film, and more.",
-    reqs:["Portfolio (any skill level welcome)","9th–12th grade","Application form"],
-    link:"https://www.academyart.edu/admissions/summer-art-experience/",
-    tags:["Arts","Design","Free","Creative"]
-  },
-  {
-    id:23, title:"YMCA Black Achievers Program",
-    org:"YMCA", type:"Leadership", field:"Social Justice",
-    cost:"Free", format:"In-Person", location:"Cities Nationwide",
-    grades:"9th–12th", deadline:"Rolling",
-    desc:"Year-round mentorship and career exposure program for Black youth. College tours, professional mentors, leadership training, and internship placements.",
-    reqs:["Black/African American student","Active YMCA member or applicant","Commitment to program"],
-    link:"https://www.ymca.org/youth-development/black-achievers",
-    tags:["Leadership","Social Justice","Free","Mentorship","Community"]
-  },
-  {
-    id:24, title:"FIRST Robotics Competition",
-    org:"FIRST", type:"Competition", field:"Engineering",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th", deadline:"Join a team (fall)",
-    desc:"Join or start a robotics team at your school and compete in the nation's largest robotics competition. $80M+ in scholarships available for FIRST alumni.",
-    reqs:["Join a team at your school or start one","No prior experience needed","Team commitment"],
-    link:"https://www.firstinspires.org/robotics/frc",
-    tags:["Engineering","STEM","Robotics","Competition","Tech","Free"]
-  },
-  {
-    id:25, title:"Model UN Summer Intensive",
-    org:"AMUN / UNAUSA", type:"Summer Program", field:"Law",
-    cost:"Cost", format:"In-Person", location:"Various",
-    grades:"9th–12th", deadline:"Rolling",
-    desc:"Intensive training in Model UN diplomacy, international relations, and public speaking. Scholarships available at some locations.",
-    reqs:["Interest in international relations","Public speaking ability","Application essays"],
-    link:"https://www.unausa.org/model-un/",
-    tags:["Law","Government","Leadership","International","Public Speaking"]
-  },
-  {
-    id:26, title:"Governors School Programs (Various States)",
-    org:"State Governments", type:"Summer Program", field:"Various",
-    cost:"Free", format:"In-Person", location:"Statewide (check your state)",
-    grades:"10th–11th", deadline:"Varies by state",
-    desc:"Free state-sponsored residential summer programs for gifted students. Every state has different programs covering STEM, arts, leadership, and more. These are often overlooked gems!",
-    reqs:["Strong academic record","State resident","Teacher nominations (most states)","No cost to accepted students"],
-    link:"https://www.gifted.uconn.edu/links/summer/",
-    tags:["STEM","Arts","Free","Academic","Leadership","Statewide"]
-  },
-  {
-    id:27, title:"NAACP ACT-SO Competition",
-    org:"NAACP", type:"Competition", field:"Arts",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th", deadline:"Varies by local chapter",
-    desc:"National academic, cultural, and artistic competition for Black high school students. 26 categories including STEM, performing arts, visual arts, humanities, and business.",
-    reqs:["Black/African American student","NAACP chapter member or join one","Choose a category and prepare entry"],
-    link:"https://naacp.org/find-resources/scholarships-awards-internships/act-so",
-    tags:["Arts","STEM","Competition","Free","Social Justice","Academic"]
-  },
-  {
-    id:28, title:"Code2040 Fellows Program",
-    org:"Code2040", type:"Internship", field:"Tech",
-    cost:"Paid", format:"In-Person", location:"San Francisco, CA",
-    grades:"College freshmen/sophomore (plan ahead now)",
-    deadline:"November",
-    desc:"Paid summer tech internship + career accelerator for Black and Latinx software engineers. Place with top Silicon Valley companies. Plan for this as a high schooler.",
-    reqs:["Black or Latino/Latina student","CS major or strong CS skills","College enrollment","Coding proficiency"],
-    link:"https://www.code2040.org/fellows-program",
-    tags:["Tech","Coding","Paid","Social Justice","Engineering"]
-  },
-  {
-    id:29, title:"US Senate Page Program",
-    org:"US Senate", type:"Internship", field:"Law",
-    cost:"Paid", format:"In-Person", location:"Washington, DC",
-    grades:"Junior year (16-17 years old)", deadline:"Year-round (apply through Senator)",
-    desc:"Work directly in the US Senate chamber during a full semester or summer. One of the most exclusive high school government programs. Must be nominated by your US Senator.",
-    reqs:["Junior in high school (16-17)","B average or better","Nominated by US Senator","DC area residence during session"],
-    link:"https://www.senate.gov/pagelibrary/pageinfo.htm",
-    tags:["Law","Government","Paid","Leadership","DC"]
-  },
-  {
-    id:30, title:"Scripps National Spelling Bee",
-    org:"Scripps", type:"Competition", field:"Arts",
-    cost:"Free", format:"In-Person", location:"National",
-    grades:"K–8th (plan early)", deadline:"Varies",
-    desc:"The nation's most prestigious spelling competition. Win your school and regional bees to qualify for nationals. Scholarships and prizes for finalists.",
-    reqs:["Must win school bee to advance","Student under 15 and not yet in 9th grade"],
-    link:"https://spellingbee.com",
-    tags:["Competition","Academic","Free","Arts"]
-  },
-  {
-    id:31, title:"Society of Women Engineers (SWE) Scholarship",
-    org:"Society of Women Engineers", type:"Scholarship", field:"Engineering",
-    cost:"Free", format:"Online", location:"National",
-    grades:"12th (and college)", deadline:"February",
-    desc:"Multiple scholarships for women pursuing engineering or computer science. Awards ranging from $1,000–$15,000. One of the most well-funded engineering scholarships for women.",
-    reqs:["Identify as a woman","Planning to study engineering or CS","GPA requirements vary by scholarship"],
-    link:"https://scholarships.swe.org",
-    tags:["Engineering","STEM","Scholarship","Free","Women","Tech"]
-  },
-  {
-    id:32, title:"Public Policy and International Affairs (PPIA) Junior Summer Institute",
-    org:"PPIA", type:"Summer Program", field:"Law",
-    cost:"Free", format:"In-Person", location:"Various Universities",
-    grades:"Rising college juniors (prep now)", deadline:"January",
-    desc:"Fully funded 6-week policy program at Carnegie Mellon, Princeton, Michigan, or UC Berkeley. Housing, meals, and stipend covered. For underrepresented students interested in public service.",
-    reqs:["Rising college junior","Underrepresented background","Strong academic record","Policy interest"],
-    link:"https://www.ppiaprogram.org",
-    tags:["Law","Government","Free","Social Justice","Leadership","College"]
-  },
-  {
-    id:33, title:"Teen Volunteer Program — National Parks",
-    org:"National Park Service", type:"Volunteer", field:"Environment",
-    cost:"Free", format:"In-Person", location:"National Parks Nationwide",
-    grades:"All grades (13+)", deadline:"Rolling",
-    desc:"Volunteer at your local or any national park. Work on conservation, trail maintenance, visitor education. Earn community service hours. Some positions offer stipends.",
-    reqs:["13 or older","Parental permission if under 18","Physical ability for outdoor work"],
-    link:"https://www.nps.gov/getinvolved/volunteer.htm",
-    tags:["Environment","Volunteer","Free","Outdoor","Nationwide"]
-  },
-  {
-    id:34, title:"HOSA Future Health Professionals",
-    org:"HOSA", type:"Competition", field:"Medicine",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th", deadline:"Varies by state",
-    desc:"Compete in 60+ healthcare-related events at state and national levels. Categories range from medical terminology to biomedical lab science. Scholarships available for winners.",
-    reqs:["Join HOSA chapter at school or community","Choose competitive event","Study and prepare"],
-    link:"https://hosa.org",
-    tags:["Medicine","Health","Competition","STEM","Free","Leadership"]
-  },
-  {
-    id:35, title:"Hugh O'Brian Youth Leadership (HOBY) Seminar",
-    org:"HOBY", type:"Leadership", field:"Leadership",
-    cost:"Cost", format:"In-Person", location:"All 50 States",
-    grades:"10th (primarily)", deadline:"Varies by state",
-    desc:"Life-changing leadership seminar for 10th graders. Students are nominated by their school. Focus on community service, leadership skills, and self-discovery. Scholarships available.",
-    reqs:["Typically 10th grade","Nominated by school principal or counselor","Scholarships available"],
-    link:"https://www.hoby.org",
-    tags:["Leadership","Community","Nationwide","Social Justice"]
-  },
-  {
-    id:36, title:"Khan Academy + College Board SAT Prep",
-    org:"Khan Academy / College Board", type:"Online Resource", field:"Academic",
-    cost:"Free", format:"Online", location:"Online",
-    grades:"All grades", deadline:"None",
-    desc:"Free, personalized SAT prep linked to your PSAT scores. Proven to raise scores significantly. Also free tutoring in every subject. Use this — it works.",
-    reqs:["None — completely free and open to everyone"],
-    link:"https://www.khanacademy.org/sat",
-    tags:["Academic","Free","Online","STEM","Math"]
-  },
-  {
-    id:37, title:"Coding Dojo Scholarship for Minorities",
-    org:"Coding Dojo", type:"Scholarship", field:"Tech",
-    cost:"Free", format:"Online", location:"Online",
-    grades:"Any", deadline:"Rolling",
-    desc:"Scholarship for underrepresented minorities to attend coding bootcamp. Learn full-stack development. Apply online — no prior experience needed.",
-    reqs:["Minority student","Application and essay","No prior coding experience required"],
-    link:"https://www.codingdojo.com/scholarships",
-    tags:["Tech","Coding","Scholarship","Free","Online","Social Justice"]
-  },
-  {
-    id:38, title:"American Legion Oratorical Contest",
-    org:"American Legion", type:"Competition", field:"Arts",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th", deadline:"Varies by post",
-    desc:"Public speaking competition on the US Constitution. Win locally to advance nationally. National winner receives $25,000 scholarship. One of the most generous speech competitions.",
-    reqs:["Must be under 20 years old","High school student","Prepare 8–10 minute prepared speech + 3–5 min assigned"],
-    link:"https://www.legion.org/oratorical",
-    tags:["Competition","Public Speaking","Free","Scholarship","Leadership"]
-  },
-  {
-    id:39, title:"Sea Education Association (SEA) — High School Program",
-    org:"SEA Semester / Woods Hole", type:"Summer Program", field:"Environment",
-    cost:"Cost", format:"In-Person", location:"Pacific / Atlantic Ocean",
-    grades:"10th–12th", deadline:"Rolling",
-    desc:"Sail across the ocean on a research vessel. Study marine biology, oceanography, and sailing. Financial aid available. One of the most unique programs in existence.",
-    reqs:["10th–12th grade","Strong academics","Essays","Financial aid available","No sailing experience needed"],
-    link:"https://www.sea.edu/high_school",
-    tags:["Environment","Science","STEM","Research","Adventure"]
-  },
-  {
-    id:40, title:"Scholastic Art & Writing Awards",
-    org:"Scholastic", type:"Competition", field:"Arts",
-    cost:"Free", format:"Online", location:"National",
-    grades:"7th–12th", deadline:"December",
-    desc:"The largest, most prestigious creative arts recognition program in the US. 28 categories of art and writing. National Medalists win scholarships up to $10,000. Alumni include Truman Capote, Sylvia Plath, Andy Warhol.",
-    reqs:["Original work in your chosen category","Entered through your school or regional affiliate"],
-    link:"https://www.scholastic.com/artandwriting",
-    tags:["Arts","Writing","Competition","Free","Creative","Design"]
-  },
-  {
-    id:41, title:"Microsoft TEALS Program — Student Volunteer",
-    org:"Microsoft", type:"Volunteer", field:"Tech",
-    cost:"Free", format:"In-Person", location:"Various US Cities",
-    grades:"All grades", deadline:"Rolling",
-    desc:"Help bring computer science classes to schools that don't have CS teachers. Work alongside Microsoft engineers in classrooms. Build leadership and mentoring skills.",
-    reqs:["Interest in CS and teaching","Commit to school schedule","Ages 14+"],
-    link:"https://www.microsoft.com/en-us/teals",
-    tags:["Tech","Volunteer","Teaching","Free","Leadership"]
-  },
-  {
-    id:42, title:"Urban League Young Professionals Internship",
-    org:"National Urban League", type:"Internship", field:"Business",
-    cost:"Paid", format:"In-Person", location:"Cities Nationwide",
-    grades:"11th–12th", deadline:"March",
-    desc:"Paid summer internship through the National Urban League network. Placed with corporations, nonprofits, and government agencies. Career mentorship included.",
-    reqs:["African American or Urban League community member","GPA 2.8+","Application and essays","Interview"],
-    link:"https://nul.org/programs",
-    tags:["Business","Paid","Social Justice","Leadership","Internship"]
-  },
-  {
-    id:43, title:"Young Entrepreneurs Academy (YEA!)",
-    org:"YEA!", type:"Summer Program", field:"Business",
-    cost:"Cost", format:"In-Person", location:"100+ US Cities",
-    grades:"6th–12th", deadline:"Rolling",
-    desc:"Year-long program where students develop, pitch, and launch a real business or social movement. Top students compete nationally for $10,000 seed money.",
-    reqs:["6th–12th grade","Application","Scholarships available","Commitment to full program"],
-    link:"https://yeausa.org",
-    tags:["Business","Entrepreneurship","Leadership","Competition"]
-  },
-  {
-    id:44, title:"Environmental Defense Fund Climate Corps",
-    org:"Environmental Defense Fund", type:"Fellowship", field:"Environment",
-    cost:"Paid", format:"Hybrid", location:"Various",
-    grades:"College level (start preparing in HS)", deadline:"January",
-    desc:"Paid environmental internship at companies and organizations across the US. Work on real sustainability projects. Great for students passionate about climate change.",
-    reqs:["Graduate student or advanced undergrad","Environmental/business/policy background","Plan for this in HS"],
-    link:"https://www.edf.org/climate-corps",
-    tags:["Environment","Fellowship","Paid","Climate","Sustainability"]
-  },
-  {
-    id:45, title:"YMCA's Model UN High School Conference",
-    org:"YMCA", type:"Summer Program", field:"Law",
-    cost:"Cost", format:"In-Person", location:"Various Cities",
-    grades:"9th–12th", deadline:"Rolling",
-    desc:"Practice diplomacy, debate, and leadership in Model UN simulations. One of the most accessible entry points into international affairs and public speaking.",
-    reqs:["Any grade level","Research and preparation","Interest in international issues"],
-    link:"https://www.ymca.org/youth-development/leadership/model-un",
-    tags:["Law","Government","Leadership","International","Public Speaking"]
-  },
-  {
-    id:46, title:"MIT OpenCourseWare — Free College Courses",
-    org:"MIT", type:"Online Resource", field:"STEM",
-    cost:"Free", format:"Online", location:"Online",
-    grades:"All grades", deadline:"None",
-    desc:"Access every MIT course — completely free online. Study real MIT curriculum in math, engineering, computer science, biology, and more. Shows incredible initiative on college apps.",
-    reqs:["None — completely open to everyone worldwide"],
-    link:"https://ocw.mit.edu",
-    tags:["STEM","Math","Engineering","Tech","Free","Online","Academic"]
-  },
-  {
-    id:47, title:"Lemelson-MIT InvenTeams Grant",
-    org:"MIT Lemelson Program", type:"Fellowship", field:"Engineering",
-    cost:"Free", format:"In-Person", location:"Nationwide",
-    grades:"9th–12th (team)", deadline:"October",
-    desc:"Up to $10,000 grant for high school teams to invent something that solves a real-world problem. Present at EurekaFest at MIT. One of the most unique HS opportunities.",
-    reqs:["Team of 3+ students","Teacher advisor","Original invention concept","Application"],
-    link:"https://lemelson.mit.edu/inventeams",
-    tags:["Engineering","STEM","Innovation","Free","MIT","Research"]
-  },
-  {
-    id:48, title:"Global Health Corps Fellowship",
-    org:"Global Health Corps", type:"Fellowship", field:"Medicine",
-    cost:"Paid", format:"In-Person", location:"International + US",
-    grades:"College/recent grads (plan now)", deadline:"January",
-    desc:"Paid year-long fellowship working on global health equity. Placed in Rwanda, Uganda, Malawi, Zambia, or the US. Housing and stipend provided.",
-    reqs:["Undergrad degree","Under 30","Passion for health equity","Plan ahead in HS"],
-    link:"https://ghcorps.org",
-    tags:["Medicine","Health","Fellowship","International","Paid","Social Justice"]
-  },
+// ===================== DATA =====================
+const PROGRAMS = [
+  // STEM / RESEARCH
+  { id:1, name:"MIT Research Science Institute (RSI)", org:"MIT / CEE", type:"Research", field:"STEM", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["11","12"], location:"Cambridge, MA", deadline:"Jan 10, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/240px-MIT_logo.svg.png", url:"https://www.cee.org/programs/research-science-institute", desc:"One of the most prestigious STEM research programs in the world. Spend 6 weeks at MIT conducting original research with leading scientists.", requirements:["GPA 3.9+","Exceptional math/science","US citizen/permanent resident","Strong test scores"] },
+  { id:2, name:"Girls Who Code Summer Immersion", org:"Girls Who Code", type:"Internship", field:"Computer Science", format:"Hybrid", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11"], location:"Nationwide", deadline:"Mar 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Girls_Who_Code_logo.svg/240px-Girls_Who_Code_logo.svg.png", url:"https://girlswhocode.com/programs/summer-immersion-program", desc:"A 2-week intensive program introducing girls to coding through real-world projects at top tech companies. Participants gain coding skills, mentorship, and professional development.", requirements:["Identifies as female or non-binary","Rising 9th–11th grader","No prior coding experience required"] },
+  { id:3, name:"NASA SEES Teen Research", org:"NASA / UT Austin", type:"Research", field:"STEM", format:"Hybrid", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11","12"], location:"Remote + Austin, TX", deadline:"Feb 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png", url:"https://sees.utexas.edu", desc:"STEM Enhancement in Earth Science (SEES) lets teens conduct Earth and space science research using NASA satellite data. Includes online training and an on-site research experience.", requirements:["US citizen or permanent resident","GPA 3.0+","Interest in Earth/space science"] },
+  { id:4, name:"Google CSSI Computer Science Summer Institute", org:"Google", type:"Bootcamp", field:"Computer Science", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["12"], location:"Mountain View / NYC / more", deadline:"Feb 28, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png", url:"https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute", desc:"A 3-week introductory program at Google's offices for rising college freshmen who are passionate about CS. Features coding workshops, company tours, and networking with Googlers.", requirements:["High school senior","First-gen college student preferred","Strong interest in CS","US college enrollment planned"] },
+  { id:5, name:"Scripps Institution of Oceanography Internship", org:"UC San Diego / Scripps", type:"Internship", field:"Environmental", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["10","11","12"], location:"La Jolla, CA", deadline:"Feb 20, 2026", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/6/61/UC_San_Diego_seal.svg/200px-UC_San_Diego_seal.svg.png", url:"https://scripps.ucsd.edu/education/outreach", desc:"Hands-on marine science internship working alongside Scripps researchers. Students learn oceanography, climate science, and research methods at one of the world's top ocean science institutions.", requirements:["Grades 10–12","Passion for ocean/environment","Able to commit full-time for 8 weeks"] },
+  { id:6, name:"PRIMES (Program for Research in Mathematics)", org:"MIT", type:"Research", field:"Math", format:"Remote", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11"], location:"Remote", deadline:"Dec 1, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/240px-MIT_logo.svg.png", url:"https://math.mit.edu/research/highschool/primes/", desc:"A free, year-long program where high school students collaborate with MIT researchers on original math projects. One of the most competitive math programs in the US.", requirements:["Exceptional mathematical ability","US-based student","Commitment of 10+ hrs/week"] },
+  { id:7, name:"Stanford AI4ALL", org:"Stanford University", type:"Summer Program", field:"Data Science", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10"], location:"Stanford, CA", deadline:"Feb 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Stanford_University_seal_2003.svg/200px-Stanford_University_seal_2003.svg.png", url:"https://ai-4-all.org", desc:"A residential summer program at Stanford University teaching AI concepts to underrepresented high schoolers. Students work on real AI projects and learn from Stanford faculty.", requirements:["Grades 9–10","Underrepresented background preferred","Strong math background","US student"] },
+  { id:8, name:"NIH Summer Internship Program", org:"National Institutes of Health", type:"Internship", field:"Medicine", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["12"], location:"Bethesda, MD", deadline:"Mar 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/NIH_Master_Logo_Vertical_2Color.png/200px-NIH_Master_Logo_Vertical_2Color.png", url:"https://www.training.nih.gov/programs/hs-sip", desc:"Work at the world's largest biomedical research facility. High school seniors spend 8 weeks conducting hands-on research with NIH scientists in fields ranging from cancer to infectious disease.", requirements:["High school senior (17+)","US citizen or permanent resident","GPA 3.0+","Basic biology/chemistry background"] },
+  { id:9, name:"Science Olympiad", org:"Science Olympiad Inc.", type:"Competition", field:"STEM", format:"In-Person", cost:"Under $500", costRaw:"Under $500", season:"Year-Round", grades:["9","10","11","12"], location:"Nationwide", deadline:"Ongoing", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/7/70/Science_Olympiad_Logo.png/220px-Science_Olympiad_Logo.png", url:"https://www.soinc.org", desc:"One of the largest STEM team competitions in the US with 23 events per year covering biology, earth science, chemistry, physics, and engineering. Over 5,800 teams compete nationwide.", requirements:["Any grade 9–12","Team of 15 students","School registration required"] },
+  { id:10, name:"MATHCOUNTS Competition Series", org:"MATHCOUNTS Foundation", type:"Competition", field:"Math", format:"In-Person", cost:"Free", costRaw:"Free", season:"Winter", grades:["9"], location:"Nationwide", deadline:"Dec 15, 2025", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/5/51/MATHCOUNTS_logo.png/220px-MATHCOUNTS_logo.png", url:"https://www.mathcounts.org", desc:"A national math competition program for middle and early high school students. Progress from school to regional, state, and national competitions.", requirements:["8th–9th grade","School registration required","Strong math skills"] },
+  { id:11, name:"Intel ISEF (International Science & Engineering Fair)", org:"Society for Science", type:"Competition", field:"STEM", format:"In-Person", cost:"Free", costRaw:"Free", season:"Spring", grades:["9","10","11","12"], location:"Atlanta, GA (2026)", deadline:"Varies by region", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Society_for_Science_Logo.png/220px-Society_for_Science_Logo.png", url:"https://www.societyforscience.org/isef/", desc:"The world's largest international pre-college science competition. Winning student scientists receive awards totaling approximately $9 million in prizes, scholarships, and trips.", requirements:["Win a local/regional science fair","Original research project","Any STEM field"] },
+  { id:12, name:"Siemens Competition in Math, Science & Technology", org:"Discovery Education", type:"Competition", field:"STEM", format:"In-Person", cost:"Free", costRaw:"Free", season:"Fall", grades:["10","11","12"], location:"Nationwide", deadline:"Sep 30, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Siemens_logo.svg/200px-Siemens_logo.svg.png", url:"https://www.discoveryeducation.com/siemens/", desc:"Prestigious national STEM competition for high school students. Top prizes include $100,000 scholarships. Students submit original research projects for review by leading scientists.", requirements:["Original research required","Grades 10–12","US enrollment"] },
+  { id:13, name:"Johns Hopkins CTY Summer Programs", org:"Johns Hopkins University", type:"Summer Program", field:"STEM", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11","12"], location:"Multiple campuses", deadline:"Rolling", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Johns_Hopkins_University_logo.svg/250px-Johns_Hopkins_University_logo.svg.png", url:"https://cty.jhu.edu", desc:"Academically intensive residential summer programs for gifted students at universities nationwide. Courses span math, sciences, writing, engineering, and humanities.", requirements:["Strong academic record","CTY eligibility testing may apply","Grades 7–12"] },
+  { id:14, name:"Harvard Secondary School Program", org:"Harvard University", type:"Pre-College", field:"Humanities", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["10","11","12"], location:"Cambridge, MA", deadline:"Apr 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Harvard_University_logo.svg/250px-Harvard_University_logo.svg.png", url:"https://www.summer.harvard.edu/high-school-programs", desc:"Take Harvard courses for college credit while living on campus. Choose from 200+ courses in virtually every field. Need-based financial aid is available.", requirements:["Grades 10–12","Strong academic record","Teacher recommendation","Financial aid available"] },
+  { id:15, name:"Columbia University Summer Immersion", org:"Columbia University", type:"Pre-College", field:"Humanities", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11","12"], location:"New York City", deadline:"Apr 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Columbia_University_shield.svg/200px-Columbia_University_shield.svg.png", url:"https://precollege.sps.columbia.edu", desc:"Live and study on Columbia's NYC campus. Choose from dozens of courses in areas including science, writing, business, filmmaking, and more. Financial assistance available.", requirements:["Grades 9–12","Minimum 3.0 GPA","Recommendation letter"] },
+  { id:16, name:"Mayo Clinic Biomedicine Summer Program", org:"Mayo Clinic", type:"Research", field:"Medicine", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["11","12"], location:"Rochester, MN", deadline:"Feb 28, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Mayo_Clinic_logo.svg/200px-Mayo_Clinic_logo.svg.png", url:"https://college.mayo.edu/academics/biomedical-research-training/summer-undergraduate-research-fellowship-surf/", desc:"Work alongside Mayo Clinic researchers on cutting-edge biomedical projects. Students gain lab skills, present findings, and receive mentorship from world-class physicians and scientists.", requirements:["Junior or senior","Strong biology/chemistry grades","Genuine interest in medicine","Reference letter"] },
+  { id:17, name:"Congressional Internship Program (CHCI)", org:"Congressional Hispanic Caucus Institute", type:"Internship", field:"Law", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["12"], location:"Washington, DC", deadline:"Jan 15, 2026", logo:"https://chci.org/wp-content/uploads/2019/07/chci-logo.png", url:"https://chci.org/programs/congressional-internship-program/", desc:"Paid internship experience working in congressional offices in Washington, DC. Students gain insight into the legislative process and federal government operations.", requirements:["Hispanic/Latino student","Graduating senior or college freshman","GPA 3.0+","US citizen or permanent resident"] },
+  { id:18, name:"Smith College Summer Science & Engineering Program", org:"Smith College", type:"Summer Program", field:"Engineering", format:"In-Person", cost:"Aid", costRaw:"Aid", season:"Summer", grades:["9","10","11"], location:"Northampton, MA", deadline:"Feb 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Smith_College_seal.png/200px-Smith_College_seal.png", url:"https://www.smith.edu/academics/ssep", desc:"A 4-week residential experience for young women interested in science and engineering at Smith College. Features college-level coursework, research projects, and mentoring.", requirements:["Female-identifying student","Grades 9–11","Strong STEM record","Financial aid available"] },
+  { id:19, name:"Regeneron Science Talent Search", org:"Society for Science / Regeneron", type:"Competition", field:"STEM", format:"In-Person", cost:"Free", costRaw:"Free", season:"Fall", grades:["12"], location:"Washington, DC", deadline:"Nov 12, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Regeneron_logo.svg/200px-Regeneron_logo.svg.png", url:"https://www.societyforscience.org/regeneron-sts/", desc:"The most prestigious science research competition for US high school seniors. $1.8 million in prizes. Top 300 scholars named; top 40 finalists present in DC.", requirements:["12th grade","Original independent research project","US high school enrollment"] },
+  { id:20, name:"Telluride Association Summer Programs", org:"Telluride Association", type:"Summer Program", field:"Humanities", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["11"], location:"Multiple US cities", deadline:"Jan 20, 2026", logo:"https://www.tellurideassociation.org/wp-content/uploads/2019/01/telluride-logo.png", url:"https://www.tellurideassociation.org", desc:"Six-week free residential program on university campuses for intellectually gifted juniors. Students choose their own courses, manage their community, and engage in deep scholarly discussion.", requirements:["Rising 11th grader","Exceptional academic record","Challenging application essay","Strong teacher recs"] },
+  { id:21, name:"Jack Kent Cooke Foundation Young Scholars", org:"Jack Kent Cooke Foundation", type:"Fellowship", field:"STEM", format:"Hybrid", cost:"Paid", costRaw:"Paid", season:"Year-Round", grades:["7","8","9","10","11","12"], location:"Nationwide", deadline:"Apr 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Jack_Kent_Cooke_Foundation_logo.png/200px-Jack_Kent_Cooke_Foundation_logo.png", url:"https://www.jkcf.org/our-scholarships/young-scholars-program/", desc:"Multi-year scholarship and support program for high-achieving students with financial need. Scholars receive funding, mentoring, college planning support, and enrichment opportunities.", requirements:["7th grade applicant","Financial need","Exceptional academic record","GPA 3.5+"] },
+  { id:22, name:"Princeton Plasma Physics Lab Internship", org:"Princeton University / DOE", type:"Internship", field:"Engineering", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["11","12"], location:"Princeton, NJ", deadline:"Feb 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Princeton_seal.svg/200px-Princeton_seal.svg.png", url:"https://www.pppl.gov/education/high-school-and-middle-school-programs", desc:"Work alongside plasma physicists and engineers at a Department of Energy national laboratory. Students gain experience with nuclear fusion research and cutting-edge physics experiments.", requirements:["Grades 11–12","Strong physics and math","US student","Stipend provided"] },
+  { id:23, name:"Coding it Forward Civic Digital Fellowship", org:"Coding it Forward", type:"Fellowship", field:"Computer Science", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["12"], location:"Washington, DC", deadline:"Jan 20, 2026", logo:"https://codingitforward.com/images/cif-logo.png", url:"https://www.codingitforward.com/fellowship", desc:"A paid fellowship placing tech-interested students in federal government agencies to work on civic tech projects. Fellows build real products used by millions of Americans.", requirements:["College freshman or high school senior","Technical skills (coding, design, or data)","Interest in public service"] },
+  { id:24, name:"Breakthrough Junior Challenge", org:"Breakthrough Prize Foundation", type:"Competition", field:"STEM", format:"Remote", cost:"Free", costRaw:"Free", season:"Fall", grades:["9","10","11","12"], location:"Remote / Global", deadline:"Jun 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Breakthrough_Prize_logo.png/200px-Breakthrough_Prize_logo.png", url:"https://breakthroughjuniorchallenge.org", desc:"Create a short video that explains a challenging concept in math, science, or physics in an original, innovative way. Winner receives a $250,000 scholarship and $50,000 for their teacher.", requirements:["Ages 13–18","Submit 3-minute video","Any STEM topic","Global competition"] },
+  { id:25, name:"Vans Custom Culture Art Competition", org:"Vans", type:"Competition", field:"Arts", format:"In-Person", cost:"Free", costRaw:"Free", season:"Spring", grades:["9","10","11","12"], location:"Nationwide", deadline:"Feb 28, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Vans-brand-logo.svg/240px-Vans-brand-logo.svg.png", url:"https://www.vans.com/custom-culture", desc:"National art competition where high school students customize pairs of Vans shoes as a canvas. Winning school receives a $50,000 grant for their art program.", requirements:["High school enrollment","Team submission","Any art style or medium"] },
+  { id:26, name:"Doodle for Google", org:"Google", type:"Competition", field:"Arts", format:"Remote", cost:"Free", costRaw:"Free", season:"Spring", grades:["9","10","11","12"], location:"US Students", deadline:"Mar 13, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png", url:"https://doodles.google.com/d4g/", desc:"Design a unique Google logo Doodle based on a prompt. The national winner's doodle is featured on Google.com and they receive a $30,000 scholarship and $50,000 for their school.", requirements:["K–12 US student","Original artwork","Entry must match theme"] },
+  { id:27, name:"AMC 10/12 Math Competition", org:"Mathematical Association of America", type:"Competition", field:"Math", format:"In-Person", cost:"Free", costRaw:"Free", season:"Fall", grades:["9","10","11","12"], location:"Nationwide", deadline:"Nov 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/AMC_logo.svg/200px-AMC_logo.svg.png", url:"https://www.maa.org/math-competitions/amc-1012", desc:"A prestigious national math competition that is the gateway to USAMO and the International Math Olympiad. Qualifying students may advance to AIME, USAMO, and IMO.", requirements:["US student","Under 19.5 years old","School must register"] },
+  { id:28, name:"National High School Journalism Convention", org:"Journalism Education Association", type:"Workshop", field:"Journalism", format:"In-Person", cost:"Under $500", costRaw:"Under $500", season:"Fall", grades:["9","10","11","12"], location:"Varies annually", deadline:"Oct 2025", logo:"https://jea.org/wp-content/uploads/2021/05/jea-logo.png", url:"https://www.jea.org/wp/", desc:"Annual convention for student journalists and media professionals. Workshops on writing, photography, video, podcasting, and multimedia storytelling from industry professionals.", requirements:["Any grade 9–12","School journalism participation preferred"] },
+  { id:29, name:"Alzheimer's Association Student Fellowship", org:"Alzheimer's Association", type:"Fellowship", field:"Medicine", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["11","12"], location:"Various research sites", deadline:"Feb 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Alzheimers_Association_logo.svg/200px-Alzheimers_Association_logo.svg.png", url:"https://www.alz.org/research/for_researchers/grants/types-of-grants/part-the-cloud-grants", desc:"Paid research fellowship for students interested in neuroscience and Alzheimer's disease. Work alongside researchers studying dementia, brain health, and treatments.", requirements:["Grades 11–12","Strong biology background","Interest in neuroscience","Stipend included"] },
+  { id:30, name:"Generation Google Scholarship", org:"Google", type:"Scholarship", field:"Computer Science", format:"Remote", cost:"Paid", costRaw:"Paid", season:"Year-Round", grades:["12"], location:"US", deadline:"Dec 1, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/250px-Google_2015_logo.svg.png", url:"https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship", desc:"$10,000 scholarship for students from underrepresented groups pursuing a CS degree. Includes invitation to Google's annual Scholar's Retreat for networking and professional development.", requirements:["High school senior","Underrepresented group in tech","Minimum 3.2 GPA","Intent to pursue CS degree"] },
+  { id:31, name:"Bezos Scholars Program", org:"Bezos Family Foundation / Aspen Institute", type:"Fellowship", field:"Social Science", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["11"], location:"Aspen, CO", deadline:"Jan 6, 2026", logo:"https://bezosfamilyfoundation.org/wp-content/uploads/2021/05/Bezos-Family-Foundation-logo.png", url:"https://www.bezosfamilyfoundation.org/our-programs/bezos-scholars-program/", desc:"Rising juniors attend the Aspen Ideas Festival for free with a parent/guardian. Scholars then implement community impact projects with mentoring and a $1,000 project grant.", requirements:["Rising junior","Leadership potential","Community service background","Strong essay"] },
+  { id:32, name:"UPenn Pre-College Program", org:"University of Pennsylvania", type:"Pre-College", field:"Business", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["10","11","12"], location:"Philadelphia, PA", deadline:"Apr 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/UPenn_shield_with_banner.svg/200px-UPenn_shield_with_banner.svg.png", url:"https://www.sas.upenn.edu/summer/programs/high-school", desc:"Live and study at one of the Ivy League's most vibrant urban campuses. Choose from 70+ courses and earn Penn credit. Financial aid available.", requirements:["Grades 10–12","Minimum 3.0 GPA","Teacher recommendation","Financial aid available"] },
+  { id:33, name:"NAACP Inspire Summer Youth Program", org:"NAACP", type:"Leadership", field:"Social Science", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11","12"], location:"Various cities", deadline:"Apr 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/NAACP_seal.png/200px-NAACP_seal.png", url:"https://www.naacp.org/find-resources/scholarships-awards-internships/youth-programs/", desc:"Summer leadership and civic engagement program for Black youth ages 14–21. Students engage with civil rights history, community organizing, and political advocacy.", requirements:["Ages 14–21","NAACP Youth Council membership preferred","Community commitment"] },
+  { id:34, name:"Congressional Award Program", org:"US Congress", type:"Leadership", field:"Volunteer", format:"In-Person", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11","12"], location:"Nationwide", deadline:"Rolling", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Congressional_Award_logo.png/200px-Congressional_Award_logo.png", url:"https://congressionalaward.org", desc:"The United States Congress's award for young Americans. Earn Bronze, Silver, or Gold medals by completing hours in voluntary public service, personal development, physical fitness, and expedition.", requirements:["Ages 13.5–23","US resident","No minimum GPA","Self-directed program"] },
+  { id:35, name:"International Mathematical Olympiad (IMO)", org:"IMO Foundation", type:"Competition", field:"Math", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11","12"], location:"International", deadline:"Qualify via AMC", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/International_Mathematical_Olympiad_logo.svg/200px-International_Mathematical_Olympiad_logo.svg.png", url:"https://www.imo-official.org", desc:"The world's most prestigious mathematics competition for high school students. Six students represent each nation each year. Qualifying through AMC → AIME → USAMO is required.", requirements:["Qualify via AMC/AIME/USAMO","Under 20 years old","Extraordinary math ability"] },
+  { id:36, name:"U.S. Chemistry Olympiad", org:"American Chemical Society", type:"Competition", field:"STEM", format:"In-Person", cost:"Free", costRaw:"Free", season:"Spring", grades:["10","11","12"], location:"Nationwide", deadline:"Mar 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/American_Chemical_Society_logo.svg/200px-American_Chemical_Society_logo.svg.png", url:"https://www.acs.org/education/students/highschool/olympiad.html", desc:"National competition leading to the International Chemistry Olympiad. Top 20 students attend a 2-week study camp; top 4 represent the US internationally.", requirements:["Grades 10–12","Strong chemistry background","School/local ACS nomination"] },
+  { id:37, name:"USA Biology Olympiad (USABO)", org:"Center for Excellence in Education", type:"Competition", field:"Biology", format:"In-Person", cost:"Free", costRaw:"Free", season:"Spring", grades:["9","10","11","12"], location:"Nationwide", deadline:"Jan 2026", logo:"https://www.usabo-trc.org/images/usabo-logo.png", url:"https://www.usabo-trc.org", desc:"National biology competition open to any high school student. Top 20 finalists attend a 2-week residential biology training camp. Top 4 represent the US at the International Biology Olympiad.", requirements:["Any US high school student","Strong biology knowledge","Open exam registration"] },
+  { id:38, name:"USA Computing Olympiad (USACO)", org:"USACO", type:"Competition", field:"Computer Science", format:"Remote", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11","12"], location:"Remote / Global", deadline:"Ongoing contests", logo:"https://usaco.org/current/images/usaco_logo.png", url:"https://usaco.org", desc:"The most prestigious competitive programming competition for high schoolers. Multiple online contests throughout the year. Top students represent the US at the International Olympiad in Informatics (IOI).", requirements:["Any student worldwide","Programming ability (C++, Java, Python)","Bronze → Silver → Gold → Platinum progression"] },
+  { id:39, name:"Appalachian Leadership & Education Foundation Fellowship", org:"ALEF", type:"Fellowship", field:"Leadership", format:"Hybrid", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["10","11"], location:"Appalachian region", deadline:"Feb 28, 2026", logo:"", url:"https://www.alef.com", desc:"Year-long fellowship for students from Appalachia focused on leadership development, civic engagement, and entrepreneurship. Fellows receive mentoring, stipends, and resources.", requirements:["Appalachian region student","Grades 10–11","Demonstrated leadership","Financial need considered"] },
+  { id:40, name:"YES (Youth Entrepreneurship & Sustainability)", org:"Network for Teaching Entrepreneurship", type:"Bootcamp", field:"Business", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11","12"], location:"Multiple cities", deadline:"May 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/NFTE_logo.png/200px-NFTE_logo.png", url:"https://www.nfte.com/programs/summer", desc:"Intensive summer entrepreneurship program teaching students to develop business plans, pitch to investors, and understand financial literacy. Program costs fully covered.", requirements:["Any grade 9–12","Financial need preferred","No prior business experience needed"] },
+  { id:41, name:"iD Tech Camps", org:"iD Tech", type:"Bootcamp", field:"Computer Science", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11","12"], location:"50+ university campuses", deadline:"Rolling", logo:"https://www.idtech.com/landing/images/logo.svg", url:"https://www.idtech.com", desc:"Residential and day tech camps at top universities including MIT, Stanford, UCLA. Students learn coding, game design, filmmaking, cybersecurity, robotics, and AI.", requirements:["Ages 7–19","No prior experience for most courses","Residential and day options"] },
+  { id:42, name:"National Merit Scholarship Program", org:"National Merit Scholarship Corp.", type:"Scholarship", field:"STEM", format:"Remote", cost:"Paid", costRaw:"Paid", season:"Fall", grades:["11"], location:"US", deadline:"PSAT registration", logo:"https://www.nationalmerit.org/s/1758/images/editor/nmsc_logo.png", url:"https://www.nationalmerit.org", desc:"Prestigious scholarship program recognizing exceptionally talented students. ~7,500 students become National Merit Scholars. Award includes $2,500 national scholarship plus corporate and college-sponsored awards.", requirements:["11th grade","PSAT score in top ~1%","US citizen","Attendance at participating school"] },
+  { id:43, name:"AXA Achievement Scholarship", org:"AXA Foundation", type:"Scholarship", field:"STEM", format:"Remote", cost:"Paid", costRaw:"Paid", season:"Fall", grades:["12"], location:"US", deadline:"Dec 15, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Axa_logo.svg/200px-Axa_logo.svg.png", url:"https://www.axa-equitable.com/about-axa/community-involvement/axa-achievement.html", desc:"National scholarship program awarding $10,000 to 52 outstanding high school seniors who have demonstrated ambition and drive. Based on leadership, community involvement, and achievement.", requirements:["High school senior","US citizen","GPA 3.0+","Strong extracurricular record"] },
+  { id:44, name:"Princeton in Africa Fellowship", org:"Princeton in Africa", type:"Fellowship", field:"Social Science", format:"In-Person", cost:"Aid", costRaw:"Aid", season:"Summer", grades:["12"], location:"Various African countries", deadline:"Jan 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Princeton_seal.svg/200px-Princeton_seal.svg.png", url:"https://www.princetoninafrica.org", desc:"Competitive fellowship placing highly motivated students and recent grads at NGOs, health organizations, and development agencies across Africa for 1-year service.", requirements:["College enrollment or high school senior","Global health/development interest","Strong application"] },
+  { id:45, name:"Michigan Math and Science Scholars (MMSS)", org:"University of Michigan", type:"Summer Program", field:"Math", format:"In-Person", cost:"$500–$2000", costRaw:"$500–$2000", season:"Summer", grades:["9","10","11","12"], location:"Ann Arbor, MI", deadline:"Mar 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/University_of_Michigan_College_of_Engineering_Logo.svg/250px-University_of_Michigan_College_of_Engineering_Logo.svg.png", url:"https://sites.lsa.umich.edu/mmss/", desc:"2-week academic summer programs at the University of Michigan in advanced math, science, and computing. Small class sizes with U-M faculty. Financial aid is available.", requirements:["Grades 9–12","Strong academic record","Financial aid available"] },
+  { id:46, name:"Duke University Talent Identification Program (TIP)", org:"Duke University", type:"Summer Program", field:"STEM", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11"], location:"Multiple campuses", deadline:"Mar 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Duke_Blue_Devils_logo.svg/200px-Duke_Blue_Devils_logo.svg.png", url:"https://tip.duke.edu", desc:"Intensive 3-week summer programs at top universities. Students take challenging courses not normally available in high school, from neuroscience to political theory.", requirements:["Grades 9–11","TIP eligibility score","Strong academic record"] },
+  { id:47, name:"YMCA Earth Service Corps", org:"YMCA of the USA", type:"Volunteer", field:"Environmental", format:"In-Person", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11","12"], location:"Nationwide (select YMCAs)", deadline:"Rolling", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/YMCA_logo.svg/200px-YMCA_logo.svg.png", url:"https://www.ymca.org/what-we-do/youth-development/youth-programs/earth-service-corps", desc:"Year-round environmental service program for teens. Participants earn leadership skills while working on local conservation projects, environmental education, and sustainability initiatives.", requirements:["Ages 14–18","YMCA membership (low-cost/free for low-income)","Commitment to weekly meetings"] },
+  { id:48, name:"The Posse Foundation Scholarship", org:"Posse Foundation", type:"Scholarship", field:"Social Science", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Fall", grades:["12"], location:"10 US cities", deadline:"Oct 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Posse_Foundation_logo.svg/200px-Posse_Foundation_logo.svg.png", url:"https://www.possefoundation.org", desc:"4-year full-tuition scholarship to top partner universities. Scholars are nominated from 10 cities and go to college in 'posses' of 10, maintaining support networks throughout college.", requirements:["Nominated by school or community org","Sophomore or junior year nomination","Leadership and teamwork focus","From select cities"] },
+  { id:49, name:"App Academy Open", org:"App Academy", type:"Bootcamp", field:"Computer Science", format:"Remote", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11","12"], location:"Remote / Online", deadline:"Rolling", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/App_Academy_logo.svg/200px-App_Academy_logo.svg.png", url:"https://www.appacademy.io/course/app-academy-open", desc:"Free online full-stack development curriculum used by top coding bootcamp. Hundreds of hours of content covering HTML, CSS, JavaScript, Python, SQL, and React.", requirements:["Any age","Internet access","Self-directed learning"] },
+  { id:50, name:"Khan Academy Talent Search & Tutoring Program", org:"Khan Academy", type:"Volunteer", field:"Social Science", format:"Remote", cost:"Free", costRaw:"Free", season:"Year-Round", grades:["9","10","11","12"], location:"Remote", deadline:"Rolling", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/KhanAcademy.svg/200px-KhanAcademy.svg.png", url:"https://www.khanacademy.org", desc:"Volunteer to tutor younger students using Khan Academy's platform. Earn community service hours while making a real academic impact in your community or nationwide.", requirements:["Any grade","Good academic standing","Commitment to tutoring sessions"] },
+
+  // Extras to round out to a strong set
+  { id:51, name:"Marine Science Summer Institute", org:"University of Washington", type:"Research", field:"Environmental", format:"In-Person", cost:"Under $500", costRaw:"Under $500", season:"Summer", grades:["10","11","12"], location:"Seattle, WA", deadline:"Mar 1, 2026", logo:"https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/University_of_Washington_seal.svg/200px-University_of_Washington_seal.svg.png", url:"https://environment.uw.edu", desc:"Hands-on marine science research experience at the University of Washington's marine science facilities. Students collect data, study ecosystems, and present findings.", requirements:["Grades 10–12","Interest in ocean/environmental science","Financial aid available"] },
+  { id:52, name:"Smithsonian Latino Center Young Ambassadors Program", org:"Smithsonian Institution", type:"Fellowship", field:"Arts", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["11","12"], location:"Washington, DC", deadline:"Jan 31, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Smithsonian_institution_logo_blueversion.svg/200px-Smithsonian_institution_logo_blueversion.svg.png", url:"https://latino.si.edu/young-ambassadors-program", desc:"Two-week fully-paid program in Washington, DC for Latino youth passionate about arts, culture, and STEM. Fellows work with Smithsonian curators and museum professionals.", requirements:["Latino/Hispanic heritage","Grades 11–12","GPA 3.0+","DC travel included"] },
+  { id:53, name:"Crow Canyon Archaeological Center Field School", org:"Crow Canyon Archaeological Center", type:"Research", field:"Humanities", format:"In-Person", cost:"$500–$2000", costRaw:"$500–$2000", season:"Summer", grades:["9","10","11","12"], location:"Cortez, CO", deadline:"Apr 15, 2026", logo:"https://www.crowcanyon.org/wp-content/uploads/2021/10/CrowCanyon-Logo.png", url:"https://www.crowcanyon.org/students/", desc:"One-week or multi-week archaeology field school where students excavate real Ancestral Pueblo archaeological sites in the American Southwest under professional supervision.", requirements:["Ages 14+","No prior experience needed","Physical activity required"] },
+  { id:54, name:"National Young Leaders Conference", org:"Leadership Institute of America", type:"Leadership", field:"Law", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11","12"], location:"Washington, DC", deadline:"Rolling", logo:"https://www.nylc.org/images/nylc-logo.png", url:"https://www.nylc.org", desc:"An intensive leadership program in Washington, DC where students learn from government officials, business leaders, and policymakers. Participate in mock congressional hearings and embassy visits.", requirements:["School nomination typically required","Grades 9–12","Interest in government/policy"] },
+  { id:55, name:"FIRST Robotics Competition (FRC)", org:"FIRST", type:"Competition", field:"Robotics", format:"In-Person", cost:"Under $500", costRaw:"Under $500", season:"Spring", grades:["9","10","11","12"], location:"Nationwide", deadline:"Team registration by Sep", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/FIRST_logo_color.svg/200px-FIRST_logo_color.svg.png", url:"https://www.firstinspires.org/robotics/frc", desc:"'The hardest fun you'll ever have' — build and program a robot in 6 weeks to compete at regional and world championship events. Over $80M in scholarships available through FIRST.", requirements:["Grades 9–12","Join an existing team or start one","Commitment of many hours/week"] },
+  { id:56, name:"PwC Accounting Scholars Program", org:"PricewaterhouseCoopers", type:"Internship", field:"Finance", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["11","12"], location:"Multiple cities", deadline:"Jan 15, 2026", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PricewaterhouseCoopers_Logo.svg/240px-PricewaterhouseCoopers_Logo.svg.png", url:"https://www.pwc.com/us/en/careers/campus/programs-and-events/accounting-scholars.html", desc:"Paid summer internship at one of the Big 4 accounting firms for high school juniors and seniors interested in business, accounting, and finance. Includes mentorship and potential return offer.", requirements:["Grades 11–12","Interest in accounting/finance","Underrepresented group preferred","GPA 3.2+"] },
+  { id:57, name:"Democracy Prep Public Schools Academy", org:"Democracy Prep", type:"Leadership", field:"Social Science", format:"In-Person", cost:"Free", costRaw:"Free", season:"Summer", grades:["9","10","11","12"], location:"Multiple cities", deadline:"Mar 31, 2026", logo:"https://democracyprep.org/wp-content/uploads/2020/01/dp-logo.png", url:"https://democracyprep.org", desc:"Rigorous academic and civic engagement summer program for students in under-resourced communities. Focus on college readiness, civic engagement, and leadership.", requirements:["Students from under-resourced communities","Any grade 9–12","Application essay required"] },
+  { id:58, name:"Telamon Corporation Farmworker Youth Summer Program", org:"Telamon Corporation", type:"Internship", field:"Volunteer", format:"In-Person", cost:"Paid", costRaw:"Paid", season:"Summer", grades:["9","10","11","12"], location:"Eastern US", deadline:"Apr 15, 2026", logo:"https://www.telamon.org/wp-content/uploads/2019/08/telamon-logo.png", url:"https://www.telamon.org/programs/youth-programs/", desc:"Paid summer jobs and educational programming for children of migrant and seasonal farmworkers. Combines work experience with leadership and career development.", requirements:["Child of farmworker","Grades 9–12","Income eligibility"] },
+  { id:59, name:"Aspen Words Young Adult Fiction Prize Reading Fellowship", org:"Aspen Institute", type:"Fellowship", field:"Journalism", format:"Remote", cost:"Free", costRaw:"Free", season:"Fall", grades:["11","12"], location:"Remote + Aspen, CO", deadline:"Sep 1, 2025", logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Aspen_Institute_logo.png/200px-Aspen_Institute_logo.png", url:"https://www.aspenwords.org", desc:"Young readers fellowship where students engage with YA fiction tackling social issues. Fellows write critical reviews, participate in virtual discussions, and join the prize weekend.", requirements:["Ages 16–18","Avid reader","Strong writing skills","Grade 11 or 12"] },
+  { id:60, name:"National Student Leadership Conference (NSLC)", org:"NSLC", type:"Leadership", field:"Medicine", format:"In-Person", cost:"$2000+", costRaw:"$2000+", season:"Summer", grades:["9","10","11","12"], location:"Top universities", deadline:"Rolling", logo:"https://www.nslcleaders.org/wp-content/uploads/2020/01/nslc-logo.png", url:"https://www.nslcleaders.org", desc:"Intensive academic and leadership programs at top universities. Tracks include medicine, law, engineering, business, and government. Students earn a college certificate upon completion.", requirements:["Grades 9–12","School/teacher nomination preferred","Strong GPA"] }
 ];
 
-// Hidden gems
-const hiddenGems = [
-  {
-    title: "Harvard Secondary School Program",
-    school: "Harvard University",
-    desc: "Take real Harvard courses on campus for credit. Most students have no idea this exists. Financial aid available. Acceptance rate higher than you'd think.",
-    link: "https://www.summer.harvard.edu/high-school-programs/secondary-school-program",
-    tags: ["Various", "Pre-College", "Credit"]
-  },
-  {
-    title: "Stanford Pre-Collegiate Studies",
-    school: "Stanford University",
-    desc: "Online and residential programs in everything from math olympiad prep to creative writing. Summer institutes and year-round online courses. Often overlooked.",
-    link: "https://spcs.stanford.edu",
-    tags: ["STEM", "Arts", "Online"]
-  },
-  {
-    title: "UPenn Pre-College Program",
-    school: "University of Pennsylvania",
-    desc: "Live on Penn's campus and take Wharton business courses or liberal arts classes. High school students get real college credit. Aid available.",
-    link: "https://www.sas.upenn.edu/lps/high-school-programs",
-    tags: ["Business", "Pre-College", "Credit"]
-  },
-  {
-    title: "Columbia University Summer Session",
-    school: "Columbia University",
-    desc: "Take courses at Columbia with real college students. Everything from film to neuroscience. Completely changes your college essay material.",
-    link: "https://precollege.sps.columbia.edu",
-    tags: ["Various", "Pre-College", "NYC"]
-  },
-  {
-    title: "Michigan Math and Science Scholars (MMSS)",
-    school: "University of Michigan",
-    desc: "Free or low-cost two-week residential summer program in math, science, or engineering at U of M. Heavily subsidized — most students pay very little.",
-    link: "https://lsa.umich.edu/mmss",
-    tags: ["Math", "STEM", "Free"]
-  },
-  {
-    title: "Vanderbilt Programs for Talented Youth",
-    school: "Vanderbilt University",
-    desc: "Rigorous summer programs for high-achieving students. Multiple tracks in STEM and humanities. Financial aid available. Less well-known than peer programs.",
-    link: "https://pty.vanderbilt.edu",
-    tags: ["Various", "Academic"]
-  },
-  {
-    title: "Notre Dame Leadership Seminars",
-    school: "University of Notre Dame",
-    desc: "Fully funded leadership summer program for underrepresented students. Only 40 spots nationwide. Includes college tours, mentorship, and a full ride to ND if you attend.",
-    link: "https://precollege.nd.edu",
-    tags: ["Leadership", "Free", "Scholarship"]
-  },
-  {
-    title: "Georgetown Junior Summer School",
-    school: "Georgetown University",
-    desc: "Take courses alongside Georgetown undergrads in DC. Earn actual college credit in law, politics, international affairs, biology, and more.",
-    link: "https://scs.georgetown.edu/programs/370/pre-college-programs/",
-    tags: ["Law", "Government", "DC", "Credit"]
-  },
-  {
-    title: "Questbridge College Prep Scholars Program",
-    school: "QuestBridge",
-    desc: "Not just a scholarship — QuestBridge College Prep Scholars get access to a network, summer programs, and resources at top colleges. Apply junior year.",
-    link: "https://www.questbridge.org/high-school-students/college-prep-scholars",
-    tags: ["Scholarship", "Free", "Nationwide"]
-  },
-  {
-    title: "Brown Pre-College Programs",
-    school: "Brown University",
-    desc: "Over 200 courses in every subject imaginable. Residential or online. Live and learn like a Brown student. Strong financial aid — do not let the price stop you from applying.",
-    link: "https://precollege.brown.edu",
-    tags: ["Various", "Pre-College", "Credit"]
-  },
-  {
-    title: "Williams College Explore Program",
-    school: "Williams College",
-    desc: "Completely free 10-day residential program at Williams College for underrepresented high schoolers. Arts, sciences, humanities — all expenses paid.",
-    link: "https://admission.williams.edu/connect/campus-programs/",
-    tags: ["Various", "Free", "Residential"]
-  },
-  {
-    title: "Wellesley College Pre-College Program",
-    school: "Wellesley College",
-    desc: "Study at one of the top liberal arts colleges in the US. Known for amazing financial aid. Young Women of Promise program specifically for high schoolers — free.",
-    link: "https://www.wellesley.edu/admission/precollege",
-    tags: ["Women", "Free", "Arts", "STEM"]
+// ===================== STATE =====================
+let activeFilters = { cat:"", cost:[], season:[], grade:[], query:"", field:"", format:[] };
+let sortBy = "relevance";
+let displayCount = 24;
+let filteredData = [...PROGRAMS];
+
+// ===================== LOGO =====================
+const LOGO_COLORS = ["#2563EB","#059669","#D97706","#7C3AED","#DC2626","#0D9488","#EA580C","#EC4899"];
+function getLogoEl(prog, size=48, borderRadius="10px") {
+  if(prog.logo) {
+    return `<div style="width:${size}px;height:${size}px;border-radius:${borderRadius};border:1px solid #E5E7EB;background:white;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+      <img src="${prog.logo}" alt="${prog.org}" style="width:100%;height:100%;object-fit:contain;border-radius:${borderRadius};" onerror="this.parentElement.innerHTML=getFallbackLogo('${prog.name}',${size})">
+    </div>`;
   }
-];
+  return `<div style="width:${size}px;height:${size}px;border-radius:${borderRadius};background:${LOGO_COLORS[prog.id % LOGO_COLORS.length]};display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:${Math.floor(size*0.35)}px;color:white;flex-shrink:0;">${prog.name.substring(0,2).toUpperCase()}</div>`;
+}
+window.getFallbackLogo = function(name, size) {
+  return `<div style="width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:${Math.floor(size*0.35)}px;color:white;background:#2563EB;">${name.substring(0,2).toUpperCase()}</div>`;
+};
 
-// ══════════════════════════════════════════════════════════
-//  STATE & CATEGORIES
-// ══════════════════════════════════════════════════════════
-const allCategories = [
-  {label:"All",icon:"🌟", value:""},
-  {label:"Internships",icon:"💼", value:"Internship"},
-  {label:"Summer Programs",icon:"☀️", value:"Summer Program"},
-  {label:"Research",icon:"🔬", value:"Research"},
-  {label:"Fellowships",icon:"🎓", value:"Fellowship"},
-  {label:"Competitions",icon:"🏆", value:"Competition"},
-  {label:"Volunteer",icon:"🤝", value:"Volunteer"},
-  {label:"Scholarships",icon:"💰", value:"Scholarship"},
-  {label:"Bootcamps",icon:"💻", value:"Bootcamp"},
-  {label:"Pre-College",icon:"🏛️", value:"Pre-College"},
-  {label:"Arts",icon:"🎨", value:"Arts"},
-  {label:"STEM",icon:"🧪", value:"STEM"},
-  {label:"Medicine",icon:"⚕️", value:"Medicine"},
-  {label:"Business",icon:"📈", value:"Business"},
-  {label:"Law & Gov't",icon:"⚖️", value:"Law"},
-  {label:"Environment",icon:"🌱", value:"Environment"},
-  {label:"Social Justice",icon:"✊", value:"Social Justice"},
-  {label:"Leadership",icon:"🌟", value:"Leadership"},
-  {label:"Engineering",icon:"⚙️", value:"Engineering"},
-  {label:"International",icon:"🌍", value:"International"},
-];
-
-let activeCategory = "";
-let currentSearch = "";
-
-// ══════════════════════════════════════════════════════════
-//  RENDER CATEGORIES
-// ══════════════════════════════════════════════════════════
-function renderCats() {
-  const row = document.getElementById('catRow');
-  row.innerHTML = allCategories.map(c => `
-    <button class="cat-chip ${activeCategory===c.value?'active':''}" onclick="selectCat('${c.value}')">
-      <span class="chip-icon">${c.icon}</span>${c.label}
-    </button>
-  `).join('');
+// ===================== RENDER =====================
+function tagHTML(prog) {
+  let t = `<span class="tag tag-type">${prog.type}</span>`;
+  if(prog.field) t += `<span class="tag tag-field">${prog.field}</span>`;
+  if(prog.cost==="Free") t += `<span class="tag tag-cost-free">Free</span>`;
+  else if(prog.cost==="Paid") t += `<span class="tag tag-cost-paid">Paid/Stipend</span>`;
+  else if(prog.cost==="Aid") t += `<span class="tag tag-cost-aid">Aid Available</span>`;
+  if(prog.format==="Remote") t += `<span class="tag tag-remote">Remote</span>`;
+  if(prog.season) t += `<span class="tag tag-season">${prog.season}</span>`;
+  return t;
 }
 
-function selectCat(val) {
-  activeCategory = val;
-  if(val) document.getElementById('typeFilter').value = '';
-  renderCats();
-  applyFilters();
+function renderCards() {
+  const grid = document.getElementById('programs-grid');
+  const slice = filteredData.slice(0, displayCount);
+  document.getElementById('showing-count').textContent = filteredData.length;
+
+  if(slice.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><h3>No programs found</h3><p>Try different keywords or clear some filters.</p></div>`;
+    document.getElementById('load-more-wrap').style.display='none';
+    return;
+  }
+
+  grid.innerHTML = slice.map(p => `
+    <div class="prog-card" onclick="openModal(${p.id})">
+      <div class="prog-card-top">
+        ${getLogoEl(p, 48, "10px")}
+        <div class="prog-info">
+          <div class="prog-name">${p.name}</div>
+          <div class="prog-org">${p.org}</div>
+        </div>
+      </div>
+      <div class="prog-tags">${tagHTML(p)}</div>
+      <div class="prog-desc">${p.desc}</div>
+      <div class="prog-card-footer">
+        <div class="prog-deadline">📅 <span>${p.deadline}</span></div>
+        <a href="${p.url}" target="_blank" rel="noopener" class="prog-apply" onclick="event.stopPropagation()">
+          Apply
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('load-more-wrap').style.display = filteredData.length > displayCount ? 'block' : 'none';
 }
 
-// ══════════════════════════════════════════════════════════
-//  FILTER & RENDER PROGRAMS
-// ══════════════════════════════════════════════════════════
+function loadMore() {
+  displayCount += 12;
+  renderCards();
+}
+
+// ===================== FILTER =====================
 function applyFilters() {
-  const type = document.getElementById('typeFilter').value;
-  const cost = document.getElementById('costFilter').value;
-  const format = document.getElementById('formatFilter').value;
-  const field = document.getElementById('fieldFilter').value;
-  const q = currentSearch.toLowerCase();
+  displayCount = 24;
+  const q = document.getElementById('main-search').value.toLowerCase().trim();
+  const ft = document.getElementById('filter-type').value;
+  const ff = document.getElementById('filter-field').value;
+  const fm = document.getElementById('filter-format').value;
 
-  let filtered = programs.filter(p => {
-    if(activeCategory && p.type !== activeCategory && p.field !== activeCategory && !p.tags.includes(activeCategory)) return false;
-    if(type && p.type !== type) return false;
-    if(cost && p.cost !== cost) return false;
-    if(format && p.format !== format) return false;
-    if(field && p.field !== field && !p.tags.includes(field)) return false;
-    if(q) {
-      const blob = (p.title+p.org+p.desc+(p.tags||[]).join(' ')+p.field+p.type+p.location).toLowerCase();
-      if(!blob.includes(q)) return false;
+  filteredData = PROGRAMS.filter(p => {
+    if(activeFilters.cat && p.type !== activeFilters.cat) return false;
+    if(q && !`${p.name} ${p.org} ${p.desc} ${p.field} ${p.type}`.toLowerCase().includes(q)) return false;
+    if(ft && p.type !== ft) return false;
+    if(ff && p.field !== ff) return false;
+    if(fm && p.format !== fm) return false;
+    if(activeFilters.cost.length > 0) {
+      const match = activeFilters.cost.some(c => {
+        if(c==='Free') return p.costRaw==='Free';
+        if(c==='Under $500') return p.costRaw==='Under $500';
+        if(c==='$500–$2000') return p.costRaw==='$500–$2000';
+        if(c==='$2000+') return p.costRaw==='$2000+';
+        if(c==='Aid') return p.cost==='Aid';
+        if(c==='Paid') return p.costRaw==='Paid';
+        return false;
+      });
+      if(!match) return false;
     }
+    if(activeFilters.season.length > 0 && !activeFilters.season.includes(p.season)) return false;
     return true;
   });
 
-  const grid = document.getElementById('programsGrid');
-  const noRes = document.getElementById('noResults');
-  const clearBtn = document.getElementById('clearBtn');
-  document.getElementById('resultCount').textContent = `${filtered.length} program${filtered.length!==1?'s':''} found`;
+  sortPrograms(false);
+}
 
-  const hasFilters = type||cost||format||field||q||activeCategory;
-  clearBtn.style.display = hasFilters ? 'inline-flex' : 'none';
+function runSearch() { applyFilters(); renderCards(); }
 
-  if(filtered.length === 0) {
-    grid.innerHTML = '';
-    noRes.style.display = '';
+function filterCat(cat, btn) {
+  activeFilters.cat = cat;
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters(); renderCards();
+}
+
+function updateCostFilter() {
+  activeFilters.cost = Array.from(document.querySelectorAll('.cost-filter input:checked')).map(i => i.value);
+  applyFilters(); renderCards();
+}
+
+function toggleSeason(s, btn) {
+  btn.classList.toggle('active');
+  const idx = activeFilters.season.indexOf(s);
+  if(idx > -1) activeFilters.season.splice(idx,1); else activeFilters.season.push(s);
+  applyFilters(); renderCards();
+}
+
+function toggleGrade(g, btn) {
+  btn.classList.toggle('active');
+  applyFilters(); renderCards();
+}
+
+function quickFilter(val, btn) {
+  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if(val === 'Free') { activeFilters.cost = ['Free']; activeFilters.cat = ''; }
+  else if(val === 'Remote') { document.getElementById('filter-format').value = 'Remote'; activeFilters.cat = ''; }
+  else { activeFilters.cat = val; document.getElementById('filter-type').value = val; }
+  applyFilters(); renderCards();
+}
+
+function clearAllFilters() {
+  activeFilters = { cat:"", cost:[], season:[], grade:[], query:"", field:"", format:[] };
+  document.getElementById('main-search').value = '';
+  document.getElementById('filter-type').value = '';
+  document.getElementById('filter-field').value = '';
+  document.getElementById('filter-format').value = '';
+  document.getElementById('zip-input').value = '';
+  document.querySelectorAll('.cost-filter input').forEach(i => i.checked=false);
+  document.querySelectorAll('.season-btn,.grade-btn,.filter-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.sidebar-btn').classList.add('active');
+  filteredData = [...PROGRAMS];
+  displayCount = 24;
+  sortPrograms(); renderCards();
+}
+
+function applyZipFilter() {
+  const zip = document.getElementById('zip-input').value.trim();
+  if(!zip || zip.length < 5) { alert('Please enter a valid 5-digit ZIP code.'); return; }
+  // For a static site, we just show a message. Real geo-filtering would need a backend.
+  alert(`Showing programs near ZIP ${zip}.\n\nNote: For full location-based filtering, consider adding a geo API like Google Maps or ZIP code database to your backend!`);
+}
+
+function sortPrograms(doRender=true) {
+  const s = document.getElementById('sort-select').value;
+  const order = { "Free":0, "Paid":1, "Under $500":2, "$500–$2000":3, "$2000+":4, "Aid":2 };
+  if(s==='az') filteredData.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(s==='free') filteredData.sort((a,b)=>(order[a.costRaw]||9)-(order[b.costRaw]||9));
+  else if(s==='az') filteredData.sort((a,b)=>a.name.localeCompare(b.name));
+  if(doRender) renderCards();
+}
+
+// ===================== MODAL =====================
+function openModal(id) {
+  const p = PROGRAMS.find(x=>x.id===id);
+  if(!p) return;
+
+  const logoEl = document.getElementById('modal-logo');
+  if(p.logo) {
+    logoEl.innerHTML = `<img src="${p.logo}" alt="${p.org}" style="width:100%;height:100%;object-fit:contain;" onerror="this.parentElement.innerHTML='<span style=\\'font-size:1.1rem;font-weight:800;\\'>${p.name.substring(0,2).toUpperCase()}</span>'">`;
+    logoEl.style.background='white';
   } else {
-    noRes.style.display = 'none';
-    grid.innerHTML = filtered.map((p,i) => cardHTML(p,i)).join('');
+    logoEl.innerHTML = p.name.substring(0,2).toUpperCase();
+    logoEl.style.background = LOGO_COLORS[p.id % LOGO_COLORS.length];
+    logoEl.style.color = 'white';
+  }
+
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-org').textContent = p.org;
+  document.getElementById('modal-tags').innerHTML = tagHTML(p);
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-details').innerHTML = `
+    <div class="modal-detail"><div class="label">Type</div><div class="value">${p.type}</div></div>
+    <div class="modal-detail"><div class="label">Field</div><div class="value">${p.field}</div></div>
+    <div class="modal-detail"><div class="label">Season</div><div class="value">${p.season}</div></div>
+    <div class="modal-detail"><div class="label">Format</div><div class="value">${p.format}</div></div>
+    <div class="modal-detail"><div class="label">Cost</div><div class="value">${p.cost}</div></div>
+    <div class="modal-detail"><div class="label">Deadline</div><div class="value">${p.deadline}</div></div>
+    <div class="modal-detail"><div class="label">Location</div><div class="value">${p.location}</div></div>
+    <div class="modal-detail"><div class="label">Grades</div><div class="value">${(p.grades||[]).join(', ')}</div></div>
+  `;
+
+  const reqList = document.getElementById('modal-requirements');
+  reqList.innerHTML = (p.requirements||[]).map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('modal-req-wrap').style.display = p.requirements?.length ? 'block' : 'none';
+
+  const applyBtn = document.getElementById('modal-apply');
+  applyBtn.href = p.url;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+  if(e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModalDirect(); });
+
+// ===================== AI SEARCH =====================
+async function runAISearch() {
+  const query = document.getElementById('ai-search').value.trim();
+  if(!query) return;
+  const resultEl = document.getElementById('ai-result');
+  resultEl.className = 'ai-result visible';
+  resultEl.textContent = '✦ Analyzing your request...';
+
+  try {
+    const programList = PROGRAMS.slice(0,60).map(p=>`${p.id}. ${p.name} (${p.org}) - ${p.type}, ${p.field}, ${p.cost}, ${p.season}, Grades: ${(p.grades||[]).join('/')}. ${p.desc.substring(0,100)}`).join('\n');
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        messages:[{role:"user", content:`You are a helpful assistant for a high school student opportunity portal called LaunchPad. A student is searching for: "${query}"\n\nHere are the available programs:\n${programList}\n\nRecommend the top 3-5 most relevant programs. Respond in 2-3 sentences explaining why these match, then list the program names and IDs. Be concise and encouraging. Format: brief intro, then bullet list with program name and why it fits.`}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.map(c=>c.text||'').join('') || 'Sorry, AI search is unavailable right now.';
+    resultEl.innerHTML = text.replace(/\n/g,'<br>');
+  } catch(err) {
+    resultEl.textContent = 'AI search is temporarily unavailable. Try the regular search above!';
   }
 }
 
-function cardHTML(p, i) {
-  const costBadge = p.cost==='Paid'
-    ? `<span class="badge badge-paid">💰 Paid</span>`
-    : p.cost==='Free'
-    ? `<span class="badge badge-free">🎓 Free/Scholarship</span>`
-    : `<span class="badge badge-location">Aid Available</span>`;
+document.getElementById('ai-search').addEventListener('keydown', e => { if(e.key==='Enter') runAISearch(); });
+document.getElementById('main-search').addEventListener('keydown', e => { if(e.key==='Enter') runSearch(); });
 
-  const formatBadge = p.format==='Online'||p.format==='Hybrid'
-    ? `<span class="badge badge-online">💻 ${p.format}</span>` : '';
-
-  return `
-    <div class="prog-card" style="animation-delay:${i*0.05}s" onclick="openModal(${p.id})">
-      <div class="card-top">
-        <div class="card-badges">
-          <span class="badge badge-type">${p.type}</span>
-          ${costBadge}
-          ${formatBadge}
-        </div>
-        <button class="card-bookmark" onclick="event.stopPropagation();this.textContent=this.textContent==='☆'?'★':'☆'" title="Save">☆</button>
-      </div>
-      <div class="card-org"><div class="org-logo">${p.org[0]}</div>${p.org}</div>
-      <div class="card-title">${p.title}</div>
-      <div class="card-desc">${p.desc}</div>
-      <div class="card-meta">
-        <span class="meta-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-          ${p.location}
-        </span>
-        <span class="meta-item">
-          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Deadline: ${p.deadline}
-        </span>
-        <span class="meta-item">👤 Grades: ${p.grades}</span>
-      </div>
-      <div class="card-reqs">
-        <div class="reqs-label">Requirements</div>
-        <div class="reqs-list">
-          ${p.reqs.slice(0,3).map(r=>`<span class="req-tag">${r}</span>`).join('')}
-          ${p.reqs.length>3?`<span class="req-tag">+${p.reqs.length-3} more</span>`:''}
-        </div>
-      </div>
-      <div class="card-actions">
-        <a class="btn-apply" href="${p.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-          Apply Now →
-        </a>
-        <button class="btn-more" onclick="event.stopPropagation();openModal(${p.id})">Details</button>
-      </div>
-    </div>
-  `;
+// ===================== SUGGEST FORM =====================
+function submitSuggest(e) {
+  e.preventDefault();
+  document.querySelector('.suggest-form').style.display='none';
+  document.getElementById('suggest-thanks').style.display='block';
 }
 
-// ══════════════════════════════════════════════════════════
-//  MODAL
-// ══════════════════════════════════════════════════════════
-function openModal(id) {
-  const p = programs.find(x=>x.id===id);
-  if(!p) return;
-  const overlay = document.getElementById('modalOverlay');
-  const content = document.getElementById('modalContent');
-
-  const costBadge = p.cost==='Paid'
-    ? `<span class="badge badge-paid">💰 Paid</span>`
-    : p.cost==='Free'
-    ? `<span class="badge badge-free">🎓 Free/Scholarship</span>`
-    : `<span class="badge badge-location">Aid Available</span>`;
-
-  content.innerHTML = `
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-org">${p.org}</div>
-    <div class="modal-title">${p.title}</div>
-    <div class="modal-badges">
-      <span class="badge badge-type">${p.type}</span>
-      ${costBadge}
-      <span class="badge badge-online">${p.format}</span>
-      <span class="badge badge-location">📍 ${p.location}</span>
-    </div>
-    <div class="modal-desc">${p.desc}</div>
-    <div class="modal-section">
-      <div class="modal-section-title">Program Details</div>
-      <div class="modal-grid">
-        <div class="modal-info-item"><div class="modal-info-label">Deadline</div><div class="modal-info-val">${p.deadline}</div></div>
-        <div class="modal-info-item"><div class="modal-info-label">Grades</div><div class="modal-info-val">${p.grades}</div></div>
-        <div class="modal-info-item"><div class="modal-info-label">Format</div><div class="modal-info-val">${p.format}</div></div>
-        <div class="modal-info-item"><div class="modal-info-label">Cost</div><div class="modal-info-val">${p.cost}</div></div>
-      </div>
-    </div>
-    <div class="modal-section">
-      <div class="modal-section-title">Requirements</div>
-      <ul class="modal-req-list">
-        ${p.reqs.map(r=>`<li>${r}</li>`).join('')}
-      </ul>
-    </div>
-    <a class="modal-apply" href="${p.link}" target="_blank" rel="noopener">
-      Apply Now on Official Website →
-    </a>
-  `;
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e) {
-  if(e && e.target !== document.getElementById('modalOverlay')) return;
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => { if(e.key==='Escape') { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }});
-
-// ══════════════════════════════════════════════════════════
-//  SEARCH
-// ══════════════════════════════════════════════════════════
-function doSearch() {
-  currentSearch = document.getElementById('searchInput').value;
-  applyFilters();
-  document.getElementById('programs').scrollIntoView({behavior:'smooth'});
-}
-
-document.getElementById('searchInput').addEventListener('keydown', e => { if(e.key==='Enter') doSearch(); });
-
-function clearFilters() {
-  activeCategory = '';
-  currentSearch = '';
-  document.getElementById('searchInput').value = '';
-  document.getElementById('zipInput').value = '';
-  document.getElementById('typeFilter').value = '';
-  document.getElementById('costFilter').value = '';
-  document.getElementById('formatFilter').value = '';
-  document.getElementById('fieldFilter').value = '';
-  renderCats();
-  applyFilters();
-}
-
-// ══════════════════════════════════════════════════════════
-//  HIDDEN GEMS
-// ══════════════════════════════════════════════════════════
-function renderGems() {
-  document.getElementById('gemsGrid').innerHTML = hiddenGems.map(g=>`
-    <div class="gem-card">
-      <div class="gem-header">
-        <div>
-          <div class="gem-title">${g.title}</div>
-          <div class="gem-school">🏛️ ${g.school}</div>
-        </div>
-      </div>
-      <div class="gem-desc">${g.desc}</div>
-      <a class="gem-apply" href="${g.link}" target="_blank" rel="noopener">Apply / Learn More →</a>
-    </div>
-  `).join('');
-}
-
-// ══════════════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════════════
-document.getElementById('totalCount').textContent = programs.length + '+';
-renderCats();
-applyFilters();
-renderGems();
+// ===================== INIT =====================
+filteredData = [...PROGRAMS];
+renderCards();
 </script>
 </body>
 </html>
